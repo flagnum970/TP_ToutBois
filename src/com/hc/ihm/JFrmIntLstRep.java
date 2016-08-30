@@ -33,13 +33,10 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     private HashMap<Integer,Representant> hashRep;
     enum type_acces {creation,modification,visualisation};
     private type_acces typAcc;
+    
     /**
      * Creates new form JFrmIntRep
      */
-    public JFrmIntLstRep() {
-        initComponents();
-    }
-
     public JFrmIntLstRep(HashMap<Integer,Representant> hashRep) {
         initComponents();
         this.hashRep = hashRep;
@@ -298,7 +295,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jBtnNouveau.setName("jBtnNouveau"); // NOI18N
         jBtnNouveau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNouveauActionPerformed(evt);
+                jBtnNouveauModifierActionPerformed(evt);
             }
         });
 
@@ -307,7 +304,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jBtnModifier.setFocusable(false);
         jBtnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnModifierActionPerformed(evt);
+                jBtnNouveauModifierActionPerformed(evt);
             }
         });
 
@@ -372,43 +369,40 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModifierActionPerformed
-       if (typAcc != type_acces.visualisation)
-            if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir abandonner vos modifications ?","Attention",JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) 
-                    return;
-            //si on clique sur 'modifier' le jPanel1 devient enabled (sauf le no representant
-            GuiUtils.setEnableRec(jPanel1,true);
-            jTxtNo.setEnabled(false);
-            jTxtNom.requestFocusInWindow();
+    
+    //Listener pour les boutons Création et Modification
+    private void jBtnNouveauModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNouveauModifierActionPerformed
+        //Clic sur Modifier
+        if (evt.getSource().equals((Object) jBtnModifier))  {
             typAcc = type_acces.modification;
-            
-    }//GEN-LAST:event_jBtnModifierActionPerformed
-
-    private void jBtnNouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNouveauActionPerformed
-        if (typAcc != type_acces.visualisation)
-            if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir abandonner vos modifications ?","Attention",JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) 
-                return;
-        // le clic sur 'Nouveau' vide les champs et le jPanel1 devient enabled
-            jTblRep.clearSelection();
-            remplitFiche(-1);
-            GuiUtils.setEnableRec(jPanel1,true);
-            jTxtNo.setEnabled(false);
-            jTxtNom.requestFocusInWindow();
+        } else {
+            remplitFiche(-1); //vide la fiche 
             typAcc = type_acces.creation;
-
+        }
         
-    }//GEN-LAST:event_jBtnNouveauActionPerformed
+        //Liste et boutons du haut grisés
+        GuiUtils.setEnableRec(jPanel4, false);
+        GuiUtils.setEnableRec(jTblRep,false);
+        
+        GuiUtils.setEnableRec(jPanel1,true);  //fiche enabled
+        jTxtNo.setEnabled(false);             //Numéro non modifiable
+        jTxtNom.requestFocusInWindow();       //Focus sur le nom
+    }//GEN-LAST:event_jBtnNouveauModifierActionPerformed
 
     private void jTxtAdrCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtAdrCPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtAdrCPActionPerformed
 
     private void jBtnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnnulerActionPerformed
-       jTblRep.clearSelection();
-       remplitFiche(-1);
-       GuiUtils.setEnableRec(jPanel1,false);
-       jLblErreur.setVisible(false);
-       typAcc = type_acces.visualisation;
+        jTblRep.clearSelection();
+        remplitFiche(-1);
+        GuiUtils.setEnableRec(jPanel1,false);
+        GuiUtils.setEnableRec(jPanel4, true);
+        GuiUtils.setEnableRec(jTblRep,true);
+        jBtnModifier.setEnabled(false);
+        jBtnSupprimer.setEnabled(false);
+        jLblErreur.setVisible(false);
+        typAcc = type_acces.visualisation;
     }//GEN-LAST:event_jBtnAnnulerActionPerformed
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
@@ -417,9 +411,12 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             jLblErreur.setVisible(false);
             sauveFiche();
             typAcc = type_acces.visualisation;
+            GuiUtils.setEnableRec(jPanel4, true);
+            GuiUtils.setEnableRec(jTblRep,true);
+            jBtnModifier.setEnabled(false);
+            jBtnSupprimer.setEnabled(false);
         }
-   //     else 
-   //         jLblErreur.setVisible(true);
+        
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
@@ -427,6 +424,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir abandonner vos modifications ?","Attention",JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) 
                 return;
         supprimeFiche();
+
     }//GEN-LAST:event_jBtnSupprimerActionPerformed
 
     private void jTxtTxCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTxCommActionPerformed
