@@ -168,11 +168,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
         jTxtTxComm.setInputVerifier(new verifyTxtFieldNumber());
         jTxtTxComm.setNextFocusableComponent(jTxtSalaire);
-        jTxtTxComm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtTxCommActionPerformed(evt);
-            }
-        });
         jPanel1.add(jTxtTxComm, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 40, -1));
 
         jBtnAnnuler.setText("Annuler");
@@ -241,11 +236,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
         jTxtAdrCP.setInputVerifier(new verifyTxtFieldInt());
         jTxtAdrCP.setNextFocusableComponent(jTxtAdrVille);
-        jTxtAdrCP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtAdrCPActionPerformed(evt);
-            }
-        });
         jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 60, -1));
 
         jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
@@ -385,10 +375,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jTxtNom.requestFocusInWindow();       //Focus sur le nom
     }//GEN-LAST:event_jBtnNouveauModifierActionPerformed
 
-    private void jTxtAdrCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtAdrCPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtAdrCPActionPerformed
-
     private void jBtnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnnulerActionPerformed
         jTblRep.clearSelection();
         remplitFiche(-1);
@@ -422,10 +408,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         supprimeFiche();
 
     }//GEN-LAST:event_jBtnSupprimerActionPerformed
-
-    private void jTxtTxCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTxCommActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtTxCommActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
