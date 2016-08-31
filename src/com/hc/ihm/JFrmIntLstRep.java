@@ -7,13 +7,10 @@ package com.hc.ihm;
 
 import com.hc.Entites.Adresse;
 import com.hc.Entites.Representant;
+import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.GuiUtils;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Point;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -22,7 +19,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -31,7 +27,6 @@ import javax.swing.table.TableColumn;
 public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
     private HashMap<Integer,Representant> hashRep;
-    enum type_acces {creation,modification,visualisation};
     private type_acces typAcc;
     
     /**
@@ -475,7 +470,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     {
         String [] cols = {"No","Nom","Prenom","Adresse","Salaire","Taux"}; 
         DefaultTableModel listData = new DefaultTableModel(cols,0); 
-        
         
         for (Representant r : hashRep.values()) {
             String[] ts = {Integer.toString(r.getNo()),
