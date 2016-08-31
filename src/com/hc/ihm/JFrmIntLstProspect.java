@@ -7,8 +7,9 @@ package com.hc.ihm;
 
 import com.hc.Entites.Adresse;
 import com.hc.Entites.Prospect;
-import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
+import com.hc.utils.Constantes;
+import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.DateLabelFormatter;
 import com.hc.utils.GuiUtils;
 import java.awt.Component;
@@ -17,23 +18,18 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Properties;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.scene.control.DatePicker;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -47,7 +43,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
 
     private HashMap<Integer,Prospect> hashProspect;
     private HashMap<Integer,Representant> hashRep;
-    enum type_acces {creation,modification};
     private type_acces typAcc;
     private UtilDateModel model ;
     private JDatePanelImpl datePanel ;
@@ -55,10 +50,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
     /**
      * Creates new form JFrmIntRep
      */
-    public JFrmIntLstProspect() {
-        initComponents();
-    }
-
     public JFrmIntLstProspect(HashMap<Integer,Prospect> hashProspect,HashMap<Integer,Representant> hashRep) {
         initComponents();
         
@@ -155,11 +146,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
 
         jTxtMail.setInputVerifier(new verifyTxtFieldMail());
         jTxtMail.setNextFocusableComponent(jTxtTel);
-        jTxtMail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtMailActionPerformed(evt);
-            }
-        });
         jPanel1.add(jTxtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 170, -1));
 
         jBtnAnnuler.setText("Annuler");
@@ -219,11 +205,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
 
         jTxtAdrCP.setInputVerifier(new verifyTxtFieldInt());
         jTxtAdrCP.setNextFocusableComponent(jTxtAdrVille);
-        jTxtAdrCP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtAdrCPActionPerformed(evt);
-            }
-        });
         jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 60, -1));
 
         jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
@@ -248,11 +229,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         jTxtTel.setToolTipText("");
         jTxtTel.setAutoscrolls(false);
         jTxtTel.setInputVerifier(new verifyTxtFieldNumber());
-        jTxtTel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtTelActionPerformed(evt);
-            }
-        });
         jPanel1.add(jTxtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 110, -1));
 
         jLabel25.setText("Téléphone");
@@ -287,7 +263,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         jBtnNouveau.setName("jBtnNouveau"); // NOI18N
         jBtnNouveau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnNouveauActionPerformed(evt);
+                jBtnNouveauModifierActionPerformed(evt);
             }
         });
 
@@ -296,7 +272,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         jBtnModifier.setFocusable(false);
         jBtnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnModifierActionPerformed(evt);
+                jBtnNouveauModifierActionPerformed(evt);
             }
         });
 
@@ -368,64 +344,63 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModifierActionPerformed
-        //si on clique sur 'modifier' le jPanel1 devient enabled (sauf le no representant)
-        GuiUtils.setEnableRec(jPanel1,true);
-        jTxtNo.setEnabled(false);
-        jTxtEnseigne.requestFocusInWindow();
-
-        typAcc = type_acces.modification;
-    }//GEN-LAST:event_jBtnModifierActionPerformed
-
-    private void jBtnNouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNouveauActionPerformed
-        // le clic sur 'Nouveau' vide les champs et le jPanel1 devient enabled
+    private void jBtnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnnulerActionPerformed
         jTblProspect.clearSelection();
         remplitFiche(-1);
-        GuiUtils.setEnableRec(jPanel1,true);
-        jTxtNo.setEnabled(false);
-        jTxtEnseigne.requestFocusInWindow();
-        typAcc = type_acces.creation;
-        
-                //CF 
-   /*    for (int i=0;i<jTblProspect.getColumnModel().getColumnCount();i++) {
-            TableColumn col = jTblProspect.getColumnModel().getColumn(i);
-            System.out.println("col("+i+") : "+col.getWidth());
-         }
-         **/
-    }//GEN-LAST:event_jBtnNouveauActionPerformed
-
-    private void jTxtAdrCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtAdrCPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtAdrCPActionPerformed
-
-    private void jBtnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnnulerActionPerformed
-       jTblProspect.clearSelection();
-       remplitFiche(-1);
-       GuiUtils.setEnableRec(jPanel1,false);
-       jLblErreur.setVisible(false);
+        GuiUtils.setEnableRec(jPanel1,false);
+        GuiUtils.setEnableRec(jPanel4, true);
+        GuiUtils.setEnableRec(jTblProspect,true);
+        jBtnModifier.setEnabled(false);
+        jBtnSupprimer.setEnabled(false);
+        jLblErreur.setVisible(false);
+        typAcc = type_acces.visualisation;
+       
     }//GEN-LAST:event_jBtnAnnulerActionPerformed
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
 
-        if (verifyFields(jPanel1)) //{
-       //    jLblErreur.setVisible(false);
+        if (verifyFields(jPanel1)) {
             sauveFiche();
-            /*       }
-        else 
-            jLblErreur.setVisible(true); */
+            jTblProspect.clearSelection();
+            remplitFiche(-1);
+            remplitTable();
+            GuiUtils.setEnableRec(jPanel1,false);   
+            GuiUtils.setEnableRec(jPanel4, true);
+            GuiUtils.setEnableRec(jTblProspect,true);
+            jBtnModifier.setEnabled(false);
+            jBtnSupprimer.setEnabled(false);
+            jLblErreur.setVisible(false);
+            
+                            
+            
+        typAcc = type_acces.visualisation;
+        }
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
         supprimeFiche();
     }//GEN-LAST:event_jBtnSupprimerActionPerformed
 
-    private void jTxtMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtMailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtMailActionPerformed
-
-    private void jTxtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtTelActionPerformed
+    private void jBtnNouveauModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNouveauModifierActionPerformed
+         
+        //Clic sur Modifier
+        if (evt.getSource().equals((Object) jBtnModifier))  {
+            typAcc = Constantes.type_acces.modification;
+        } else {
+            remplitFiche(-1); //vide la fiche 
+            typAcc = Constantes.type_acces.creation;
+        }
+  
+       // jTblProspect.clearSelection();
+        GuiUtils.setEnableRec(jPanel1,true); //Fiche modifiable
+      
+        //Liste et boutons du haut grisés
+        GuiUtils.setEnableRec(jPanel4, false);
+        GuiUtils.setEnableRec(jTblProspect,false);
+        jTxtNo.setEnabled(false); //Numéro non modifiable
+        jTxtEnseigne.requestFocusInWindow();//Focus sur le nom
+          
+    }//GEN-LAST:event_jBtnNouveauModifierActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -519,8 +494,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                                           Integer.parseInt(new SimpleDateFormat("dd").format(p.getDateVisite())));
             datePicker.getModel().setSelected(true);
 
-            System.out.println(new SimpleDateFormat("YYYY").format(p.getDateVisite())+" " +new SimpleDateFormat("MM").format(p.getDateVisite())+" "+new SimpleDateFormat("dd").format(p.getDateVisite()));
-
             //Remplit la combobox des représentants
             jCboRep.removeAllItems();
             Collection<Representant> setRep = hashRep.values();
@@ -600,11 +573,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                                                 );
             hashProspect.put(Prospect.getDernierNo(),c); 
         }
-        
-        jTblProspect.clearSelection();
-        remplitFiche(-1);
-        remplitTable();
-        GuiUtils.setEnableRec(jPanel1,false);        
+            
     }
     
 
