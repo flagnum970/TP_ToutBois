@@ -37,6 +37,8 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         this.hashRep = hashRep;
         remplitTable();
        
+        typAcc = type_acces.visualisation;
+        
         //on disable tous les composants du jPanel1
         GuiUtils.setEnableRec(jPanel1,false);
 
@@ -44,8 +46,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
         jTblRep.getSelectionModel().addListSelectionListener(new SharedListSelectionHandler()); 
         jTblRep.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        initTailleCol();
-        typAcc = type_acces.visualisation;
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -483,11 +484,11 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         }
 
         jTblRep.setModel(listData);
-        initTailleCol();
+        initTailleCols();
     }
 
     //Taille des colonnes
-    private void initTailleCol() 
+    private void initTailleCols() 
     {
         int[] tailleCol = {37,118,92,307,84,83};
         for (int i=0;i<tailleCol.length;i++)
@@ -555,12 +556,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             hashRep.put(Representant.getDernierNo(),r);
         }
         
-        jTblRep.clearSelection();
-        remplitFiche(-1);
-        remplitTable();
-        GuiUtils.setEnableRec(jPanel1,false);        
-        initTailleCol();
-        typAcc = type_acces.visualisation;
+
     }
         
     private void supprimeFiche() {
