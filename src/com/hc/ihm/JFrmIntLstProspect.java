@@ -456,7 +456,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                     p.getTelephone(),
                     p.getSiret(),
                     p.getNoRepresentant() + " "+hashRep.get(p.getNoRepresentant()).getNom()+" "+hashRep.get(p.getNoRepresentant()).getPrenom(),
-                    sdf.format(p.getDateVisite())
+                        sdf.format(p.getDateVisite())
                 };
             
                 listData.addRow(ts);
