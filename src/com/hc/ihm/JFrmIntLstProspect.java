@@ -46,18 +46,21 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
     private type_acces typAcc;
     private UtilDateModel model ;
     private JDatePanelImpl datePanel ;
-    private JDatePickerImpl datePicker ;
+    private JDatePickerImpl jDtPicker ;
     /**
      * Creates new form JFrmIntRep
+     * @param hashProspect
+     * @param hashRep
      */
     public JFrmIntLstProspect(HashMap<Integer,Prospect> hashProspect,HashMap<Integer,Representant> hashRep) {
         initComponents();
         
-        //On ajoute notre datePicker
+        //On ajoute notre jDtPicker
         model = new UtilDateModel();
         datePanel = new JDatePanelImpl(model);
-        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        jPanel1.add(datePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(140,160,110,-1));
+        jDtPicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        jPanel1.add(jDtPicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(140,160,110,-1));
+        jDtPicker.setInputVerifier(new verifyFieldDate());
         
         //Mise à jour des attributs
         this.hashProspect = hashProspect;
@@ -370,10 +373,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
             jBtnModifier.setEnabled(false);
             jBtnSupprimer.setEnabled(false);
             jLblErreur.setVisible(false);
-            
-                            
-            
-        typAcc = type_acces.visualisation;
+            typAcc = type_acces.visualisation;
         }
     }//GEN-LAST:event_jBtnOKActionPerformed
 
@@ -489,12 +489,13 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
             jTxtMail.setText(p.getMail());
             jTxtTel.setText(p.getTelephone());
             jTxtSiret.setText(p.getSiret());
-            datePicker.getModel().setDate(Integer.parseInt(new SimpleDateFormat("YYYY").format(p.getDateVisite())),
+            // init datepicker. -1 sur le mois, car janvier=0
+            jDtPicker.getModel().setDate(Integer.parseInt(new SimpleDateFormat("YYYY").format(p.getDateVisite())),
                                           Integer.parseInt(new SimpleDateFormat("MM").format(p.getDateVisite()))-1,
                                           Integer.parseInt(new SimpleDateFormat("dd").format(p.getDateVisite())));
-            datePicker.getModel().setSelected(true);
+            jDtPicker.getModel().setSelected(true);
 
-            //Remplit la combobox des représentants
+            //Remplit la combobox des représentants et select du bon
             jCboRep.removeAllItems();
             Collection<Representant> setRep = hashRep.values();
             for (Representant r : setRep) {
@@ -518,13 +519,13 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
             jTxtNo.setText("");
 
             //DatePicker 
-            datePicker.getModel().setValue(null);
+            jDtPicker.getModel().setValue(null);
 
             //cbo des representants
             jCboRep.removeAllItems();
             Collection<Representant> setRep = hashRep.values();
             for (Representant r : setRep) 
-                jCboRep.addItem(r.getNo() + " "+ r.getNom() + " "+ r.getPrenom());
+                jCboRep.addItem(r.getNo()+" "+r.getNom()+" "+r.getPrenom());
         }
        jLblErreur.setVisible(false);
     }
@@ -535,7 +536,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         int noRep=Integer.parseInt(jCboRep.getSelectedItem().toString().split(" ")[0]);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         sdf.setLenient(false);
-        Date d = (Date) datePicker.getModel().getValue();
+        Date d = (Date) jDtPicker.getModel().getValue();
         Date dateVisite = null;
         try {
             dateVisite = sdf.parse(sdf.format(d));
@@ -543,6 +544,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
             Logger.getLogger(JFrmIntLstProspect.class.getName()).log(Level.SEVERE, null, ex);
         }
  
+        // en modif, on utilise le constructeur avec le n° de prospect
         if (typAcc == type_acces.modification) {
             Prospect c = new Prospect(          Integer.parseInt(jTxtNo.getText()),
                                                 jTxtEnseigne.getText(),
@@ -558,7 +560,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                                                dateVisite
                                                 );
             hashProspect.put(Integer.parseInt(jTxtNo.getText()),c);
-        } else {
+        } else { // en création, on utilise le constructeur sans le n°
             Prospect c = new Prospect (         jTxtEnseigne.getText(),
                                                 new Adresse(Integer.parseInt(jTxtAdrNo.getText()), 
                                                             jTxtAdrRue.getText(),
@@ -580,47 +582,22 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
     
     private void supprimeFiche() {
 
-        //Verification de l'intégrité des données (on ne peut pas supprimer un représentant s'il est utilisé ailleurs (client ou prospect)
-        if (verifIntegriteRep()) {
-            //Affichage boite de dialogue pour confirmation
-            if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir supprimer ce client ?","Attention",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                Prospect r = hashProspect.get(Integer.parseInt(jTxtNo.getText()));
-                hashProspect.remove(Integer.parseInt(jTxtNo.getText()),r);
-                //On vide tout
-                jTblProspect.clearSelection();
-                remplitFiche(-1);
-                //Affichage nouvelle liste
-                remplitTable(); 
-            }
-        } else { // Sinon, on affiche un message d'alerte
-            
+        //Affichage boite de dialogue pour confirmation
+        if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir supprimer ce client ?","Attention",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            Prospect r = hashProspect.get(Integer.parseInt(jTxtNo.getText()));
+            hashProspect.remove(Integer.parseInt(jTxtNo.getText()),r);
+            //On vide tout
+            jTblProspect.clearSelection();
+            remplitFiche(-1);
+            //Affichage nouvelle liste
+            remplitTable(); 
         }
                 
     }
     
-    //Verification de l'intégrité des données 
-    private boolean verifIntegriteRep()
-    {
-        return true;
-    }
-    
+  
     private boolean  verifyFields(Component container) 
     {    
-       //ne fonctionne pas donc fait à la main pour l'instant
-   /*         Component[] components= ((Container) container).getComponents();
-            for (Component c : components) {
-                                System.out.println("je controle " + p.getName());
-              try {                  
-                if (c instanceof JTextField) {
-                    if (!getInputVerifier().verify((JComponent) c)) {
-                    System.out.println("ça chie dans la colle pour : " + p.getName());
-                    return false ;}
-                }
-              } catch (ClassCastException e) {
-                //TODO : gestion exception
-              }
-            }
-     */
     
         if (!new verifyTxtFieldString().verify(jTxtEnseigne)) return false ;
         if (!new verifyTxtFieldString().verify(jTxtSiret)) return false ;
@@ -630,7 +607,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
         if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
         if (!new verifyTxtFieldMail().verify(jTxtMail)) return false ;
-        
+        if (!new verifyFieldDate().verify(jDtPicker)) return false ;
+         
         return true;        
         
     }
@@ -695,25 +673,27 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                 bOk = false;
             }
             jLblErreur.setVisible(!bOk);
+            input.requestFocusInWindow();
             return bOk;
         }
    }
     
-    class verifyTxtFieldDate extends InputVerifier {
+    class verifyFieldDate extends InputVerifier {
         @Override
         public boolean verify(JComponent input) {
-             
+            Date d; 
             boolean bOk = true;
-            JTextField tf = (JTextField) input;
-             
+               
             SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
             sdf.setLenient(false);
             try {
-                Date d = (Date) datePicker.getModel().getValue();
+                d = (Date) jDtPicker.getModel().getValue();
+                if (d==null) bOk=false;
             } catch (Exception e) {
                 bOk = false;
             }
              jLblErreur.setVisible(!bOk);
+             input.requestFocusInWindow();
              return bOk;
         }
     }
