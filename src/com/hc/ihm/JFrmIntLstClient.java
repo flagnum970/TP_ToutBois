@@ -380,7 +380,6 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
         //Liste et boutons du haut grisés
         GuiUtils.setEnableRec(jPanel4, false);
         GuiUtils.setEnableRec(jTblClient,false);
-        
         GuiUtils.setEnableRec(jPanel1,true);  //fiche enabled
         jTxtNo.setEnabled(false);             //Numéro non modifiable
         jTxtEnseigne.requestFocusInWindow();       //Focus sur le nom
@@ -427,22 +426,22 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
 
     private void remplitTable()
     {
-        String [] cols = {"No","Enseigne","Adresse","Mail","Téléphone","Siret","Représentant","Nb commandes"}; 
+        String[] cols = {"No","Enseigne","Adresse","Mail","Téléphone","Siret","Représentant","Nb commandes"}; 
         DefaultTableModel listData = new DefaultTableModel(cols,0); 
         
         if (hashClient!=null)
             for (Client c : hashClient.values()) {
 
-                String[] ts = {Integer.toString(c.getNo()),
-                    c.getEnseigne(),
-                    c.getAdrToString(),
-                    c.getMail(),
-                    c.getTelephone(),
-                    c.getSiret(),
-                    c.getNoRepresentant() + " "+hashRep.get(c.getNoRepresentant()).getNom()+" "+hashRep.get(c.getNoRepresentant()).getPrenom(),
-                    Integer.toString(c.getNbCommandes())};
+                String[] ts = { Integer.toString(c.getNo()),
+                                c.getEnseigne(),
+                                c.getAdrToString(),
+                                c.getMail(),
+                                c.getTelephone(),
+                                c.getSiret(),
+                                c.getNoRepresentant() + " "+hashRep.get(c.getNoRepresentant()).getNom()+" "+hashRep.get(c.getNoRepresentant()).getPrenom(),
+                                Integer.toString(c.getNbCommandes())};
             
-                 listData.addRow(ts);
+                listData.addRow(ts);
             }
         jTblClient.setModel(listData);
         initTailleCols();
