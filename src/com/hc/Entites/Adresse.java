@@ -12,6 +12,7 @@ package com.hc.Entites;
 public class Adresse {
     private int no;
     private String rue;
+    private String compl;
     private int cp;
     private String ville;
     private String pays;
@@ -30,6 +31,10 @@ public class Adresse {
         this.cp = cp;
         this.ville = ville;
         this.pays = pays;
+    }
+
+    public String getCompl() {
+        return compl;
     }
 
     public int getNo() {
