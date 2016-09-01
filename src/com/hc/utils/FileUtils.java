@@ -60,8 +60,7 @@ public class FileUtils {
                     if (line!= null) 
                         lst.add(line);                   
                 }
-            }
-            
+            }          
             finally {        
                 br.close();
                 fr.close();
