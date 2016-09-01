@@ -252,9 +252,7 @@ public class MDIToutBois extends javax.swing.JFrame {
         
         List<String> lstProspectString = FileUtils.codeFichierProspect(hashProspect);
         FileUtils.sauveFichier(lstProspectString,Constantes.FICHIER_PROSPECT);
-        
-        
-        
+              
         System.exit(0);
     }
 
