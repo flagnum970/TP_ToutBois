@@ -7,6 +7,7 @@ package com.hc.utils;
 
 import com.hc.Entites.Adresse;
 import com.hc.Entites.Client;
+import com.hc.Entites.Produit;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
 import java.io.BufferedReader;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +31,7 @@ import java.util.Set;
  * @author cflagollet
  */
 public class FileUtils {
-   
+    private final static String separator=";";
     private FileUtils() 
     {     
     }
@@ -84,7 +86,7 @@ public class FileUtils {
         HashMap<Integer,Representant> hashRep = new HashMap<Integer,Representant>();
       
         for (String s : lst) {
-            String[] ts = s.split(";");
+            String[] ts = s.split(separator);
                                                     
             Adresse n = new Adresse(Integer.parseInt(ts[5]),ts[6],Integer.parseInt(ts[7]),ts[8],ts[9]);
             try {
@@ -93,7 +95,7 @@ public class FileUtils {
                                                     Double.parseDouble(ts[2]),
                                                     ts[3],
                                                     ts[4],
-                                                    new Adresse(Integer.parseInt(ts[5]),ts[6],Integer.parseInt(ts[7]),ts[8],ts[9]));
+                                                    n);
                 hashRep.put(Integer.parseInt(ts[0]), r);
             } catch (Exception e) {
                 System.out.println("com.hc.utils.FileUtils.decodeRep()");
@@ -109,7 +111,7 @@ public class FileUtils {
         HashMap<Integer,Client> hashClient = new HashMap<Integer,Client>();
       
         for (String s : lst) {
-            String[] ts = s.split(";");
+            String[] ts = s.split(separator);
                                                     
             Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3],Integer.parseInt(ts[4]),ts[5],ts[6]);
             try {
@@ -137,7 +139,7 @@ public class FileUtils {
         HashMap<Integer,Prospect> hashProspect = new HashMap<Integer,Prospect>();
       
         for (String s : lst) {
-            String[] ts = s.split(";");
+            String[] ts = s.split(separator);
                                                     
             Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3],Integer.parseInt(ts[4]),ts[5],ts[6]);
             try {
@@ -158,29 +160,71 @@ public class FileUtils {
         
         return hashProspect;
     }
+   
+    public static HashMap<String,Produit> decodeProduit(List<String> lst) 
+    {        
+        HashMap<String,Produit> hashProduit = new HashMap<String,Produit>();
+      
+        for (String s : lst) {
+            String[] ts = s.split(separator);
+                                                    
+            
+            try {
+                Produit p = new Produit(   ts[0], 
+                                            ts[1],
+                                            Double.parseDouble(ts[2]),    
+                                            Integer.parseInt(ts[3]));
+                hashProduit.put(ts[0], p);
+            } catch (Exception e) {
+                System.out.println("com.hc.utils.FileUtils.decodeRep()");
+            }
+            
+        }
+        
+        return hashProduit;
+    }
+    
+    
+    public static List<String> codeFichierProduit(HashMap<String,Produit> hashProduit)
+    {
+        Set<String> setProduit = hashProduit.keySet();
+        List<String> lstProduit = new ArrayList<String>();
+        
+        for (String code : setProduit) {
+            Produit p= hashProduit.get(code);
+            String s =  code+separator+
+                        p.getDesignation()+separator+
+                        p.getPrixHT()+separator+
+                        p.getQteStock()+"\n";
+                        
+            lstProduit.add(s);
+        }
+        return lstProduit;
+    }
+    
     
     public static List<String> codeFichierRep(HashMap<Integer,Representant> hashRep)
     {
-        Set<Integer> setRep = hashRep.keySet();
-        List<String> lstRep = new ArrayList<String>();
+        Set<Integer> setProduit = hashRep.keySet();
+        List<String> lstProduit = new ArrayList<String>();
         
-        for (Integer no : setRep) {
+        for (Integer no : setProduit) {
             Representant r = hashRep.get(no);
-            String s =  no+";"+
-                        r.getTxComm()+";"+
-                        r.getSalaire()+";"+
-                        r.getNom()+";"+
-                        r.getPrenom()+";"+
-                        r.getAdresse().getNo()+";"+
-                        r.getAdresse().getRue()+";"+
-                        r.getAdresse().getCp()+";"+
-                        r.getAdresse().getVille()+";"+
+            String s =  no+separator+
+                        r.getTxComm()+separator+
+                        r.getSalaire()+separator+
+                        r.getNom()+separator+
+                        r.getPrenom()+separator+
+                        r.getAdresse().getNo()+separator+
+                        r.getAdresse().getRue()+separator+
+                        r.getAdresse().getCp()+separator+
+                        r.getAdresse().getVille()+separator+
                         r.getAdresse().getPays()+"\n";
-            lstRep.add(s);
+            lstProduit.add(s);
         }
-        return lstRep;
+        return lstProduit;
     }
-
+    
     public static List<String> codeFichierProspect(HashMap<Integer,Prospect> hashProspect)
     {
         Set<Integer> setRep = hashProspect.keySet();
@@ -188,18 +232,18 @@ public class FileUtils {
         
         for (Integer no : setRep) {
             Prospect p = hashProspect.get(no);
-            String s =  no+";"+
-                        p.getEnseigne()+";"+                        
-                        p.getAdresse().getNo()+";"+
-                        p.getAdresse().getRue()+";"+
-                        p.getAdresse().getCp()+";"+
-                        p.getAdresse().getVille()+";"+
-                        p.getAdresse().getPays()+";"+
-                        p.getMail()+";"+
-                        p.getTelephone()+";"+
-                        p.getSiret()+";"+
-                        p.getNoRepresentant()+";"+
-                        new SimpleDateFormat("dd/MM/YYYY").format(p.getDateVisite());
+            String s =  no+separator+
+                        p.getEnseigne()+separator+                        
+                        p.getAdresse().getNo()+separator+
+                        p.getAdresse().getRue()+separator+
+                        p.getAdresse().getCp()+separator+
+                        p.getAdresse().getVille()+separator+
+                        p.getAdresse().getPays()+separator+
+                        p.getMail()+separator+
+                        p.getTelephone()+separator+
+                        p.getSiret()+separator+
+                        p.getNoRepresentant()+separator+
+                        new SimpleDateFormat("dd/MM/YYYY").format(p.getDateVisite())+"\n";
             lstRep.add(s);
         }
         return lstRep;
@@ -212,17 +256,17 @@ public class FileUtils {
         
         for (Integer no : setClient) {
             Client c = hashClient.get(no);
-            String s =  no+";"+
-                        c.getEnseigne()+";"+                        
-                        c.getAdresse().getNo()+";"+
-                        c.getAdresse().getRue()+";"+
-                        c.getAdresse().getCp()+";"+
-                        c.getAdresse().getVille()+";"+
-                        c.getAdresse().getPays()+";"+
-                        c.getMail()+";"+
-                        c.getTelephone()+";"+
-                        c.getSiret()+";"+
-                        c.getNoRepresentant()+";"+
+            String s =  no+separator+
+                        c.getEnseigne()+separator+                        
+                        c.getAdresse().getNo()+separator+
+                        c.getAdresse().getRue()+separator+
+                        c.getAdresse().getCp()+separator+
+                        c.getAdresse().getVille()+separator+
+                        c.getAdresse().getPays()+separator+
+                        c.getMail()+separator+
+                        c.getTelephone()+separator+
+                        c.getSiret()+separator+
+                        c.getNoRepresentant()+separator+
                         c.getNbCommandes()+"\n";
                     
             lstClient.add(s);
@@ -239,8 +283,9 @@ public class FileUtils {
             BufferedWriter br = new BufferedWriter (fr);
             try
             {
-                for (String s : lst)
+                for (String s : lst) {
                     br.write(s);
+                }
             }
             
             finally {        
