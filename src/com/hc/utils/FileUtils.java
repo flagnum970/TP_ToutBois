@@ -13,10 +13,13 @@ import com.hc.Entites.Representant;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import static java.util.Collections.list;
@@ -39,39 +42,38 @@ public class FileUtils {
     /*** Lecture d'un fichier dont le chemin est passé en paramètre
      *   renvoie une list de String 
      * @param chemin
-     * @return
-     * @throws FileNotFoundException 
+     * @return 
      */
     
-    public static List<String> litFichier(String chemin) throws FileNotFoundException
+    public static List<String> litFichier(String chemin) // throws FileNotFoundException
     {
         String line;
         List<String> lst = new ArrayList<String>();
         
         try
         {
-            File f = new File (chemin);
-            FileReader fr = new FileReader (f);
-            BufferedReader br = new BufferedReader (fr);
-            line="";
+        /*    File f = new File (chemin);
+            FileReader fr = new FileReader(f); */
+            InputStream is = new FileInputStream(chemin);
+            InputStreamReader isr = new InputStreamReader(is);
+            
+            BufferedReader br = new BufferedReader(isr);
+
             try
             {
-                while(line != null)
-                {
-                    line = br.readLine();
-                    if (line!= null) 
-                        lst.add(line);                   
-                }
+                while ((line = br.readLine()) != null)
+                   lst.add(line);                   
+                
             }          
             finally {        
                 br.close();
-                fr.close();
+                isr.close();
             }   
         }
         catch (FileNotFoundException fnfe)
         {
-            System.out.println ("Le fichier n'a pas été trouvé"+fnfe.getMessage());
-        }
+            System.out.println ("Le fichier n'a pas été trouvé "+fnfe.getMessage());
+        } 
         catch (IOException ioe)
         {
             System.out.println ("Erreur lors de la lecture : " + ioe.getMessage());
