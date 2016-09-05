@@ -6,11 +6,16 @@
 package com.hc.ihm;
 
 import com.hc.Entites.Adresse;
+import com.hc.Entites.Client;
+import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
 import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.GuiUtils;
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -27,14 +32,19 @@ import javax.swing.table.DefaultTableModel;
 public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
     private HashMap<Integer,Representant> hashRep;
+    private HashMap<Integer,Prospect> hashProspect;
+    private HashMap<Integer,Client> hashClient;
     private type_acces typAcc;
     
     /**
      * Creates new form JFrmIntRep
      */
-    public JFrmIntLstRep(HashMap<Integer,Representant> hashRep) {
+    public JFrmIntLstRep(HashMap<Integer,Representant> hashRep, HashMap<Integer,Prospect> hashProspect,HashMap<Integer,Client> hashClient ) {
         initComponents();
         this.hashRep = hashRep;
+        this.hashClient = hashClient;
+        this.hashProspect = hashProspect;
+        
         remplitTable();
        
         typAcc = type_acces.visualisation;
@@ -128,7 +138,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setMaximizable(true);
-        setTitle("Liste des représentants");
+        setTitle("Gestion des représentants");
         setPreferredSize(new java.awt.Dimension(906, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -213,6 +223,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jLblErreur.setText("Veuillez vérifier votre saisie !");
         jLblErreur.setEnabled(false);
         jLblErreur.setFocusable(false);
+        jLblErreur.setName("jLblErreur"); // NOI18N
         jLblErreur.setRequestFocusEnabled(false);
         jLblErreur.setVerifyInputWhenFocusTarget(false);
         jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 170, -1));
@@ -392,6 +403,9 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         if (verifyFields(jPanel1)) {
             jLblErreur.setVisible(false);
             sauveFiche();
+            remplitFiche(-1);
+            remplitTable();
+            GuiUtils.setEnableRec(jPanel1,false);
             typAcc = type_acces.visualisation;
             GuiUtils.setEnableRec(jPanel4, true);
             GuiUtils.setEnableRec(jTblRep,true);
@@ -402,9 +416,14 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
-        if (typAcc != type_acces.visualisation)
-            if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir abandonner vos modifications ?","Attention",JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) 
-                return;
+        
+        //
+        //if (typAcc != type_acces.visualisation)
+        //if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir abandonner vos modifications ?","Attention",JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) 
+        //        return;
+        //if (!verifRepNonUtilise())
+        //    JOptionPane.showMessageDialog(null,"Suppression impossible. Ce représentant est utilisé","Attention",JOptionPane.ABORT);
+        
         supprimeFiche();
 
     }//GEN-LAST:event_jBtnSupprimerActionPerformed
@@ -544,7 +563,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     private void supprimeFiche() {
 
         //Verification de l'intégrité des données (on ne peut pas supprimer un représentant s'il est utilisé ailleurs (client ou prospect)
-        if (verifIntegriteRep()) {
+        if (verifIntegriteRep(Integer.parseInt(jTxtNo.getText()))) {
             //Affichage boite de dialogue pour confirmation
             if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir supprimer ce représentant ?","Attention",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 Representant r = hashRep.get(Integer.parseInt(jTxtNo.getText()));
@@ -558,14 +577,33 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         
             }
         } else { // Sinon, on affiche un message d'alerte
-            
+            JOptionPane.showMessageDialog(null,"Impossible de supprimer ce représentant : utilisé","ERREUR",JOptionPane.WARNING_MESSAGE);
         }
                 
     }
     
     //Verification de l'intégrité des données 
-    private boolean verifIntegriteRep()
+    private boolean verifIntegriteRep(int noRep)
     {
+        // On vérifie que le représentant passé en param, n'existe pas dans les prospects et clients
+        
+        //parcourt des prospects
+        Set<Integer> setProspect = hashProspect.keySet();
+        for (Integer no : setProspect) {
+            Prospect p = hashProspect.get(no);
+            if (p.getNoRepresentant() == noRep)
+                return false;
+        }
+        
+        //parcourt des clients
+        Set<Integer> setClient = hashClient.keySet();
+        for (Integer no : setClient) {
+            Client c = hashClient.get(no);
+            if (c.getNoRepresentant() == noRep)
+                return false;    
+            
+        }
+         
         return true;
     }
     
@@ -632,16 +670,16 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
                 
     }
     
-    class verifyTxtFieldString extends InputVerifier {
+class verifyTxtFieldString extends InputVerifier {
          @Override
          public boolean verify(JComponent input) {
-             JTextField tf = (JTextField) input;
+              JTextField tf = (JTextField) input;
              boolean bOk = !tf.getText().isEmpty();
      //        jLblErreur.setLocation(tf.getLocation().x,tf.getLocation().y+230);
      //        jLblErreur.paint(tf.getGraphics());
-             jLblErreur.setVisible(!bOk);
-
-
+             for ( Component c : tf.getParent().getComponents())
+                 if ((c.getName()!= null) &&(c.getName().equalsIgnoreCase("jlblerreur")))
+                         c.setVisible(!bOk);
              return (bOk);
          }
     }
