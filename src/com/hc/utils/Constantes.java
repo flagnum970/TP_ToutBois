@@ -10,9 +10,11 @@ package com.hc.utils;
  * @author cflagollet
  */
 public class Constantes {
-     public static final String FICHIER_REP = "c:\\CDI\\projet1_Toutbois\\representant2.txt";
-     public static final String FICHIER_PROSPECT = "c:\\CDI\\projet1_Toutbois\\prospect.txt";;
-     public static final String FICHIER_CLIENT = "c:\\CDI\\projet1_Toutbois\\client.txt";
+     public static final String FICHIER_REP = "c:\\CDI\\Fil rouge\\representant2.txt";
+     public static final String FICHIER_PROSPECT = "c:\\CDI\\Fil rouge\\prospect.txt";;
+     public static final String FICHIER_CLIENT = "c:\\CDI\\Fil rouge\\client.txt";
+     public static final String FICHIER_PRODUIT = "c:\\CDI\\Fil rouge\\produit.txt";
+     public static final String FICHIER_COMMANDE = "c:\\CDI\\Fil rouge\\commande.txt";
      
      public enum type_acces {creation,modification,visualisation};
 }
