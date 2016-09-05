@@ -13,6 +13,8 @@ import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.DateLabelFormatter;
 import com.hc.utils.GuiUtils;
 import java.awt.Component;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -39,7 +41,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
  *
  * @author cflagollet
  */
-public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
+public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
 
     private HashMap<Integer,Prospect> hashProspect;
     private HashMap<Integer,Representant> hashRep;
@@ -47,6 +49,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
     private UtilDateModel model ;
     private JDatePanelImpl datePanel ;
     private JDatePickerImpl jDtPicker ;
+   
     /**
      * Creates new form JFrmIntRep
      * @param hashProspect
@@ -76,8 +79,19 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         //SelectionListener
         jTblProspect.getSelectionModel().addListSelectionListener(new SharedListSelectionHandler());
         jTblProspect.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
+   /*     jPanel1.getFocusOwner().addFocusListener(new java.awt.event.FocusAdapter() {
+                        public void focusGained(FocusEvent e) {
+
+                        System.out.print("focus");
+                        }
+                        @Override
+                        public void focusLost(FocusEvent e) {
+
+                        }
+        }); */
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,12 +138,24 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setMaximizable(true);
-        setTitle("Liste des prospects");
+        setTitle("Gestion des prospects");
         setPreferredSize(new java.awt.Dimension(906, 500));
+        setRequestFocusEnabled(false);
+        setVerifyInputWhenFocusTarget(false);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                refreshComboRep(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setEnabled(false);
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                refreshComboRep(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTxtEnseigne.setInputVerifier(new verifyTxtFieldString());
@@ -402,6 +428,12 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
           
     }//GEN-LAST:event_jBtnNouveauModifierActionPerformed
 
+    private void refreshComboRep(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_refreshComboRep
+        // TODO add your handling code here:
+        if (jPanel1.isEnabled())
+            remplitComboRep(jCboRep.getSelectedIndex()) ;
+    }//GEN-LAST:event_refreshComboRep
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAnnuler;
@@ -495,8 +527,9 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                                           Integer.parseInt(new SimpleDateFormat("dd").format(p.getDateVisite())));
             jDtPicker.getModel().setSelected(true);
 
+            remplitComboRep(p.getNoRepresentant());
             //Remplit la combobox des représentants et select du bon
-            jCboRep.removeAllItems();
+  /*          jCboRep.removeAllItems();
             Collection<Representant> setRep = hashRep.values();
             for (Representant r : setRep) {
                 jCboRep.addItem(r.getNo() + " "+ r.getNom() + " "+ r.getPrenom());
@@ -504,7 +537,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                     iRep = i;
                  i++;
             }
-            jCboRep.setSelectedIndex(iRep);
+            jCboRep.setSelectedIndex(iRep); */
             
        } else {
             jTxtEnseigne.setText("");
@@ -522,12 +555,27 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
             jDtPicker.getModel().setValue(null);
 
             //cbo des representants
-            jCboRep.removeAllItems();
-            Collection<Representant> setRep = hashRep.values();
-            for (Representant r : setRep) 
-                jCboRep.addItem(r.getNo()+" "+r.getNom()+" "+r.getPrenom());
+            remplitComboRep(-1);
         }
        jLblErreur.setVisible(false);
+    }
+   
+    private void remplitComboRep(int index) 
+    {
+            int i=0,iRep =0;    
+            jCboRep.removeAllItems();
+            Collection<Representant> setRep = hashRep.values();
+                
+            for (Representant r : setRep) {
+                jCboRep.addItem(r.getNo() + " "+ r.getNom() + " "+ r.getPrenom());
+                if (r.getNo() == index)
+                    iRep = i;
+                 i++;
+            }
+            jCboRep.setSelectedIndex(iRep);
+ 
+       /*     for (Representant r : setRep) 
+                jCboRep.addItem(r.getNo()+" "+r.getNom()+" "+r.getPrenom()); ù*/
     }
     
     private void sauveFiche() 
@@ -577,9 +625,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
         }
             
     }
-    
-
-    
+   
     private void supprimeFiche() {
 
         //Affichage boite de dialogue pour confirmation
@@ -673,7 +719,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                 bOk = false;
             }
             jLblErreur.setVisible(!bOk);
-            input.requestFocusInWindow();
+            tf.requestFocusInWindow();
             return bOk;
         }
    }
@@ -686,8 +732,9 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame {
                
             SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
             sdf.setLenient(false);
+            JDatePickerImpl jDate = (JDatePickerImpl) input;
             try {
-                d = (Date) jDtPicker.getModel().getValue();
+                d = (Date) jDate.getModel().getValue();
                 if (d==null) bOk=false;
             } catch (Exception e) {
                 bOk = false;
