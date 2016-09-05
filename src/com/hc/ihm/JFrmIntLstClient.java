@@ -101,7 +101,7 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setMaximizable(true);
-        setTitle("Liste des clients");
+        setTitle("Gestion des clients");
         setPreferredSize(new java.awt.Dimension(906, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
