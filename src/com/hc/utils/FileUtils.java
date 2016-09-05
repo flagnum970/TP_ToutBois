@@ -205,10 +205,10 @@ public class FileUtils {
     
     public static List<String> codeFichierRep(HashMap<Integer,Representant> hashRep)
     {
-        Set<Integer> setProduit = hashRep.keySet();
-        List<String> lstProduit = new ArrayList<String>();
+        Set<Integer> setRep = hashRep.keySet();
+        List<String> lstRep = new ArrayList<String>();
         
-        for (Integer no : setProduit) {
+        for (Integer no : setRep) {
             Representant r = hashRep.get(no);
             String s =  no+separator+
                         r.getTxComm()+separator+
@@ -220,9 +220,9 @@ public class FileUtils {
                         r.getAdresse().getCp()+separator+
                         r.getAdresse().getVille()+separator+
                         r.getAdresse().getPays()+"\n";
-            lstProduit.add(s);
+            lstRep.add(s);
         }
-        return lstProduit;
+        return lstRep;
     }
     
     public static List<String> codeFichierProspect(HashMap<Integer,Prospect> hashProspect)
