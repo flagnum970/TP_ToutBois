@@ -13,14 +13,14 @@ import java.util.List;
  * @author cflagollet
  */
 public class Commande {
-    public enum etatCommande {enCours,validee,facturee};
+    public enum etat_commande {enCours,validee,facturee};
     
     private int no;
     private static int dernierNo=0;
     private Date dtCommande;
     private Date dtLivraison;
     private List<LigneCommande> lgComm;
-    private etatCommande etat;
+    private etat_commande etat;
 
     /**
      *
@@ -34,7 +34,7 @@ public class Commande {
         this.dtCommande = dtCommande; //on passe la date car pas forcément la date du jour !
         this.dtLivraison = dtLivraison;
         this.lgComm = lgComm;
-        this.etat = etatCommande.enCours;
+        this.etat = etat_commande.enCours;
     }
 
     public static int getDernierNo() {
@@ -72,11 +72,11 @@ public class Commande {
         lgComm.set(i, lg);
     }
     
-    public etatCommande getEtat() {
+    public etat_commande getEtat() {
         return etat;
     }
 
-    public void setEtat(etatCommande etat) {
+    public void setEtat(etat_commande etat) {
         this.etat = etat;
     }
     
