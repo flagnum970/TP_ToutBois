@@ -7,6 +7,9 @@ package com.hc.utils;
 
 import java.awt.Component;
 import java.awt.Container;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
+import javax.swing.JTextField;
 
 /**
  *
@@ -27,4 +30,20 @@ public class GuiUtils {
                 //TODO : gestion exception
         }
     }
+    
+   public class verifyTxtFieldString extends InputVerifier {
+         public  boolean verify(JComponent input) {
+              JTextField tf = (JTextField) input;
+             boolean bOk = !tf.getText().isEmpty();
+     //        jLblErreur.setLocation(tf.getLocation().x,tf.getLocation().y+230);
+     //        jLblErreur.paint(tf.getGraphics());
+             for ( Component c : tf.getParent().getComponents())
+                 if ((c.getName()!= null) &&(c.getName().equalsIgnoreCase("jlblerreur")))
+                         c.setVisible(!bOk);
+             return (bOk);
+         }
+    } 
+    
 }
+
+
