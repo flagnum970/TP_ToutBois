@@ -6,6 +6,7 @@
 package com.hc.application;
 
 import com.hc.Entites.Client;
+import com.hc.Entites.Produit;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
 import com.hc.ihm.MDIToutBois;
@@ -58,7 +59,6 @@ public class Principale {
                 List<String> lstLignes=null;
                 
                 //On crée la map des représentants, à partir du fichier
-                //
                 HashMap<Integer,Representant> hashRep;
                 try {
                   lstLignes=  FileUtils.litFichier(Constantes.FICHIER_REP);
@@ -70,7 +70,6 @@ public class Principale {
                 hashRep=FileUtils.decodeRep(lstLignes) ;
         
                 //On crée la map des clients, à partir du fichier
-                //
                 HashMap<Integer,Client> hashClient;
                 try {
                   lstLignes=  FileUtils.litFichier(Constantes.FICHIER_CLIENT);
@@ -82,7 +81,6 @@ public class Principale {
                 hashClient=FileUtils.decodeClient(lstLignes) ;
                 
                 //On crée la map des prospects, à partir du fichier
-                //
                 HashMap<Integer,Prospect> hashProspect;
                 try {
                   lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PROSPECT);
@@ -93,9 +91,20 @@ public class Principale {
                 }
                 hashProspect=FileUtils.decodeProspect(lstLignes) ;
                 
+                //On crée la map des produits, à partir du fichier
+                HashMap<String,Produit> hashProduit;
+                try {
+                  lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PRODUIT);
+                } 
+                catch (FileNotFoundException ex) {
+                    Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
+                    System.exit(0);
+                }
+                hashProduit=FileUtils.decodeProduit(lstLignes) ;
+                
                 //On appelle la fenêtre MDI avec nos hashmaps
-                new MDIToutBois(hashRep,hashClient,hashProspect).setVisible(true);
-               
+                new MDIToutBois(hashRep,hashClient,hashProspect,hashProduit).setVisible(true);
+                
                 }
         });
     }
