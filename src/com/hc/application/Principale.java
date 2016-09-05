@@ -60,46 +60,46 @@ public class Principale {
                 
                 //On crée la map des représentants, à partir du fichier
                 HashMap<Integer,Representant> hashRep;
-                try {
+         //       try {
                   lstLignes=  FileUtils.litFichier(Constantes.FICHIER_REP);
-                } 
-                catch (FileNotFoundException ex) {
+         //       } 
+       /*         catch (FileNotFoundException ex) {
                     Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
                     System.exit(0);
-                }
+                } */
                 hashRep=FileUtils.decodeRep(lstLignes) ;
         
                 //On crée la map des clients, à partir du fichier
                 HashMap<Integer,Client> hashClient;
-                try {
+         //       try {
                   lstLignes=  FileUtils.litFichier(Constantes.FICHIER_CLIENT);
-                } 
-                catch (FileNotFoundException ex) {
+         //       } 
+        /*        catch (FileNotFoundException ex) {
                     Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
                     System.exit(0);
-                }
+                } */
                 hashClient=FileUtils.decodeClient(lstLignes) ;
                 
                 //On crée la map des prospects, à partir du fichier
                 HashMap<Integer,Prospect> hashProspect;
-                try {
+             //   try {
                   lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PROSPECT);
-                } 
-                catch (FileNotFoundException ex) {
+            //    } 
+            /*    catch (FileNotFoundException ex) {
                     Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
                     System.exit(0);
-                }
+                } */
                 hashProspect=FileUtils.decodeProspect(lstLignes) ;
                 
                 //On crée la map des produits, à partir du fichier
                 HashMap<String,Produit> hashProduit;
-                try {
+                //    try {
                   lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PRODUIT);
-                } 
+              /*  } 
                 catch (FileNotFoundException ex) {
                     Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
                     System.exit(0);
-                }
+                } */
                 hashProduit=FileUtils.decodeProduit(lstLignes) ;
                 
                 //On appelle la fenêtre MDI avec nos hashmaps
