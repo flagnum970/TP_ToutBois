@@ -19,15 +19,20 @@ public class GuiUtils {
         //Methode pour enable/disable un panel (quand on disable un container, les composants contenus ne sont pas disable !
     public static void setEnableRec(Component container, boolean enable){
     
-        container.setEnabled(enable);
-
+        if  (( (container.getName() ==null ) ||
+              (!container.getName().startsWith("jLbl")) ||
+              (!container.getName().startsWith("jPane")) ) && !enable)
+            container.setEnabled(enable);
+        else
+            if  ( (container.getName() ==null ) ||
+              (!container.getName().startsWith("jTxtNo")))
+            container.setEnabled(enable);
+        
         try {
             Component[] components= ((Container) container).getComponents();
-            for (Component component : components) {
-                if ( (component.getName()!=null ) && (!component.getName().startsWith("jLbl"))
-                        )
-                    setEnableRec(component, enable);
-            }
+            for (Component component : components)     
+                setEnableRec(component, enable);
+            
         } catch (ClassCastException e) {
                 //TODO : gestion exception
         }
