@@ -24,7 +24,9 @@ public class GuiUtils {
         try {
             Component[] components= ((Container) container).getComponents();
             for (Component component : components) {
-                setEnableRec(component, enable);
+                if ( (component.getName()!=null ) && (!component.getName().startsWith("jLbl"))
+                        )
+                    setEnableRec(component, enable);
             }
         } catch (ClassCastException e) {
                 //TODO : gestion exception
