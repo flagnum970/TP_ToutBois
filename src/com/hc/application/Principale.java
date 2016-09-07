@@ -6,6 +6,7 @@
 package com.hc.application;
 
 import com.hc.Entites.Client;
+import com.hc.Entites.Commande;
 import com.hc.Entites.Produit;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
@@ -60,50 +61,32 @@ public class Principale {
                 
                 //On crée la map des représentants, à partir du fichier
                 HashMap<Integer,Representant> hashRep;
-         //       try {
-                  lstLignes=  FileUtils.litFichier(Constantes.FICHIER_REP);
-         //       } 
-       /*         catch (FileNotFoundException ex) {
-                    Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
-                    System.exit(0);
-                } */
+         
+                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_REP);
                 hashRep=FileUtils.decodeRep(lstLignes) ;
         
                 //On crée la map des clients, à partir du fichier
                 HashMap<Integer,Client> hashClient;
-         //       try {
-                  lstLignes=  FileUtils.litFichier(Constantes.FICHIER_CLIENT);
-         //       } 
-        /*        catch (FileNotFoundException ex) {
-                    Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
-                    System.exit(0);
-                } */
+                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_CLIENT);
                 hashClient=FileUtils.decodeClient(lstLignes) ;
-                
+             
                 //On crée la map des prospects, à partir du fichier
                 HashMap<Integer,Prospect> hashProspect;
-             //   try {
-                  lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PROSPECT);
-            //    } 
-            /*    catch (FileNotFoundException ex) {
-                    Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
-                    System.exit(0);
-                } */
+                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PROSPECT);
                 hashProspect=FileUtils.decodeProspect(lstLignes) ;
                 
                 //On crée la map des produits, à partir du fichier
                 HashMap<String,Produit> hashProduit;
-                //    try {
-                  lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PRODUIT);
-              /*  } 
-                catch (FileNotFoundException ex) {
-                    Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
-                    System.exit(0);
-                } */
+                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PRODUIT);
                 hashProduit=FileUtils.decodeProduit(lstLignes) ;
                 
+                                //On crée la map des produits, à partir du fichier
+                HashMap<Integer,Commande> hashCommande;
+                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_COMMANDE);
+                hashCommande=FileUtils.decodeCommande(lstLignes) ;
+                
                 //On appelle la fenêtre MDI avec nos hashmaps
-                new MDIToutBois(hashRep,hashClient,hashProspect,hashProduit).setVisible(true);
+                new MDIToutBois(hashRep,hashClient,hashProspect,hashProduit,hashCommande).setVisible(true);
                 
                 }
         });
