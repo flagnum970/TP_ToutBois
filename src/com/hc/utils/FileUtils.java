@@ -2,11 +2,12 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ */   
 package com.hc.utils;
 
 import com.hc.Entites.Adresse;
 import com.hc.Entites.Client;
+import com.hc.Entites.Commande;
 import com.hc.Entites.Produit;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
@@ -90,7 +91,7 @@ public class FileUtils {
         for (String s : lst) {
             String[] ts = s.split(separator);
                                                     
-            Adresse n = new Adresse(Integer.parseInt(ts[5]),ts[6],Integer.parseInt(ts[7]),ts[8],ts[9]);
+            Adresse n = new Adresse(Integer.parseInt(ts[5]),ts[6], ts[7], Integer.parseInt(ts[8]),ts[9],ts[10]);
             try {
                 Representant r = new Representant(  Integer.parseInt(ts[0]),
                                                     Double.parseDouble(ts[1]),
@@ -115,16 +116,16 @@ public class FileUtils {
         for (String s : lst) {
             String[] ts = s.split(separator);
                                                     
-            Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3],Integer.parseInt(ts[4]),ts[5],ts[6]);
+            Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3], ts[4], Integer.parseInt(ts[5]),ts[6],ts[7]);
             try {
                 Client c = new Client(  Integer.parseInt(ts[0]), // n, s, s, s, 0, 0);
                                                     ts[1],
                                                     n,
-                                                    ts[7],
-                                                    ts[8],                                                    
-                                                    ts[9],               
-                                                    Integer.parseInt(ts[10]),
-                                                    Integer.parseInt(ts[11]));
+                                                    ts[8],
+                                                    ts[9],                                                    
+                                                    ts[10],               
+                                                    Integer.parseInt(ts[11]),
+                                                    Integer.parseInt(ts[12]));
                 
                 hashClient.put(Integer.parseInt(ts[0]), c);
             } catch (Exception e) {
@@ -143,16 +144,16 @@ public class FileUtils {
         for (String s : lst) {
             String[] ts = s.split(separator);
                                                     
-            Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3],Integer.parseInt(ts[4]),ts[5],ts[6]);
+            Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3], ts[4],Integer.parseInt(ts[5]),ts[6],ts[7]);
             try {
                 Prospect p = new Prospect(Integer.parseInt(ts[0]), // n, s, s, s, 0, 0);
                                                     ts[1],
                                                     n,
-                                                    ts[7],
-                                                    ts[8],                                                    
-                                                    ts[9],               
-                                                    Integer.parseInt(ts[10]),
-                                                    new SimpleDateFormat("dd/MM/YYYY").parse(ts[11]));
+                                                    ts[8],
+                                                    ts[9],                                                    
+                                                    ts[10],               
+                                                    Integer.parseInt(ts[11]),
+                                                    new SimpleDateFormat("dd/MM/YYYY").parse(ts[12]));
                 hashProspect.put(Integer.parseInt(ts[0]), p);
             } catch (Exception e) {
                 System.out.println("com.hc.utils.FileUtils.decodeRep()");
@@ -184,6 +185,29 @@ public class FileUtils {
         }
         
         return hashProduit;
+    }
+    
+        public static HashMap<Integer,Commande> decodeCommande(List<String> lst) 
+    {        
+        HashMap<Integer,Commande> hashCommande = new HashMap<Integer,Commande>();
+      
+        for (String s : lst) {
+            String[] ts = s.split(separator);
+                                                    
+            Adresse n = new Adresse(Integer.parseInt(ts[5]),ts[6],ts[7],Integer.parseInt(ts[8]),ts[9],ts[10]);
+            try {
+                Commande c = new Commande(  Integer.parseInt(ts[0]),
+                                            new SimpleDateFormat("dd/MM/YYYY").parse(ts[1]), 
+                                            new SimpleDateFormat("dd/MM/YYYY").parse(ts[2]),
+                                            null);
+                hashCommande.put(Integer.parseInt(ts[0]), c);
+            } catch (Exception e) {
+                System.out.println("com.hc.utils.FileUtils.decodeCommande() : "+e.getLocalizedMessage());
+            }
+            
+        }
+        
+        return hashCommande;
     }
     
     
@@ -219,6 +243,7 @@ public class FileUtils {
                         r.getPrenom()+separator+
                         r.getAdresse().getNo()+separator+
                         r.getAdresse().getRue()+separator+
+                        r.getAdresse().getCompl()+separator+
                         r.getAdresse().getCp()+separator+
                         r.getAdresse().getVille()+separator+
                         r.getAdresse().getPays()+"\n";
@@ -238,6 +263,7 @@ public class FileUtils {
                         p.getEnseigne()+separator+                        
                         p.getAdresse().getNo()+separator+
                         p.getAdresse().getRue()+separator+
+                        p.getAdresse().getCompl()+separator+
                         p.getAdresse().getCp()+separator+
                         p.getAdresse().getVille()+separator+
                         p.getAdresse().getPays()+separator+
@@ -262,6 +288,7 @@ public class FileUtils {
                         c.getEnseigne()+separator+                        
                         c.getAdresse().getNo()+separator+
                         c.getAdresse().getRue()+separator+
+                        c.getAdresse().getCompl()+separator+
                         c.getAdresse().getCp()+separator+
                         c.getAdresse().getVille()+separator+
                         c.getAdresse().getPays()+separator+
