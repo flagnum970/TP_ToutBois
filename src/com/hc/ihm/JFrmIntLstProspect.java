@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.InputVerifier;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -101,40 +102,41 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jTxtEnseigne = new javax.swing.JTextField();
-        jTxtSiret = new javax.swing.JTextField();
-        jLblSiret = new javax.swing.JLabel();
-        jLblEnseigne = new javax.swing.JLabel();
-        jTxtMail = new javax.swing.JTextField();
-        jBtnAnnuler = new javax.swing.JButton();
-        jLblSalaire = new javax.swing.JLabel();
-        jBtnOK = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTxtNo = new javax.swing.JTextField();
-        jLblErreur = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTxtAdrNo = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTxtAdrRue = new javax.swing.JTextField();
-        jTxtAdrCP = new javax.swing.JTextField();
-        jTxtAdrVille = new javax.swing.JTextField();
-        jTxtAdrPays = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTxtTel = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jCboRep = new javax.swing.JComboBox<>();
-        jLabel15 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jBtnNouveau = new javax.swing.JButton();
         jBtnModifier = new javax.swing.JButton();
         jBtnSupprimer = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTblProspect = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jTxtEnseigne = new javax.swing.JTextField();
+        jTxtSiret = new javax.swing.JTextField();
+        jLblSiret = new javax.swing.JLabel();
+        jLblEnseigne = new javax.swing.JLabel();
+        jTxtMail = new javax.swing.JTextField();
+        jLblSalaire = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTxtNo = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTxtAdrCompl = new javax.swing.JTextField();
+        jTxtAdrCP = new javax.swing.JTextField();
+        jTxtAdrVille = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTxtAdrRue = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTxtAdrNo = new javax.swing.JTextField();
+        jCboAdrPays = new javax.swing.JComboBox<>();
+        jTxtTel = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jCboRep = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        jLblErreur = new javax.swing.JLabel();
+        jBtnOK = new javax.swing.JButton();
+        jBtnAnnuler = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -148,144 +150,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.setEnabled(false);
-        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                refreshComboRep(evt);
-            }
-        });
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTxtEnseigne.setInputVerifier(new verifyTxtFieldString());
-        jTxtEnseigne.setNextFocusableComponent(jTxtSiret);
-        jPanel1.add(jTxtEnseigne, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 230, -1));
-
-        jTxtSiret.setToolTipText("");
-        jTxtSiret.setInputVerifier(new verifyTxtFieldString());
-        jTxtSiret.setNextFocusableComponent(jTxtMail);
-        jPanel1.add(jTxtSiret, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 120, -1));
-
-        jLblSiret.setText("Siret");
-        jPanel1.add(jLblSiret, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 57, 20));
-
-        jLblEnseigne.setText("Enseigne");
-        jPanel1.add(jLblEnseigne, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 20));
-
-        jTxtMail.setInputVerifier(new verifyTxtFieldMail());
-        jTxtMail.setNextFocusableComponent(jTxtTel);
-        jPanel1.add(jTxtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 170, -1));
-
-        jBtnAnnuler.setText("Annuler");
-        jBtnAnnuler.setToolTipText("");
-        jBtnAnnuler.setNextFocusableComponent(jTxtEnseigne);
-        jBtnAnnuler.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAnnulerActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, -1, -1));
-
-        jLblSalaire.setText("Représentant");
-        jPanel1.add(jLblSalaire, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, 20));
-
-        jBtnOK.setText("OK");
-        jBtnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOKActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
-
-        jLabel1.setText("Mail");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, 20));
-
-        jTxtNo.setEditable(false);
-        jTxtNo.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
-        jTxtNo.setEnabled(false);
-        jTxtNo.setFocusable(false);
-        jTxtNo.setVerifyInputWhenFocusTarget(false);
-        jPanel1.add(jTxtNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, -1));
-
-        jLblErreur.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-        jLblErreur.setForeground(new java.awt.Color(255, 51, 0));
-        jLblErreur.setText("Veuillez vérifier votre saisie !");
-        jLblErreur.setEnabled(false);
-        jLblErreur.setFocusable(false);
-        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 310, -1));
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Adresse"));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setText("Numéro");
-        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 57, 20));
-
-        jTxtAdrNo.setInputVerifier(new verifyTxtFieldInt());
-        jTxtAdrNo.setNextFocusableComponent(jTxtAdrRue);
-        jPanel5.add(jTxtAdrNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 40, -1));
-
-        jLabel4.setText("Rue");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 57, 20));
-
-        jTxtAdrRue.setInputVerifier(new verifyTxtFieldString());
-        jTxtAdrRue.setNextFocusableComponent(jTxtAdrCP);
-        jPanel5.add(jTxtAdrRue, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 210, -1));
-
-        jTxtAdrCP.setInputVerifier(new verifyTxtFieldInt());
-        jTxtAdrCP.setNextFocusableComponent(jTxtAdrVille);
-        jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 60, -1));
-
-        jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
-        jTxtAdrVille.setNextFocusableComponent(jTxtAdrPays);
-        jPanel5.add(jTxtAdrVille, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 160, -1));
-
-        jTxtAdrPays.setInputVerifier(new verifyTxtFieldString());
-        jTxtAdrPays.setNextFocusableComponent(jBtnOK);
-        jPanel5.add(jTxtAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 160, -1));
-
-        jLabel5.setText("Code postal");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
-
-        jLabel6.setText("Ville");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 50, 20));
-
-        jLabel7.setText("Pays");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 50, 20));
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 330, 200));
-
-        jTxtTel.setToolTipText("");
-        jTxtTel.setAutoscrolls(false);
-        jTxtTel.setInputVerifier(new verifyTxtFieldNumber());
-        jPanel1.add(jTxtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 110, -1));
-
-        jLabel25.setText("Téléphone");
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, 20));
-
-        jCboRep.setNextFocusableComponent(jTxtAdrNo);
-        jPanel1.add(jCboRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 120, -1));
-
-        jLabel15.setText("Date visite");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, 20));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, -1, -1));
 
         jBtnNouveau.setText("Nouveau");
         jBtnNouveau.setFocusable(false);
@@ -368,7 +232,139 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jTblProspect.setFocusable(false);
         jScrollPane2.setViewportView(jTblProspect);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 727, 173));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 727, 110));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setEnabled(false);
+        jPanel1.setName("Jpane"); // NOI18N
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                refreshComboRep(evt);
+            }
+        });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTxtEnseigne.setInputVerifier(new verifyTxtFieldString());
+        jTxtEnseigne.setNextFocusableComponent(jTxtSiret);
+        jPanel1.add(jTxtEnseigne, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 230, -1));
+
+        jTxtSiret.setToolTipText("");
+        jTxtSiret.setInputVerifier(new verifyTxtFieldString());
+        jTxtSiret.setNextFocusableComponent(jTxtMail);
+        jPanel1.add(jTxtSiret, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 120, -1));
+
+        jLblSiret.setText("Siret");
+        jPanel1.add(jLblSiret, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 57, 20));
+
+        jLblEnseigne.setText("Enseigne");
+        jPanel1.add(jLblEnseigne, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 20));
+
+        jTxtMail.setInputVerifier(new verifyTxtFieldMail());
+        jTxtMail.setNextFocusableComponent(jTxtTel);
+        jPanel1.add(jTxtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 170, -1));
+
+        jLblSalaire.setText("Représentant");
+        jPanel1.add(jLblSalaire, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, 20));
+
+        jLabel1.setText("Mail");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, 20));
+
+        jTxtNo.setEditable(false);
+        jTxtNo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtNo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTxtNo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtNo.setEnabled(false);
+        jTxtNo.setFocusable(false);
+        jTxtNo.setName("jTxtNo"); // NOI18N
+        jTxtNo.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(jTxtNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, -1));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Adresse"));
+        jPanel5.setName("Jpane"); // NOI18N
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Numéro");
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 57, 20));
+
+        jLabel4.setText("Complements");
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 80, 20));
+
+        jTxtAdrCompl.setNextFocusableComponent(jTxtAdrCP);
+        jPanel5.add(jTxtAdrCompl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 210, -1));
+
+        jTxtAdrCP.setInputVerifier(new verifyTxtFieldInt());
+        jTxtAdrCP.setNextFocusableComponent(jTxtAdrVille);
+        jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 60, -1));
+
+        jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
+        jPanel5.add(jTxtAdrVille, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, -1));
+
+        jLabel5.setText("Code postal");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
+
+        jLabel6.setText("Ville");
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 50, 20));
+
+        jLabel7.setText("Pays");
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 50, 20));
+
+        jTxtAdrRue.setInputVerifier(new verifyTxtFieldString());
+        jTxtAdrRue.setNextFocusableComponent(jTxtAdrCP);
+        jPanel5.add(jTxtAdrRue, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 210, -1));
+
+        jLabel8.setText("Rue");
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 57, 20));
+
+        jTxtAdrNo.setInputVerifier(new verifyTxtFieldInt());
+        jTxtAdrNo.setNextFocusableComponent(jTxtAdrCompl);
+        jPanel5.add(jTxtAdrNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 40, -1));
+
+        jCboAdrPays.setEditable(true);
+        jCboAdrPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allemagne", "Angleterre", "Belgique", "Cameroun", "Espagne", "France", "Italie" }));
+        jPanel5.add(jCboAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 330, 230));
+
+        jTxtTel.setToolTipText("");
+        jTxtTel.setAutoscrolls(false);
+        jTxtTel.setInputVerifier(new verifyTxtFieldNumber());
+        jPanel1.add(jTxtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 110, -1));
+
+        jLabel25.setText("Téléphone");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, 20));
+
+        jCboRep.setNextFocusableComponent(jTxtAdrNo);
+        jPanel1.add(jCboRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 120, -1));
+
+        jLabel15.setText("Date visite");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, 20));
+
+        jLblErreur.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLblErreur.setForeground(new java.awt.Color(255, 51, 0));
+        jLblErreur.setText("Veuillez vérifier votre saisie !");
+        jLblErreur.setEnabled(false);
+        jLblErreur.setFocusable(false);
+        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 180, -1));
+
+        jBtnOK.setText("OK");
+        jBtnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOKActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
+
+        jBtnAnnuler.setText("Annuler");
+        jBtnAnnuler.setToolTipText("");
+        jBtnAnnuler.setNextFocusableComponent(jTxtEnseigne);
+        jBtnAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAnnulerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 726, 310));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -423,7 +419,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         //Liste et boutons du haut grisés
         GuiUtils.setEnableRec(jPanel4, false);
         GuiUtils.setEnableRec(jTblProspect,false);
-        jTxtNo.setEnabled(false); //Numéro non modifiable
         jTxtEnseigne.requestFocusInWindow();//Focus sur le nom
           
     }//GEN-LAST:event_jBtnNouveauModifierActionPerformed
@@ -441,6 +436,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
     private javax.swing.JButton jBtnNouveau;
     private javax.swing.JButton jBtnOK;
     private javax.swing.JButton jBtnSupprimer;
+    private javax.swing.JComboBox<String> jCboAdrPays;
     private javax.swing.JComboBox<String> jCboRep;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
@@ -450,19 +446,19 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLblEnseigne;
     private javax.swing.JLabel jLblErreur;
     private javax.swing.JLabel jLblSalaire;
     private javax.swing.JLabel jLblSiret;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTblProspect;
     private javax.swing.JTextField jTxtAdrCP;
+    private javax.swing.JTextField jTxtAdrCompl;
     private javax.swing.JTextField jTxtAdrNo;
-    private javax.swing.JTextField jTxtAdrPays;
     private javax.swing.JTextField jTxtAdrRue;
     private javax.swing.JTextField jTxtAdrVille;
     private javax.swing.JTextField jTxtEnseigne;
@@ -515,9 +511,10 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             jTxtEnseigne.setText(p.getEnseigne());
             jTxtAdrNo.setText(String.valueOf(p.getAdresse().getNo()));
             jTxtAdrRue.setText(p.getAdresse().getRue());
+            jTxtAdrCompl.setText(p.getAdresse().getCompl());
             jTxtAdrVille.setText(p.getAdresse().getVille());
             jTxtAdrCP.setText(String.valueOf(p.getAdresse().getCp()));
-            jTxtAdrPays.setText(p.getAdresse().getPays());
+            jCboAdrPays.setSelectedItem(p.getAdresse().getPays());
             jTxtMail.setText(p.getMail());
             jTxtTel.setText(p.getTelephone());
             jTxtSiret.setText(p.getSiret());
@@ -526,18 +523,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                                           Integer.parseInt(new SimpleDateFormat("MM").format(p.getDateVisite()))-1,
                                           Integer.parseInt(new SimpleDateFormat("dd").format(p.getDateVisite())));
             jDtPicker.getModel().setSelected(true);
-
             remplitComboRep(p.getNoRepresentant());
-            //Remplit la combobox des représentants et select du bon
-  /*          jCboRep.removeAllItems();
-            Collection<Representant> setRep = hashRep.values();
-            for (Representant r : setRep) {
-                jCboRep.addItem(r.getNo() + " "+ r.getNom() + " "+ r.getPrenom());
-                if (r.getNo() == p.getNoRepresentant())
-                    iRep = i;
-                 i++;
-            }
-            jCboRep.setSelectedIndex(iRep); */
+
             
        } else {
             jTxtEnseigne.setText("");
@@ -545,10 +532,11 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             jTxtMail.setText("");
             jTxtTel.setText("");
             jTxtAdrNo.setText("");
-            jTxtAdrRue.setText("");
+            jTxtAdrCompl.setText("");
+            jTxtAdrCompl.setText("");
             jTxtAdrVille.setText("");
             jTxtAdrCP.setText("");
-            jTxtAdrPays.setText("");
+            jCboAdrPays.setSelectedItem("");
             jTxtNo.setText("");
 
             //DatePicker 
@@ -596,11 +584,12 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         if (typAcc == type_acces.modification) {
             Prospect c = new Prospect(          Integer.parseInt(jTxtNo.getText()),
                                                 jTxtEnseigne.getText(),
-                                                new Adresse(Integer.parseInt(jTxtAdrNo.getText()), 
-                                                            jTxtAdrRue.getText(),
+                                                new Adresse(Integer.parseInt(jTxtAdrNo.getText()),
+                                                           jTxtAdrRue.getText(),
+                                                            jTxtAdrCompl.getText(),
                                                             Integer.parseInt(jTxtAdrCP.getText()),
                                                             jTxtAdrVille.getText(),
-                                                            jTxtAdrPays.getText()),
+                                                            (String) jCboAdrPays.getSelectedItem()),
                                                 jTxtMail.getText(),
                                                 jTxtTel.getText(),
                                                 jTxtSiret.getText(),
@@ -612,9 +601,10 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             Prospect c = new Prospect (         jTxtEnseigne.getText(),
                                                 new Adresse(Integer.parseInt(jTxtAdrNo.getText()), 
                                                             jTxtAdrRue.getText(),
+                                                            jTxtAdrCompl.getText(),
                                                             Integer.parseInt(jTxtAdrCP.getText()),
                                                             jTxtAdrVille.getText(),
-                                                            jTxtAdrPays.getText()),
+                                                            (String) jCboAdrPays.getSelectedItem()),
                                                 jTxtMail.getText(),
                                                 jTxtTel.getText(),
                                                 jTxtSiret.getText(),
@@ -645,16 +635,17 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
     private boolean  verifyFields(Component container) 
     {    
     
-        if (!new verifyTxtFieldString().verify(jTxtEnseigne)) return false ;
-        if (!new verifyTxtFieldString().verify(jTxtSiret)) return false ;
-        if (!new verifyTxtFieldString().verify(jTxtAdrRue)) return false ;
-        if (!new verifyTxtFieldString().verify(jTxtAdrVille)) return false ;
-        if (!new verifyTxtFieldString().verify(jTxtAdrPays)) return false ;
-        if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
-        if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
-        if (!new verifyTxtFieldMail().verify(jTxtMail)) return false ;
-        if (!new verifyFieldDate().verify(jDtPicker)) return false ;
-         
+        if (!new verifyTxtFieldString().verify(jTxtEnseigne)) return false;
+        if (!new verifyTxtFieldString().verify(jTxtSiret)) return false;
+        if (!new verifyTxtFieldCbo().verify(jCboRep)) return false;
+        if (!new verifyTxtFieldMail().verify(jTxtMail)) return false;
+        if (!new verifyFieldDate().verify(jDtPicker)) return false;
+        if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false;
+        if (!new verifyTxtFieldString().verify(jTxtAdrRue)) return false;
+        if (!new verifyTxtFieldString().verify(jTxtAdrVille)) return false;
+        if (!new verifyTxtFieldCbo().verify(jCboAdrPays)) return false;
+        if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false;
+        
         return true;        
         
     }
@@ -679,11 +670,23 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                 
     }
     
+        class verifyTxtFieldCbo extends InputVerifier {
+         @Override
+         public boolean verify(JComponent input) {
+             JComboBox<String> tf = (JComboBox<String>) input;
+             boolean bOk = !tf.getSelectedItem().toString().isEmpty();
+             if (!bOk) tf.requestFocusInWindow();
+             jLblErreur.setVisible(!bOk);
+             return (bOk);
+         }
+    }
+    
     class verifyTxtFieldString extends InputVerifier {
          @Override
          public boolean verify(JComponent input) {
              JTextField tf = (JTextField) input;
              boolean bOk = !tf.getText().isEmpty();
+             if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return (bOk);
          }
@@ -696,12 +699,14 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
              JTextField tf = (JTextField) input;
              //System.out.println("nom "+tf.getL.getName());
              try {
-                 int i = Integer.parseInt(tf.getText());                 
+                 int i = Integer.parseInt(tf.getText());  
+                 if (i<0) bOk=false;
              }
              catch (Exception e) {
                  bOk = false;
              }
              //tf.getParent().getComponents().
+             if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return bOk;
          }
@@ -713,13 +718,14 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             boolean bOk = true;
             JTextField tf = (JTextField) input;
             try {
-                double d = Double.parseDouble(tf.getText());                 
+                double d = Double.parseDouble(tf.getText());   
+                if (d<0) bOk=false;
             }
             catch (Exception e) {
                 bOk = false;
             }
+            if (!bOk) tf.requestFocusInWindow();
             jLblErreur.setVisible(!bOk);
-            tf.requestFocusInWindow();
             return bOk;
         }
    }
@@ -740,7 +746,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                 bOk = false;
             }
              jLblErreur.setVisible(!bOk);
-             input.requestFocusInWindow();
+             if (!bOk) input.requestFocusInWindow();
              return bOk;
         }
     }
@@ -754,8 +760,10 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
 
            Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(tf.getText());
-            jLblErreur.setVisible(!matcher.matches());
-            return matcher.matches();
+            boolean bOk = matcher.matches();
+            jLblErreur.setVisible(!bOk);
+            if (!bOk) input.requestFocusInWindow();
+            return bOk;
         }
     }
     
