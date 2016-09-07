@@ -25,9 +25,10 @@ public class Adresse {
      * @param cp
      * @param ville 
      */
-    public Adresse(int no, String rue, int cp, String ville,String pays) {
+    public Adresse(int no, String rue, String compl, int cp, String ville,String pays) {
         this.no = no;
         this.rue = rue;
+        this.compl= compl;
         this.cp = cp;
         this.ville = ville;
         this.pays = pays;
@@ -57,26 +58,8 @@ public class Adresse {
         return pays;
     }
 
-    public void setNo(int no) {
-        this.no = no;
-    }
 
-    public void setRue(String rue) {
-        this.rue = rue;
-    }
-
-    public void setCp(int cp) {
-        this.cp = cp;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public void setPays(String pays) {
-        this.pays = pays;
-    }
-    
+    @Override
    public String toString() {
        return this.no+" "+this.rue+" "+this.cp+" "+this.ville+" "+this.pays;
    }
