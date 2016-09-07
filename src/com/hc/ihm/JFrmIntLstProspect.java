@@ -80,17 +80,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         //SelectionListener
         jTblProspect.getSelectionModel().addListSelectionListener(new SharedListSelectionHandler());
         jTblProspect.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-   /*     jPanel1.getFocusOwner().addFocusListener(new java.awt.event.FocusAdapter() {
-                        public void focusGained(FocusEvent e) {
-
-                        System.out.print("focus");
-                        }
-                        @Override
-                        public void focusLost(FocusEvent e) {
-
-                        }
-        }); */
+        
     }
 
     /**
@@ -349,7 +339,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jBtnOK.setText("OK");
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOKActionPerformed(evt);
+                jBtnOKAnnulerActionPerformed(evt);
             }
         });
         jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
@@ -359,7 +349,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jBtnAnnuler.setNextFocusableComponent(jTxtEnseigne);
         jBtnAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAnnulerActionPerformed(evt);
+                jBtnOKAnnulerActionPerformed(evt);
             }
         });
         jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
@@ -369,35 +359,26 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnnulerActionPerformed
+    private void jBtnOKAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKAnnulerActionPerformed
+
+        if (evt.getSource().equals(jBtnOK)) {
+            if (verifyFields(jPanel1)) {
+                sauveFiche();
+            }
+        }
+
         jTblProspect.clearSelection();
         remplitFiche(-1);
-        GuiUtils.setEnableRec(jPanel1,false);
+        remplitTable();
+        GuiUtils.setEnableRec(jPanel1,false);   
         GuiUtils.setEnableRec(jPanel4, true);
         GuiUtils.setEnableRec(jTblProspect,true);
         jBtnModifier.setEnabled(false);
         jBtnSupprimer.setEnabled(false);
         jLblErreur.setVisible(false);
         typAcc = type_acces.visualisation;
-       
-    }//GEN-LAST:event_jBtnAnnulerActionPerformed
-
-    private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-
-        if (verifyFields(jPanel1)) {
-            sauveFiche();
-            jTblProspect.clearSelection();
-            remplitFiche(-1);
-            remplitTable();
-            GuiUtils.setEnableRec(jPanel1,false);   
-            GuiUtils.setEnableRec(jPanel4, true);
-            GuiUtils.setEnableRec(jTblProspect,true);
-            jBtnModifier.setEnabled(false);
-            jBtnSupprimer.setEnabled(false);
-            jLblErreur.setVisible(false);
-            typAcc = type_acces.visualisation;
-        }
-    }//GEN-LAST:event_jBtnOKActionPerformed
+        
+    }//GEN-LAST:event_jBtnOKAnnulerActionPerformed
 
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
         supprimeFiche();
@@ -618,20 +599,18 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
    
     private void supprimeFiche() {
 
+        //TODO : vérification des commandes éventuelle
+        
         //Affichage boite de dialogue pour confirmation
         if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir supprimer ce client ?","Attention",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             Prospect r = hashProspect.get(Integer.parseInt(jTxtNo.getText()));
             hashProspect.remove(Integer.parseInt(jTxtNo.getText()),r);
-            //On vide tout
-            jTblProspect.clearSelection();
-            remplitFiche(-1);
-            //Affichage nouvelle liste
-            remplitTable(); 
+            
+            remplitFiche(-1);   //Fiche à vide
+            remplitTable();      //Affichage nouvelle liste
         }
-                
     }
     
-  
     private boolean  verifyFields(Component container) 
     {    
     
@@ -646,8 +625,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         if (!new verifyTxtFieldCbo().verify(jCboAdrPays)) return false;
         if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false;
         
-        return true;        
-        
+        return true;            
     }
     
     class SharedListSelectionHandler implements ListSelectionListener {
@@ -670,7 +648,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                 
     }
     
-        class verifyTxtFieldCbo extends InputVerifier {
+    class verifyTxtFieldCbo extends InputVerifier {
          @Override
          public boolean verify(JComponent input) {
              JComboBox<String> tf = (JComboBox<String>) input;
@@ -697,7 +675,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
          public boolean verify(JComponent input) {
              boolean bOk = true;
              JTextField tf = (JTextField) input;
-             //System.out.println("nom "+tf.getL.getName());
+             
              try {
                  int i = Integer.parseInt(tf.getText());  
                  if (i<0) bOk=false;
@@ -705,7 +683,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
              catch (Exception e) {
                  bOk = false;
              }
-             //tf.getParent().getComponents().
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return bOk;
