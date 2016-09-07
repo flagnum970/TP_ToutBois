@@ -35,6 +35,7 @@ public class MDIToutBois extends javax.swing.JFrame {
     private HashMap<Integer,Client> hashClient;
     private HashMap<Integer,Prospect> hashProspect;
     private HashMap<String,Produit> hashProduit;
+    private HashMap<Integer,Commande> hashCommande;
     /**
      * Creates new form MDIToutBois
      */
@@ -42,13 +43,17 @@ public class MDIToutBois extends javax.swing.JFrame {
     public MDIToutBois( HashMap<Integer,Representant> hashRep,
                         HashMap<Integer,Client> hashClient,
                         HashMap<Integer,Prospect> hashProspect,
-                        HashMap<String,Produit> hashProduit) {
+                        HashMap<String,Produit> hashProduit,
+                        HashMap<Integer,Commande> hashCommande) 
+    {
+        
         super("TP Gestion société TOUTBOIS");
         initComponents();
         this.hashRep = hashRep;
         this.hashClient = hashClient;
         this.hashProspect = hashProspect;
         this.hashProduit = hashProduit;
+        this.hashCommande = hashCommande;
         
         //centrer la fenetre
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -85,6 +90,7 @@ public class MDIToutBois extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         commandeMenu = new javax.swing.JMenu();
         produitMenuItem = new javax.swing.JMenuItem();
+        commandeMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -141,13 +147,22 @@ public class MDIToutBois extends javax.swing.JFrame {
         commandeMenu.setText("Commandes");
 
         produitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        produitMenuItem.setText("Produits");
+        produitMenuItem.setText("Gestion des produits");
         produitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 produitMenuItemActionPerformed(evt);
             }
         });
         commandeMenu.add(produitMenuItem);
+
+        commandeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        commandeMenuItem.setText("Gestion des commandes");
+        commandeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commandeMenuItemActionPerformed(evt);
+            }
+        });
+        commandeMenu.add(commandeMenuItem);
 
         menuBar.add(commandeMenu);
 
@@ -196,7 +211,6 @@ public class MDIToutBois extends javax.swing.JFrame {
                 bFound=true;
                 ((JFrmIntLstRep) c).pack();
                 ((JFrmIntLstRep) c).toFront();
-//TODO                c.setSelected(true);
            }
         //Si on a pas trouvé, on crée la fenêtre   
        if (!bFound) {
@@ -258,7 +272,7 @@ public class MDIToutBois extends javax.swing.JFrame {
     }//GEN-LAST:event_clientMenuItemActionPerformed
 
     private void produitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produitMenuItemActionPerformed
-         //On passe en revue les composants ouverts
+        //On passe en revue les composants ouverts
         boolean bFound = false;
         for (Component c :  this.desktopPane.getComponents()) 
            //Si   on trouve la fenêtre des représentants, on lui donne le focus
@@ -271,14 +285,37 @@ public class MDIToutBois extends javax.swing.JFrame {
 //TODO                c.setSelected(true);
            }
         //Si on a pas trouvé, on crée la fenêtre   
-       if (!bFound) {
+        if (!bFound) {
             JFrmIntLstProduit jFrmIntProduit = new JFrmIntLstProduit(hashProduit);
             desktopPane.add( jFrmIntProduit );
             Dimension dim = desktopPane.getSize();
             jFrmIntProduit.setLocation(dim.width/2 - jFrmIntProduit.getWidth()/2, dim.height/2 - jFrmIntProduit.getHeight()/2);
             jFrmIntProduit.setVisible( true ); 
-       }
+        }
     }//GEN-LAST:event_produitMenuItemActionPerformed
+
+    private void commandeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commandeMenuItemActionPerformed
+        //On passe en revue les composants ouverts
+        boolean bFound = false;
+        for (Component c :  this.desktopPane.getComponents()) 
+           //Si   on trouve la fenêtre des représentants, on lui donne le focus
+           if (c instanceof com.hc.ihm.JFrmIntLstCommande) {
+                bFound=true;
+                ((JFrmIntLstCommande) c).pack();
+                ((JFrmIntLstCommande) c).toFront();
+                // TODO : rafraichir la liste des représentants
+              //  ((JFrmIntLstClient) c).requestFocusInWindow();
+//TODO                c.setSelected(true);
+           }
+        //Si on a pas trouvé, on crée la fenêtre   
+        if (!bFound) {
+            JFrmIntLstCommande jFrmIntCommande = new JFrmIntLstCommande(hashCommande);
+            desktopPane.add( jFrmIntCommande );
+            Dimension dim = desktopPane.getSize();
+            jFrmIntCommande.setLocation(dim.width/2 - jFrmIntCommande.getWidth()/2, dim.height/2 - jFrmIntCommande.getHeight()/2);
+            jFrmIntCommande.setVisible( true ); 
+        }
+    }//GEN-LAST:event_commandeMenuItemActionPerformed
 
     private void quitteSauve() {
         List<String> lstRepString = FileUtils.codeFichierRep(hashRep);
@@ -297,6 +334,7 @@ public class MDIToutBois extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem clientMenuItem;
     private javax.swing.JMenu commandeMenu;
+    private javax.swing.JMenuItem commandeMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu gestionMenu;
