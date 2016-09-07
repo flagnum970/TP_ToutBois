@@ -6,6 +6,7 @@
 package com.hc.ihm;
 
 import com.hc.Entites.Adresse;
+import com.hc.Entites.Commande;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
 import com.hc.utils.Constantes;
@@ -55,7 +56,7 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
      * @param hashProspect
      * @param hashRep
      */
-    public JFrmIntLstCommande(HashMap<Integer,Prospect> hashProspect,HashMap<Integer,Representant> hashRep) {
+    public JFrmIntLstCommande(HashMap<Integer,Commande> hashCommande) {
         initComponents();
         
         //On ajoute notre jDtPicker
@@ -114,6 +115,7 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
         jTxtNo1 = new javax.swing.JTextField();
         jBtnVisuClient = new javax.swing.JButton();
         jCboEtat = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTblLgCommande = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
@@ -150,7 +152,7 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTxtEnseigne.setInputVerifier(new verifyTxtFieldString());
-        jPanel1.add(jTxtEnseigne, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 230, -1));
+        jPanel1.add(jTxtEnseigne, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 230, -1));
 
         jLblEnseigne.setText("Client");
         jPanel1.add(jLblEnseigne, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 20));
@@ -163,7 +165,7 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
                 jBtnAnnulerActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, -1, -1));
+        jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, -1, -1));
 
         jBtnOK.setText("OK");
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -171,10 +173,10 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
                 jBtnOKActionPerformed(evt);
             }
         });
-        jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
+        jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
 
         jLabel1.setText("Date commande");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, 20));
 
         jTxtNoClient.setEditable(false);
         jTxtNoClient.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
@@ -188,20 +190,22 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
         jLblErreur.setText("Veuillez vérifier votre saisie !");
         jLblErreur.setEnabled(false);
         jLblErreur.setFocusable(false);
-        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 310, -1));
+        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 310, -1));
 
         jLabel25.setText("Date livraison");
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, 20));
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, 20));
 
         jTxtNo1.setEditable(false);
-        jTxtNo1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        jTxtNo1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtNo1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTxtNo1.setEnabled(false);
         jTxtNo1.setFocusable(false);
+        jTxtNo1.setName("jTxtNo"); // NOI18N
         jTxtNo1.setVerifyInputWhenFocusTarget(false);
-        jPanel1.add(jTxtNo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, -1));
+        jPanel1.add(jTxtNo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
 
         jBtnVisuClient.setText("*");
-        jPanel1.add(jBtnVisuClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 30, -1));
+        jPanel1.add(jBtnVisuClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 30, -1));
 
         jCboEtat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "en cours", "validée", "facturée" }));
         jCboEtat.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +213,10 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
                 jCboEtatActionPerformed(evt);
             }
         });
-        jPanel1.add(jCboEtat, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 80, -1));
+        jPanel1.add(jCboEtat, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 80, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lignes de commande"));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTblLgCommande.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,7 +247,7 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
         jTblLgCommande.setFocusable(false);
         jScrollPane3.setViewportView(jTblLgCommande);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 727, 140));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 727, 140));
 
         jBtnNouveau1.setText("Nouveau");
         jBtnNouveau1.setFocusable(false);
@@ -292,7 +299,9 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, 120));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 870, 200));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -306,7 +315,7 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -492,6 +501,7 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
     private javax.swing.JLabel jLblEnseigne;
     private javax.swing.JLabel jLblErreur;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -545,42 +555,15 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
 
             jTxtNoClient.setText(String.valueOf(p.getNo())); 
             jTxtEnseigne.setText(p.getEnseigne());
-   /*         jTxtAdrNo.setText(String.valueOf(p.getAdresse().getNo()));
-            jTxtAdrRue.setText(p.getAdresse().getRue());
-            jTxtAdrVille.setText(p.getAdresse().getVille());
-            jTxtAdrCP.setText(String.valueOf(p.getAdresse().getCp()));
-            jTxtAdrPays.setText(p.getAdresse().getPays());
-            jTxtMail.setText(p.getMail());
-            jTxtTel.setText(p.getTelephone());
-            jTxtSiret.setText(p.getSiret()); */
             // init datepicker. -1 sur le mois, car janvier=0
             jDtPicker.getModel().setDate(Integer.parseInt(new SimpleDateFormat("YYYY").format(p.getDateVisite())),
                                           Integer.parseInt(new SimpleDateFormat("MM").format(p.getDateVisite()))-1,
                                           Integer.parseInt(new SimpleDateFormat("dd").format(p.getDateVisite())));
             jDtPicker.getModel().setSelected(true);
 
-            remplitComboRep(p.getNoRepresentant());
-            //Remplit la combobox des représentants et select du bon
-  /*          jCboEtat.removeAllItems();
-            Collection<Representant> setRep = hashRep.values();
-            for (Representant r : setRep) {
-                jCboEtat.addItem(r.getNo() + " "+ r.getNom() + " "+ r.getPrenom());
-                if (r.getNo() == p.getNoRepresentant())
-                    iRep = i;
-                 i++;
-            }
-            jCboEtat.setSelectedIndex(iRep); */
-            
+            remplitComboRep(p.getNoRepresentant());            
        } else {
             jTxtEnseigne.setText("");
-            /*jTxtSiret.setText("");
-            jTxtMail.setText("");
-            jTxtTel.setText("");
-            jTxtAdrNo.setText("");
-            jTxtAdrRue.setText("");
-            jTxtAdrVille.setText("");
-            jTxtAdrCP.setText("");
-            jTxtAdrPays.setText(""); */
             jTxtNoClient.setText("");
 
             //DatePicker 
