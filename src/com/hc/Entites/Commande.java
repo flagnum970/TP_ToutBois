@@ -16,11 +16,19 @@ public class Commande {
     public enum etat_commande {enCours,validee,facturee};
     
     private int no;
+    private etat_commande etat;
     private static int dernierNo=0;
     private Date dtCommande;
     private Date dtLivraison;
     private List<LigneCommande> lgComm;
-    private etat_commande etat;
+    
+
+    public Commande(int no, Date dtCommande, Date dtLivraison, List<LigneCommande> lgComm) {
+        this.no = no;
+        this.dtCommande = dtCommande;
+        this.dtLivraison = dtLivraison;
+        this.lgComm = lgComm;
+    }
 
     /**
      *
