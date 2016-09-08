@@ -509,18 +509,18 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
              jCboRep.setSelectedIndex(iRep);
         } else {
                 jTxtEnseigne.setText("");
-            jTxtSiret.setText("");
-            jTxtMail.setText("");
-            jTxtNbComm.setText("");
-            jTxtTel.setText("");
-            jTxtAdrNo.setText("");
-            jTxtAdrCompl.setText("");
-            jTxtAdrCompl.setText("");
-            jTxtAdrVille.setText("");
-            jTxtAdrCP.setText("");
-          jCboAdrPays.setSelectedItem("");
-            jTxtNo.setText("");
-            jCboRep.removeAllItems();
+                jTxtSiret.setText("");
+                jTxtMail.setText("");
+                jTxtNbComm.setText("");
+                jTxtTel.setText("");
+                jTxtAdrNo.setText("");
+                jTxtAdrRue.setText("");
+                jTxtAdrCompl.setText("");
+                jTxtAdrVille.setText("");
+                jTxtAdrCP.setText("");
+                jCboAdrPays.setSelectedIndex(5);
+                jTxtNo.setText("");
+                jCboRep.removeAllItems();
 
             //cbo des representants
             Collection<Representant> setRep = hashRep.values();
