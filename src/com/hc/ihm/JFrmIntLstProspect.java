@@ -92,6 +92,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateComponentFactory1 = new net.sourceforge.jdatepicker.JDateComponentFactory();
+        jDatePickerUtil1 = new net.sourceforge.jdatepicker.util.JDatePickerUtil();
         jPanel4 = new javax.swing.JPanel();
         jBtnNouveau = new javax.swing.JButton();
         jBtnModifier = new javax.swing.JButton();
@@ -334,7 +336,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jLblErreur.setText("Veuillez vérifier votre saisie !");
         jLblErreur.setEnabled(false);
         jLblErreur.setFocusable(false);
-        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 180, -1));
+        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, -1));
 
         jBtnOK.setText("OK");
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -365,6 +367,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             if (verifyFields(jPanel1)) {
                 sauveFiche();
             }
+            else return;
         }
 
         jTblProspect.clearSelection();
@@ -419,6 +422,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
     private javax.swing.JButton jBtnSupprimer;
     private javax.swing.JComboBox<String> jCboAdrPays;
     private javax.swing.JComboBox<String> jCboRep;
+    private net.sourceforge.jdatepicker.JDateComponentFactory jDateComponentFactory1;
+    private net.sourceforge.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -513,7 +518,6 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             jTxtMail.setText("");
             jTxtTel.setText("");
             jTxtAdrNo.setText("");
-            jTxtAdrCompl.setText("");
             jTxtAdrCompl.setText("");
             jTxtAdrVille.setText("");
             jTxtAdrCP.setText("");
