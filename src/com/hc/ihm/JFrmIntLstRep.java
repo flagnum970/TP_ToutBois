@@ -244,7 +244,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jPanel1.add(jLblTxComm, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 183, -1, 0));
 
         jTxtTxComm.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtTxComm.setInputVerifier(new verifyTxtFieldNumber());
+        jTxtTxComm.setInputVerifier(new verifyTxtFieldTaux());
         jTxtTxComm.setNextFocusableComponent(jTxtSalaire);
         jPanel1.add(jTxtTxComm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 40, -1));
 
@@ -253,7 +253,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jBtnAnnuler.setNextFocusableComponent(jTxtNom);
         jBtnAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAnnulerActionPerformed(evt);
+                jBtnOKAnnulerActionPerformed(evt);
             }
         });
         jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
@@ -275,7 +275,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jBtnOK.setNextFocusableComponent(jBtnAnnuler);
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOKActionPerformed(evt);
+                jBtnOKAnnulerActionPerformed(evt);
             }
         });
         jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
@@ -330,11 +330,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jTxtAdrRue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTxtAdrRue.setInputVerifier(new verifyTxtFieldString());
         jTxtAdrRue.setNextFocusableComponent(jTxtAdrCompl);
-        jTxtAdrRue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtAdrRueActionPerformed(evt);
-            }
-        });
         jPanel5.add(jTxtAdrRue, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
 
         jTxtAdrCP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -373,11 +368,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
         jTxtAdrCompl.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTxtAdrCompl.setNextFocusableComponent(jTxtAdrCP);
-        jTxtAdrCompl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtAdrComplActionPerformed(evt);
-            }
-        });
         jPanel5.add(jTxtAdrCompl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 210, -1));
 
         jCboAdrPays.setEditable(true);
@@ -412,19 +402,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jTxtNom.requestFocusInWindow();       //Focus sur le nom
     }//GEN-LAST:event_jBtnNouveauModifierActionPerformed
 
-    private void jBtnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnnulerActionPerformed
-        jTblRep.clearSelection();
-        remplitFiche(-1);
-        GuiUtils.setEnableRec(jPanel1,false);
-        GuiUtils.setEnableRec(jPanel4, true);
-        GuiUtils.setEnableRec(jTblRep,true);
-        jBtnModifier.setEnabled(false);
-        jBtnSupprimer.setEnabled(false);
-        jLblErreur.setVisible(false);
-        typAcc = type_acces.visualisation;
-    }//GEN-LAST:event_jBtnAnnulerActionPerformed
-
-    private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
+    private void jBtnOKAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKAnnulerActionPerformed
 
         if (evt.getSource().equals(jBtnOK))
             if (verifyFields(jPanel1)) {
@@ -434,53 +412,18 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         remplitFiche(-1);
         remplitTable();
         GuiUtils.setEnableRec(jPanel1,false);
-        typAcc = type_acces.visualisation;
         GuiUtils.setEnableRec(jPanel4, true);
         GuiUtils.setEnableRec(jTblRep,true);
         jBtnModifier.setEnabled(false);
         jBtnSupprimer.setEnabled(false);
         jLblErreur.setVisible(false);
-        
-    }//GEN-LAST:event_jBtnOKActionPerformed
-
-    private void jBtnOKAnnuActionPerformed(java.awt.event.ActionEvent evt) {                                       
-
-        if (verifyFields(jPanel1)) {
-            
-            sauveFiche();
-            remplitFiche(-1);
-            
-            remplitTable();
-            GuiUtils.setEnableRec(jPanel1,false);
-            typAcc = type_acces.visualisation;
-            GuiUtils.setEnableRec(jPanel4, true);
-            GuiUtils.setEnableRec(jTblRep,true);
-            jBtnModifier.setEnabled(false);
-            jBtnSupprimer.setEnabled(false);
-        }
-        
-    }       
+        typAcc = type_acces.visualisation;
+    }//GEN-LAST:event_jBtnOKAnnulerActionPerformed
+       
     
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
-        
-        //
-        //if (typAcc != type_acces.visualisation)
-        //if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir abandonner vos modifications ?","Attention",JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) 
-        //        return;
-        //if (!verifRepNonUtilise())
-        //    JOptionPane.showMessageDialog(null,"Suppression impossible. Ce représentant est utilisé","Attention",JOptionPane.ABORT);
-        
         supprimeFiche();
-
     }//GEN-LAST:event_jBtnSupprimerActionPerformed
-
-    private void jTxtAdrComplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtAdrComplActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtAdrComplActionPerformed
-
-    private void jTxtAdrRueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtAdrRueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtAdrRueActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -584,6 +527,8 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jLblErreur.setVisible(false);
     }
     
+    //* 
+    //
     private void sauveFiche()
     { 
         if (typAcc == type_acces.modification) {
@@ -753,6 +698,24 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         }
     }
 
+        class verifyTxtFieldTaux extends InputVerifier {
+        @Override
+        public boolean verify(JComponent input) {
+            boolean bOk = true;
+            JTextField tf = (JTextField) input;
+            try {
+                Double d = Double.parseDouble(tf.getText());                 
+                if ((d<0) || d>100) bOk=false;
+            }
+            catch (Exception e) {
+                bOk = false;
+            }
+            jLblErreur.setVisible(!bOk);
+            if (!bOk) tf.requestFocusInWindow();
+            return bOk;
+        }
+    }
+    
     class verifyTxtFieldNumber extends InputVerifier {
         @Override
         public boolean verify(JComponent input) {
@@ -774,6 +737,5 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     
 
     //TODO : verifier que le champ taux <100
-    //TODO : vérifier que le champ CP 5 chiffres
     
 }
