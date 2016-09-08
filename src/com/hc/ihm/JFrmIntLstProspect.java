@@ -63,6 +63,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         model = new UtilDateModel();
         datePanel = new JDatePanelImpl(model);
         jDtPicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        jDtPicker.setButtonFocusable(true);
+        
         jPanel1.add(jDtPicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(140,160,110,-1));
         jDtPicker.setInputVerifier(new verifyFieldDate());
         
@@ -278,7 +280,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jLabel2.setText("Numéro");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 57, 20));
 
-        jLabel4.setText("Complements");
+        jLabel4.setText("Compléments");
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 80, 20));
 
         jTxtAdrCompl.setNextFocusableComponent(jTxtAdrCP);
@@ -289,6 +291,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 60, -1));
 
         jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
+        jTxtAdrVille.setNextFocusableComponent(jCboAdrPays);
         jPanel5.add(jTxtAdrVille, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, -1));
 
         jLabel5.setText("Code postal");
@@ -301,18 +304,20 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 50, 20));
 
         jTxtAdrRue.setInputVerifier(new verifyTxtFieldString());
-        jTxtAdrRue.setNextFocusableComponent(jTxtAdrCP);
+        jTxtAdrRue.setNextFocusableComponent(jTxtAdrCompl);
         jPanel5.add(jTxtAdrRue, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 210, -1));
 
         jLabel8.setText("Rue");
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 57, 20));
 
         jTxtAdrNo.setInputVerifier(new verifyTxtFieldInt());
-        jTxtAdrNo.setNextFocusableComponent(jTxtAdrCompl);
+        jTxtAdrNo.setNextFocusableComponent(jTxtAdrRue);
         jPanel5.add(jTxtAdrNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 40, -1));
 
         jCboAdrPays.setEditable(true);
         jCboAdrPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allemagne", "Angleterre", "Belgique", "Cameroun", "Espagne", "France", "Italie" }));
+        jCboAdrPays.setSelectedIndex(5);
+        jCboAdrPays.setNextFocusableComponent(jBtnOK);
         jPanel5.add(jCboAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 330, 230));
@@ -339,6 +344,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, -1));
 
         jBtnOK.setText("OK");
+        jBtnOK.setNextFocusableComponent(jBtnAnnuler);
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnOKAnnulerActionPerformed(evt);

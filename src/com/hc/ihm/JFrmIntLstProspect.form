@@ -301,7 +301,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Complements"/>
+                <Property name="text" type="java.lang.String" value="Compl&#xe9;ments"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -340,6 +340,9 @@
               <Properties>
                 <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new verifyTxtFieldString()" type="code"/>
+                </Property>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="jCboAdrPays"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -384,7 +387,7 @@
                   <Connection code="new verifyTxtFieldString()" type="code"/>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="jTxtAdrCP"/>
+                  <ComponentRef name="jTxtAdrCompl"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -409,7 +412,7 @@
                   <Connection code="new verifyTxtFieldInt()" type="code"/>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="jTxtAdrCompl"/>
+                  <ComponentRef name="jTxtAdrRue"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -431,6 +434,10 @@
                     <StringItem index="5" value="France"/>
                     <StringItem index="6" value="Italie"/>
                   </StringArray>
+                </Property>
+                <Property name="selectedIndex" type="int" value="5"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="jBtnOK"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -517,6 +524,9 @@
         <Component class="javax.swing.JButton" name="jBtnOK">
           <Properties>
             <Property name="text" type="java.lang.String" value="OK"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="jBtnAnnuler"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnOKAnnulerActionPerformed"/>
