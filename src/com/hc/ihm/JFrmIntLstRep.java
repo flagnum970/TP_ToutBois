@@ -557,7 +557,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             jTxtAdrCompl.setText("");
             jTxtAdrVille.setText("");
             jTxtAdrCP.setText("");
-            jCboAdrPays.setSelectedItem("");
+            jCboAdrPays.setSelectedIndex(5);
             jTxtNo.setText("");
         }
             
