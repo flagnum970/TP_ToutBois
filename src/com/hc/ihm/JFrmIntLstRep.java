@@ -72,8 +72,12 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jBtnNouveau = new javax.swing.JButton();
+        jBtnModifier = new javax.swing.JButton();
+        jBtnSupprimer = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTblRep = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jTxtNom = new javax.swing.JTextField();
         jTxtPrenom = new javax.swing.JTextField();
@@ -101,12 +105,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jTxtAdrCompl = new javax.swing.JTextField();
         jCboAdrPays = new javax.swing.JComboBox<>();
-        jPanel4 = new javax.swing.JPanel();
-        jBtnNouveau = new javax.swing.JButton();
-        jBtnModifier = new javax.swing.JButton();
-        jBtnSupprimer = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTblRep = new javax.swing.JTable();
 
         jInternalFrame1.setClosable(true);
         jInternalFrame1.setMaximizable(true);
@@ -143,253 +141,8 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setTitle("Gestion des représentants");
-        setPreferredSize(new java.awt.Dimension(906, 500));
+        setPreferredSize(new java.awt.Dimension(906, 560));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 702, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, -1, 702));
-
-        jPanel3.setLayout(new java.awt.BorderLayout());
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.setEnabled(false);
-        jPanel1.setName(""); // NOI18N
-
-        jTxtNom.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtNom.setInputVerifier(new verifyTxtFieldString());
-        jTxtNom.setNextFocusableComponent(jTxtPrenom);
-
-        jTxtPrenom.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtPrenom.setInputVerifier(new verifyTxtFieldString());
-        jTxtPrenom.setNextFocusableComponent(jTxtTxComm);
-
-        jLblPrenom.setText("Prénom");
-        jLblPrenom.setMinimumSize(null);
-        jLblPrenom.setName("jLbl"); // NOI18N
-
-        jLblNom.setLabelFor(jTxtNom);
-        jLblNom.setText("Nom");
-        jLblNom.setName("jLbl"); // NOI18N
-
-        jLblTxComm.setText("Taux de commission");
-
-        jTxtTxComm.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtTxComm.setInputVerifier(new verifyTxtFieldNumber());
-        jTxtTxComm.setNextFocusableComponent(jTxtSalaire);
-
-        jBtnAnnuler.setText("Annuler");
-        jBtnAnnuler.setToolTipText("");
-        jBtnAnnuler.setNextFocusableComponent(jTxtNom);
-        jBtnAnnuler.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAnnulerActionPerformed(evt);
-            }
-        });
-
-        jLblSalaire.setText("Salaire");
-        jLblSalaire.setMinimumSize(null);
-        jLblSalaire.setName("jLbl"); // NOI18N
-
-        jTxtSalaire.setToolTipText("");
-        jTxtSalaire.setAutoscrolls(false);
-        jTxtSalaire.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtSalaire.setInputVerifier(new verifyTxtFieldNumber());
-        jTxtSalaire.setNextFocusableComponent(jTxtAdrNo);
-
-        jBtnOK.setText("OK");
-        jBtnOK.setNextFocusableComponent(jBtnAnnuler);
-        jBtnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOKActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Taux");
-        jLabel1.setMinimumSize(null);
-        jLabel1.setName("jLbl"); // NOI18N
-
-        jTxtNo.setEditable(false);
-        jTxtNo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTxtNo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTxtNo.setEnabled(false);
-        jTxtNo.setFocusable(false);
-        jTxtNo.setName("jTxtNo"); // NOI18N
-        jTxtNo.setVerifyInputWhenFocusTarget(false);
-
-        jLblErreur.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-        jLblErreur.setForeground(new java.awt.Color(255, 51, 0));
-        jLblErreur.setText("Veuillez vérifier votre saisie !");
-        jLblErreur.setEnabled(false);
-        jLblErreur.setFocusable(false);
-        jLblErreur.setName(""); // NOI18N
-        jLblErreur.setOpaque(true);
-        jLblErreur.setRequestFocusEnabled(false);
-        jLblErreur.setVerifyInputWhenFocusTarget(false);
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Adresse"));
-        jPanel5.setName("Jpane"); // NOI18N
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setText("Numéro");
-        jLabel2.setMinimumSize(null);
-        jLabel2.setName("jLbl"); // NOI18N
-        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 57, 20));
-
-        jTxtAdrNo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrNo.setInputVerifier(new verifyTxtFieldInt());
-        jTxtAdrNo.setNextFocusableComponent(jTxtAdrRue);
-        jPanel5.add(jTxtAdrNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 40, -1));
-
-        jLabel4.setText("Rue");
-        jLabel4.setMinimumSize(null);
-        jLabel4.setName("jLbl"); // NOI18N
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 57, 20));
-
-        jTxtAdrRue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrRue.setInputVerifier(new verifyTxtFieldString());
-        jTxtAdrRue.setNextFocusableComponent(jTxtAdrCompl);
-        jTxtAdrRue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtAdrRueActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTxtAdrRue, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
-
-        jTxtAdrCP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrCP.setInputVerifier(new verifyTxtFieldInt());
-        jTxtAdrCP.setNextFocusableComponent(jTxtAdrVille);
-        jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 60, -1));
-
-        jTxtAdrVille.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
-        jTxtAdrVille.setNextFocusableComponent(jCboAdrPays);
-        jPanel5.add(jTxtAdrVille, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 160, -1));
-
-        jLabel5.setText("Code postal");
-        jLabel5.setMinimumSize(null);
-        jLabel5.setName("jLbl"); // NOI18N
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 20));
-
-        jLabel6.setText("Ville");
-        jLabel6.setMinimumSize(null);
-        jLabel6.setName("jLbl"); // NOI18N
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 50, 20));
-
-        jLabel7.setText("Pays");
-        jLabel7.setMinimumSize(null);
-        jLabel7.setName("jLbl"); // NOI18N
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 50, 20));
-
-        jLabel8.setText("Compléments");
-        jLabel8.setMinimumSize(null);
-        jLabel8.setName("jLbl"); // NOI18N
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 90, 20));
-
-        jTxtAdrCompl.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrCompl.setNextFocusableComponent(jTxtAdrCP);
-        jTxtAdrCompl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtAdrComplActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTxtAdrCompl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 210, -1));
-
-        jCboAdrPays.setEditable(true);
-        jCboAdrPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allemagne", "Angleterre", "Belgique", "Cameroun", "Espagne", "France", "Italie" }));
-        jCboAdrPays.setNextFocusableComponent(jBtnOK);
-        jPanel5.add(jCboAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTxtNo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLblNom, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(jTxtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLblPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jTxtPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(jTxtTxComm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLblSalaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTxtSalaire, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLblTxComm)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(258, 258, 258)
-                .addComponent(jBtnOK)
-                .addGap(123, 123, 123)
-                .addComponent(jBtnAnnuler))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLblErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTxtNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLblNom, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLblPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtTxComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLblSalaire, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtSalaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLblTxComm, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnOK)
-                    .addComponent(jBtnAnnuler))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jLblErreur)
-                .addGap(20, 20, 20))
-        );
-
-        jPanel3.add(jPanel1, java.awt.BorderLayout.CENTER);
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, -1, 330));
 
         jBtnNouveau.setText("Nouveau");
         jBtnNouveau.setFocusPainted(false);
@@ -446,27 +199,196 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
         jTblRep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "N°", "Nom", "Prénom", "Adresse", "Taux", "Salaire"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTblRep.setFocusable(false);
         jScrollPane2.setViewportView(jTblRep);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 727, 173));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setEnabled(false);
+        jPanel1.setName(""); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTxtNom.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtNom.setInputVerifier(new verifyTxtFieldString());
+        jTxtNom.setNextFocusableComponent(jTxtPrenom);
+        jPanel1.add(jTxtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 170, -1));
+
+        jTxtPrenom.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtPrenom.setInputVerifier(new verifyTxtFieldString());
+        jTxtPrenom.setNextFocusableComponent(jTxtTxComm);
+        jPanel1.add(jTxtPrenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 170, -1));
+
+        jLblPrenom.setText("Prénom");
+        jLblPrenom.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLblPrenom.setMinimumSize(null);
+        jLblPrenom.setName("jLbl"); // NOI18N
+        jPanel1.add(jLblPrenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 57, 20));
+
+        jLblNom.setLabelFor(jTxtNom);
+        jLblNom.setText("Nom");
+        jLblNom.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLblNom.setName("jLbl"); // NOI18N
+        jPanel1.add(jLblNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 30, 20));
+
+        jLblTxComm.setText("Taux de commission");
+        jPanel1.add(jLblTxComm, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 183, -1, 0));
+
+        jTxtTxComm.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtTxComm.setInputVerifier(new verifyTxtFieldNumber());
+        jTxtTxComm.setNextFocusableComponent(jTxtSalaire);
+        jPanel1.add(jTxtTxComm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 40, -1));
+
+        jBtnAnnuler.setText("Annuler");
+        jBtnAnnuler.setToolTipText("");
+        jBtnAnnuler.setNextFocusableComponent(jTxtNom);
+        jBtnAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAnnulerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
+
+        jLblSalaire.setText("Salaire");
+        jLblSalaire.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLblSalaire.setMinimumSize(null);
+        jLblSalaire.setName("jLbl"); // NOI18N
+        jPanel1.add(jLblSalaire, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));
+
+        jTxtSalaire.setToolTipText("");
+        jTxtSalaire.setAutoscrolls(false);
+        jTxtSalaire.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtSalaire.setInputVerifier(new verifyTxtFieldNumber());
+        jTxtSalaire.setNextFocusableComponent(jTxtAdrNo);
+        jPanel1.add(jTxtSalaire, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 70, -1));
+
+        jBtnOK.setText("OK");
+        jBtnOK.setNextFocusableComponent(jBtnAnnuler);
+        jBtnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOKActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
+
+        jLabel1.setText("Taux");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel1.setMinimumSize(null);
+        jLabel1.setName("jLbl"); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 20));
+
+        jTxtNo.setEditable(false);
+        jTxtNo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtNo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTxtNo.setEnabled(false);
+        jTxtNo.setFocusable(false);
+        jTxtNo.setName("jTxtNo"); // NOI18N
+        jTxtNo.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(jTxtNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
+
+        jLblErreur.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLblErreur.setForeground(new java.awt.Color(255, 51, 0));
+        jLblErreur.setText("Veuillez vérifier votre saisie !");
+        jLblErreur.setEnabled(false);
+        jLblErreur.setFocusable(false);
+        jLblErreur.setName(""); // NOI18N
+        jLblErreur.setOpaque(true);
+        jLblErreur.setRequestFocusEnabled(false);
+        jLblErreur.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 284, 170, 20));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Adresse"));
+        jPanel5.setName("Jpane"); // NOI18N
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Numéro");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel2.setMinimumSize(null);
+        jLabel2.setName("jLbl"); // NOI18N
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 57, 20));
+
+        jTxtAdrNo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtAdrNo.setInputVerifier(new verifyTxtFieldInt());
+        jTxtAdrNo.setNextFocusableComponent(jTxtAdrRue);
+        jPanel5.add(jTxtAdrNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 40, -1));
+
+        jLabel4.setText("Rue");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel4.setMinimumSize(null);
+        jLabel4.setName("jLbl"); // NOI18N
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 57, 20));
+
+        jTxtAdrRue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtAdrRue.setInputVerifier(new verifyTxtFieldString());
+        jTxtAdrRue.setNextFocusableComponent(jTxtAdrCompl);
+        jTxtAdrRue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtAdrRueActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jTxtAdrRue, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
+
+        jTxtAdrCP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtAdrCP.setInputVerifier(new verifyTxtFieldInt());
+        jTxtAdrCP.setNextFocusableComponent(jTxtAdrVille);
+        jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 60, -1));
+
+        jTxtAdrVille.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
+        jTxtAdrVille.setNextFocusableComponent(jCboAdrPays);
+        jPanel5.add(jTxtAdrVille, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 160, -1));
+
+        jLabel5.setText("Code postal");
+        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel5.setMinimumSize(null);
+        jLabel5.setName("jLbl"); // NOI18N
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 20));
+
+        jLabel6.setText("Ville");
+        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel6.setMinimumSize(null);
+        jLabel6.setName("jLbl"); // NOI18N
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 50, 20));
+
+        jLabel7.setText("Pays");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel7.setMinimumSize(null);
+        jLabel7.setName("jLbl"); // NOI18N
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 50, 20));
+
+        jLabel8.setText("Compléments");
+        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel8.setMinimumSize(null);
+        jLabel8.setName("jLbl"); // NOI18N
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, 20));
+
+        jTxtAdrCompl.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTxtAdrCompl.setNextFocusableComponent(jTxtAdrCP);
+        jTxtAdrCompl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtAdrComplActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jTxtAdrCompl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 210, -1));
+
+        jCboAdrPays.setEditable(true);
+        jCboAdrPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allemagne", "Angleterre", "Belgique", "Cameroun", "Espagne", "France", "Italie" }));
+        jCboAdrPays.setSelectedIndex(5);
+        jCboAdrPays.setNextFocusableComponent(jBtnOK);
+        jPanel5.add(jCboAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 330, 230));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 730, 310));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -562,8 +484,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLblSalaire;
     private javax.swing.JLabel jLblTxComm;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
