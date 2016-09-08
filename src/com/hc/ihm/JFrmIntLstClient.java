@@ -210,7 +210,7 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
         jCboAdrPays.setNextFocusableComponent(jBtnOK);
         jPanel5.add(jCboAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 330, 230));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 330, 220));
 
         jTxtTel.setToolTipText("");
         jTxtTel.setAutoscrolls(false);
@@ -230,7 +230,7 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
         jBtnOK.setText("OK");
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOKActionPerformed(evt);
+                jBtnOKAnnulerActionPerformed(evt);
             }
         });
         jPanel1.add(jBtnOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, -1, -1));
@@ -240,7 +240,7 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
         jBtnAnnuler.setNextFocusableComponent(jTxtEnseigne);
         jBtnAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAnnulerActionPerformed(evt);
+                jBtnOKAnnulerActionPerformed(evt);
             }
         });
         jPanel1.add(jBtnAnnuler, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, -1, -1));
@@ -368,36 +368,37 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnnulerActionPerformed
+    private void jBtnOKAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKAnnulerActionPerformed
+  
+        if (evt.getSource().equals(jBtnOK)) {
+            if (verifyFields(jPanel1)) {
+                sauveFiche();
+            } else return;
+        }
+
         jTblClient.clearSelection();
         remplitFiche(-1);
-        jLblErreur.setVisible(false);
-        typAcc = type_acces.visualisation;
-        GuiUtils.setEnableRec(jPanel1,false);
+        remplitTable();
+        GuiUtils.setEnableRec(jPanel1,false);   
         GuiUtils.setEnableRec(jPanel4, true);
         GuiUtils.setEnableRec(jTblClient,true);
         jBtnModifier.setEnabled(false);
         jBtnSupprimer.setEnabled(false);
-    }//GEN-LAST:event_jBtnAnnulerActionPerformed
+        jLblErreur.setVisible(false);
+        typAcc = type_acces.visualisation;
+    }//GEN-LAST:event_jBtnOKAnnulerActionPerformed
 
-    private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-        if (verifyFields(jPanel1)) {
-            jLblErreur.setVisible(false);
-            sauveFiche();
-            typAcc = type_acces.visualisation;
-            GuiUtils.setEnableRec(jPanel4, true);
-            GuiUtils.setEnableRec(jTblClient,true);
-            jBtnModifier.setEnabled(false);
-            jBtnSupprimer.setEnabled(false);
-        }
-    }//GEN-LAST:event_jBtnOKActionPerformed
+                                       
 
+        
+  
+    
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
         supprimeFiche();
     }//GEN-LAST:event_jBtnSupprimerActionPerformed
