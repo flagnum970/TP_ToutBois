@@ -426,10 +426,30 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
 
+        if (evt.getSource().equals(jBtnOK))
+            if (verifyFields(jPanel1)) {
+                sauveFiche();
+        } else return;
+        
+        remplitFiche(-1);
+        remplitTable();
+        GuiUtils.setEnableRec(jPanel1,false);
+        typAcc = type_acces.visualisation;
+        GuiUtils.setEnableRec(jPanel4, true);
+        GuiUtils.setEnableRec(jTblRep,true);
+        jBtnModifier.setEnabled(false);
+        jBtnSupprimer.setEnabled(false);
+        jLblErreur.setVisible(false);
+        
+    }//GEN-LAST:event_jBtnOKActionPerformed
+
+    private void jBtnOKAnnuActionPerformed(java.awt.event.ActionEvent evt) {                                       
+
         if (verifyFields(jPanel1)) {
-            jLblErreur.setVisible(false);
+            
             sauveFiche();
             remplitFiche(-1);
+            
             remplitTable();
             GuiUtils.setEnableRec(jPanel1,false);
             typAcc = type_acces.visualisation;
@@ -439,8 +459,8 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             jBtnSupprimer.setEnabled(false);
         }
         
-    }//GEN-LAST:event_jBtnOKActionPerformed
-
+    }       
+    
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
         
         //
@@ -667,11 +687,8 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
         if (!new verifyTxtFieldString().verify(jTxtAdrVille)) return false ;
         if (!new verifyTxtFieldCbo().verify(jCboAdrPays)) return false ;
-        
 
-
-        return true;        
-        
+        return true;               
     }
     
     //Pour un select (déselect) sur la jTable
@@ -696,48 +713,48 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
                 
     }
     
-        class verifyTxtFieldCbo extends InputVerifier {
-         @Override
-         public boolean verify(JComponent input) {
-             JComboBox<String> tf = (JComboBox<String>) input;
-             boolean bOk = !tf.getSelectedItem().toString().isEmpty();
-             if (!bOk) tf.requestFocusInWindow();
-             jLblErreur.setVisible(!bOk);
-             return (bOk);
+    class verifyTxtFieldCbo extends InputVerifier {
+        @Override
+        public boolean verify(JComponent input) {
+            JComboBox<String> tf = (JComboBox<String>) input;
+            boolean bOk = !tf.getSelectedItem().toString().isEmpty();
+            if (!bOk) tf.requestFocusInWindow();
+            jLblErreur.setVisible(!bOk);
+            return (bOk);
          }
     }
     
     class verifyTxtFieldString extends InputVerifier {
          @Override
-         public boolean verify(JComponent input) {
-            JTextField tf = (JTextField) input;
-            boolean bOk = !tf.getText().isEmpty();
-            jLblErreur.setVisible(!bOk);
-            if (!bOk) tf.requestFocusInWindow();
-            return (bOk);
-         }
+        public boolean verify(JComponent input) {
+           JTextField tf = (JTextField) input;
+           boolean bOk = !tf.getText().isEmpty();
+           jLblErreur.setVisible(!bOk);
+           if (!bOk) tf.requestFocusInWindow();
+           return (bOk);
+        }
     }
     
     class verifyTxtFieldInt extends InputVerifier {
-         @Override
-         public boolean verify(JComponent input) {
-             boolean bOk = true;
-             JTextField tf = (JTextField) input;
-             try {
-                 int i = Integer.parseInt(tf.getText());                 
-                 if (i<0) bOk=false;
-             }
-             catch (Exception e) {
-                 bOk = false;
-             }
-             jLblErreur.setVisible(!bOk);
-             if (!bOk) tf.requestFocusInWindow();
-             return bOk;
-         }
+        @Override
+        public boolean verify(JComponent input) {
+            boolean bOk = true;
+            JTextField tf = (JTextField) input;
+            try {
+                int i = Integer.parseInt(tf.getText());                 
+                if (i<0) bOk=false;
+            }
+            catch (Exception e) {
+                bOk = false;
+            }
+            jLblErreur.setVisible(!bOk);
+            if (!bOk) tf.requestFocusInWindow();
+            return bOk;
+        }
     }
 
     class verifyTxtFieldNumber extends InputVerifier {
-         @Override
+        @Override
         public boolean verify(JComponent input) {
             boolean bOk = true;
             JTextField tf = (JTextField) input;
