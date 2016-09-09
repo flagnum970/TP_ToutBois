@@ -13,6 +13,7 @@ import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.DateLabelFormatter;
 import com.hc.utils.GuiUtils;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.text.ParseException;
@@ -224,6 +225,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             }
         });
         jTblProspect.setFocusable(false);
+        jTblProspect.setName("jTbl"); // NOI18N
         jScrollPane2.setViewportView(jTblProspect);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 727, 110));
@@ -314,9 +316,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jTxtAdrNo.setNextFocusableComponent(jTxtAdrRue);
         jPanel5.add(jTxtAdrNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 40, -1));
 
-        jCboAdrPays.setEditable(true);
-        jCboAdrPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allemagne", "Angleterre", "Belgique", "Cameroun", "Espagne", "France", "Italie" }));
-        jCboAdrPays.setSelectedIndex(5);
+        jCboAdrPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afghanistan", "Afrique du Sud", "Albanie", "Algérie", "Allemagne", "Andorre", "Angola", "Antigua et Barbuda", "Arabie saoudite", "Argentine", "Arménie", "Australie", "Autriche", "Azerbaïdjan", "Bahamas", "Bahrein", "Bangladesh", "Barbade", "Belgique", "Bélize", "Benin", "Bhoutan", "Biélorussie", "Bolivie", "Bosnie-Herzégovine", "Botswana", "Brésil", "Brunei", "Bulgarie", "Burkina Faso", "Burundi", "Cambodge", "Cameroun", "Canada", "Cap Vert", "Centrafrique", "Chili", "Chine", "Chypre", "Colombie", "Comores", "Congo démocratique", "Congo", "Corée du Nord", "Corée du Sud", "Costa Rica", "Côte d'Ivoire", "Croatie", "Cuba", "Danemark", "Djibouti", "Dominique", "RépubliqueDominicaine", "Egypte", "Emirats Arabes Unis", "Equateur", "Erythrée", "Espagne", "Estonie", "Etats-Unis", "Ethiopie", "Fidji", "Finlande", "France", "Gabon", "Gambie", "Géorgie", "Ghana", "Grèce", "Grenade", "Groenland", "Guatémala", "Guinée", "Guinée Bissau", "Guinée équatoriale", "Guyana", "Haïti", "Honduras", "Hong Kong", "Hongrie", "Inde", "Indonésie", "Irak", "Iran", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Jordanie", "Kazakhstan", "Kenya", "Kirghizstan", "Kiribati", "Koweït", "Laos", "Lesotho", "Lettonie", "Liban", "Liberia", "Libye", "Liechtenstein", "Lituanie", "Luxembourg", "Macédoine", "Madagascar", "Malaisie", "Malawi", "Maldives", "Mali", "Malte", "Maroc", "Marshall", "Maurice", "Mauritanie", "Mexique", "Micronésie", "Moldavie", "Monaco", "Mongolie", "Mozambique", "Myanmar", "Namibie", "Népal", "Nicaragua", "Niger", "Nigeria", "Norvège", "Nouvelle Zélande", "Oman", "Ouganda", "Ouzbekistan", "Pakistan", "Palau", "Palestine", "Panama", "Papouasie - Nouvelle Guinée", "Paraguay", "Pays-Bas", "Pérou", "Philippines", "Pologne", "Porto Rico", "Portugal", "Qatar", "Roumanie", "Royaume-Uni", "Russie", "Rwanda", "Saint Christophe et Nevis", "Saint Vincent et les Grenadines", "Sainte Lucie", "Salomon", "Salvador", "Samoa", "São Tomé et Príncipe", "Sénégal", "Seychelles", "Sierra Leone", "Singapour", "Slovaquie", "Slovénie", "Somalie", "Somaliland", "Soudan", "Sri Lanka", "Suède", "Suisse", "Surinam", "Syrie", "Swaziland", "Tadjikistan", "Taïwan", "Tanzanie", "Tchad", "Tchéquie", "Thaïlande", "Tibet", "Timor Oriental", "Togo", "Tonga", "Trinité et Tobago", "Tunisie", "Turkmenistan", "Turquie", "Tuvalu", "Ukraine", "Uruguay", "Vanuatu", "Vatican", "Vénézuéla", "Vietnam", "Yémen", "Yougoslavie", "Zambie", "Zimbabwe" }));
         jCboAdrPays.setNextFocusableComponent(jBtnOK);
         jPanel5.add(jCboAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
 
@@ -325,6 +325,11 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jTxtTel.setToolTipText("");
         jTxtTel.setAutoscrolls(false);
         jTxtTel.setInputVerifier(new verifyTxtFieldNumber());
+        jTxtTel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtTelActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTxtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 110, -1));
 
         jLabel25.setText("Téléphone");
@@ -341,7 +346,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         jLblErreur.setText("Veuillez vérifier votre saisie !");
         jLblErreur.setEnabled(false);
         jLblErreur.setFocusable(false);
-        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, -1));
+        jPanel1.add(jLblErreur, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 380, -1));
 
         jBtnOK.setText("OK");
         jBtnOK.setNextFocusableComponent(jBtnAnnuler);
@@ -418,6 +423,10 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         if (jPanel1.isEnabled())
             remplitComboRep(jCboRep.getSelectedIndex()) ;
     }//GEN-LAST:event_refreshComboRep
+
+    private void jTxtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtTelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -523,11 +532,12 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             jTxtSiret.setText("");
             jTxtMail.setText("");
             jTxtTel.setText("");
+            jTxtAdrRue.setText("");
             jTxtAdrNo.setText("");
             jTxtAdrCompl.setText("");
             jTxtAdrVille.setText("");
             jTxtAdrCP.setText("");
-            jCboAdrPays.setSelectedItem("");
+            jCboAdrPays.setSelectedItem("France");
             jTxtNo.setText("");
 
             //DatePicker 
@@ -539,6 +549,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
        jLblErreur.setVisible(false);
     }
    
+    // Remplissage et sélection (éventuelle  : en création index = -1 : 1er sel) de la combo des représentants
+    // TODO : voir pour le refresh : lorsque la frm des représentants est ouverte et en modif
     private void remplitComboRep(int index) 
     {
             int i=0,iRep =0;    
@@ -553,14 +565,13 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             }
             jCboRep.setSelectedIndex(iRep);
  
-       /*     for (Representant r : setRep) 
-                jCboRep.addItem(r.getNo()+" "+r.getNom()+" "+r.getPrenom()); ù*/
     }
     
     private void sauveFiche() 
     { 
-        //Recuperation du représentant à partir de la cbo
+        //Recuperation du n° représentant à partir de la cbo 
         int noRep=Integer.parseInt(jCboRep.getSelectedItem().toString().split(" ")[0]);
+        //
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         sdf.setLenient(false);
         Date d = (Date) jDtPicker.getModel().getValue();
@@ -585,7 +596,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                                                 jTxtTel.getText(),
                                                 jTxtSiret.getText(),
                                                 noRep,
-                                               dateVisite
+                                                dateVisite
                                                 );
             hashProspect.put(Integer.parseInt(jTxtNo.getText()),c);
         } else { // en création, on utilise le constructeur sans le n°
@@ -621,22 +632,29 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         }
     }
     
+    /** méthode de verification des champs appelée lors du clic sur OK
+     *  car on ne passe pas forcément par tous les champs donc les inputVerifier ne sont pas appelés systématiquement
+     */
     private boolean  verifyFields(Component container) 
-    {    
-    
-        if (!new verifyTxtFieldString().verify(jTxtEnseigne)) return false;
-        if (!new verifyTxtFieldString().verify(jTxtSiret)) return false;
-        if (!new verifyTxtFieldCbo().verify(jCboRep)) return false;
-        if (!new verifyTxtFieldMail().verify(jTxtMail)) return false;
-        if (!new verifyFieldDate().verify(jDtPicker)) return false;
-        if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false;
-        if (!new verifyTxtFieldString().verify(jTxtAdrRue)) return false;
-        if (!new verifyTxtFieldString().verify(jTxtAdrVille)) return false;
-        if (!new verifyTxtFieldCbo().verify(jCboAdrPays)) return false;
-        if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false;
-        
-        return true;            
-    }
+    {
+        Component[] components= ((Container) container).getComponents();
+        for (Component c : components) {
+            try {   
+                JComponent jc = (JComponent)c;
+
+                if (jc.getInputVerifier()!=null) {
+                    if (!jc.getInputVerifier().verify(jc)) {
+                        System.out.println("ça chie dans la colle pour : " );
+                        return false ;
+                    }
+                }
+            } catch (ClassCastException e) {
+             //TODO : gestion exception
+            }
+        }
+        return true;              
+    }    
+     
     
     class SharedListSelectionHandler implements ListSelectionListener {
         @Override
@@ -662,7 +680,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
          @Override
          public boolean verify(JComponent input) {
              JComboBox<String> tf = (JComboBox<String>) input;
-             boolean bOk = !tf.getSelectedItem().toString().isEmpty();
+             boolean bOk = (!tf.getSelectedItem().toString().isEmpty() || !tf.isEnabled());
+             jLblErreur.setText("Veuillez verifier votre saisie");
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return (bOk);
@@ -673,7 +692,8 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
          @Override
          public boolean verify(JComponent input) {
              JTextField tf = (JTextField) input;
-             boolean bOk = !tf.getText().isEmpty();
+             boolean bOk = (!tf.getText().isEmpty() || !tf.isEnabled());
+             jLblErreur.setText("Veuillez verifier votre saisie");
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return (bOk);
@@ -685,14 +705,16 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
          public boolean verify(JComponent input) {
              boolean bOk = true;
              JTextField tf = (JTextField) input;
-             
-             try {
-                 int i = Integer.parseInt(tf.getText());  
-                 if (i<0) bOk=false;
+             if (tf.isEnabled()) {
+                try {
+                    int i = Integer.parseInt(tf.getText());  
+                    if (i<0) bOk=false;
+                }
+                catch (Exception e) {
+                    bOk = false;
+                }
              }
-             catch (Exception e) {
-                 bOk = false;
-             }
+             jLblErreur.setText("Veuillez verifier votre saisie (Entier incorrect)");
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return bOk;
@@ -704,13 +726,16 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         public boolean verify(JComponent input) {
             boolean bOk = true;
             JTextField tf = (JTextField) input;
-            try {
-                double d = Double.parseDouble(tf.getText());   
-                if (d<0) bOk=false;
+            if (tf.isEnabled()) {
+                try {
+                    double d = Double.parseDouble(tf.getText());   
+                    if (d<0) bOk=false;
+                }
+                catch (Exception e) {
+                    bOk = false;
+                }
             }
-            catch (Exception e) {
-                bOk = false;
-            }
+            jLblErreur.setText("Veuillez verifier votre saisie (Nombre incorrect)");
             if (!bOk) tf.requestFocusInWindow();
             jLblErreur.setVisible(!bOk);
             return bOk;
@@ -726,28 +751,33 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
             sdf.setLenient(false);
             JDatePickerImpl jDate = (JDatePickerImpl) input;
-            try {
-                d = (Date) jDate.getModel().getValue();
-                if (d==null) bOk=false;
-            } catch (Exception e) {
-                bOk = false;
+            if (jDate.isEnabled()) {
+                try {
+                    d = (Date) jDate.getModel().getValue();
+                    if (d==null) bOk=false;
+                } catch (Exception e) {
+                    bOk = false;
+                }
             }
-             jLblErreur.setVisible(!bOk);
-             if (!bOk) input.requestFocusInWindow();
-             return bOk;
+            jLblErreur.setText("Veuillez verifier votre saisie (date incorrecte)");
+            jLblErreur.setVisible(!bOk);
+            if (!bOk) jDate.requestFocusInWindow();
+            return bOk;
         }
     }
 
     class verifyTxtFieldMail extends InputVerifier {
         @Override
         public boolean verify(JComponent input) {
-
+            boolean bOk = true;
             String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
             JTextField tf = (JTextField) input;
-
-           Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(tf.getText());
-            boolean bOk = matcher.matches();
+            if (tf.isEnabled()) {
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(tf.getText());
+                bOk = matcher.matches();
+            }
+            jLblErreur.setText("Veuillez verifier votre saisie (mail incorrect)");
             jLblErreur.setVisible(!bOk);
             if (!bOk) input.requestFocusInWindow();
             return bOk;
