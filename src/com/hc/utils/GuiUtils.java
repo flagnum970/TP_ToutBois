@@ -5,6 +5,7 @@
  */
 package com.hc.utils;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.InputVerifier;
@@ -26,7 +27,15 @@ public class GuiUtils {
         else
             if  ( (container.getName() ==null ) ||
               (!container.getName().startsWith("jTxtNo")))
-            container.setEnabled(enable);
+                container.setEnabled(enable);
+        
+        if ((container.getName() !=null ) && container.getName().startsWith("jTbl")) {
+            if (enable) 
+                container.setForeground(Color.black);
+            else 
+                container.setForeground(Color.lightGray);
+        }
+            
         
         try {
             Component[] components= ((Container) container).getComponents();
@@ -37,6 +46,27 @@ public class GuiUtils {
                 //TODO : gestion exception
         }
     }
+    
+    /* méthode de verification des champs appelée lors du clic sur OK
+       car on ne passe pas forcément par tous les champs donc les inputVerifier ne sont pas appelés systématiquement
+    */
+    public static boolean  verifyFields(Component container) 
+    {
+        Component[] components= ((Container) container).getComponents();
+        for (Component c : components) {
+            try {   
+                JComponent jc = (JComponent)c;
+                if (jc.getInputVerifier()!=null) {
+                    if (!jc.getInputVerifier().verify(jc)) 
+                        return false ;                    
+                }
+            } catch (ClassCastException e) {
+             //TODO : gestion exception
+            }
+        }
+        return true;              
+    }  
+    
 }
 
 
