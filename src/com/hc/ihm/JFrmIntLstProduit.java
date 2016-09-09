@@ -35,20 +35,16 @@ public class JFrmIntLstProduit extends javax.swing.JInternalFrame {
      * Creates new form JFrmIntRep
      */
     public JFrmIntLstProduit(HashMap<String,Produit> hashProduit) {
-        initComponents();
         this.hashProduit = hashProduit;
+        initComponents();
         remplitTable();
-       
-        typAcc = type_acces.visualisation;
+        typAcc = type_acces.visualisation; //par défaut en visu
         
         //on disable tous les composants du jPanel1
         GuiUtils.setEnableRec(jPanel1,false);
-
         jLblErreur.setVisible(false);
-
-        jTblRep.getSelectionModel().addListSelectionListener(new SharedListSelectionHandler()); 
-        jTblRep.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
+        typAcc = type_acces.visualisation;
     }
 
     /**
