@@ -9,10 +9,12 @@ import com.hc.Entites.Adresse;
 import com.hc.Entites.Client;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
+import static com.hc.utils.Constantes.separator;
 import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.GuiUtils;
 import java.awt.Component;
 import java.awt.Container;
+import java.io.File;
 import java.util.HashMap;
 import javax.swing.InputVerifier;
 import javax.swing.JComboBox;
@@ -25,7 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Fenêtre de gestion des représentants
  * @author cflagollet
  */
 public class JFrmIntLstRep extends javax.swing.JInternalFrame {
@@ -36,7 +38,11 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     private type_acces typAcc;
     
     /**
-     * Creates new form JFrmIntRep
+     * Crée une nouvelle form JFrmIntRep
+     * @param hashRep
+     * @param hashProspect
+     * @param hashClient
+     * 
      */
     public JFrmIntLstRep(HashMap<Integer,Representant> hashRep, HashMap<Integer,Prospect> hashProspect,HashMap<Integer,Client> hashClient ) {
         initComponents();
@@ -193,6 +199,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(757, 0, -1, 120));
 
+        jTblRep.setAutoCreateRowSorter(true);
         jTblRep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -380,7 +387,11 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    //Listener pour les boutons Création et Modification
+    /**
+     * Méthode commune aux boutons Création et Modification
+     * Gère le grisage/dégrisage liste et fiche, et remplit (modif) ou non (creation) la fiche
+     * @param evt 
+     */
     private void jBtnNouveauModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNouveauModifierActionPerformed
         //Clic sur Modifier
         if (evt.getSource().equals((Object) jBtnModifier))  {
@@ -402,7 +413,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
      * Méthode commune aux boutons OK et annuler
      * OK       : Controles, sauvegarde, et vide fiche, retour sur la liste
      * Annuler  : Vide fiche, retour sur la liste
-     * @param evt : évèment déclencheur 
+     * @param evt : évènement déclencheur 
      */
     private void jBtnOKAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKAnnulerActionPerformed
 
@@ -494,6 +505,11 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTxtTxComm;
     // End of variables declaration//GEN-END:variables
 
+    
+    /**
+     * Remplit la liste des représentants à partir de la hashmap hasRep
+     * 
+     */
     private void remplitTable()
     {
         String [] cols = {"No","Nom","Prenom","Adresse","Salaire","Taux"}; 
@@ -522,6 +538,10 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             jTblRep.getColumnModel().getColumn(i).setPreferredWidth(tailleCol[i]);       
     }
     
+    /**
+     * mise à jour des zones : utilisé en création (zones à vide) et en modification (zones remplies à partir de la hasMap)
+     * @param : noRep : numéro du représentant (-1 si création)
+     */
     
     private void remplitFiche(int noRep) 
     {
@@ -639,6 +659,11 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
            }
          }
    
+                 if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
+        if (!new verifyTxtFieldString().verify(jTxtAdrRue)) return false ;
+        if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
+        if (!new verifyTxtFieldInt().verify(jTxtAdrVille)) return false ;
+         
         return true;               
     }
     
@@ -683,7 +708,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
          @Override
         public boolean verify(JComponent input) {
            JTextField tf = (JTextField) input;
-           boolean bOk = (!tf.getText().isEmpty() || !tf.isEnabled());
+           boolean bOk = ((!tf.getText().isEmpty() && !tf.getText().contains(separator)) || !tf.isEnabled());
            jLblErreur.setText("Veuillez vérifier votre saisie ");
            jLblErreur.setVisible(!bOk);
            if (!bOk) tf.requestFocusInWindow();
