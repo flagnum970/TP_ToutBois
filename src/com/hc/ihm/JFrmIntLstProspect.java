@@ -9,6 +9,7 @@ import com.hc.Entites.Adresse;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
 import com.hc.utils.Constantes;
+import static com.hc.utils.Constantes.separator;
 import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.DateLabelFormatter;
 import com.hc.utils.GuiUtils;
@@ -40,7 +41,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 
 /**
- *
+ * Fenêtre de gestion des prospects
  * @author cflagollet
  */
 public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
@@ -637,9 +638,10 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
      */
     private boolean  verifyFields(Component container) 
     {
-        Component[] components= ((Container) container).getComponents();
+  /*      Component[] components= ((Container) container).getComponents();
         for (Component c : components) {
             try {   
+                
                 JComponent jc = (JComponent)c;
 
                 if (jc.getInputVerifier()!=null) {
@@ -652,7 +654,20 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
              //TODO : gestion exception
             }
         }
-        return true;              
+        return true;              */
+        
+        if (!new JFrmIntLstProspect.verifyTxtFieldString().verify(jTxtEnseigne)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldString().verify(jTxtSiret)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldMail().verify(jTxtMail)) return false ;
+        if (!new JFrmIntLstProspect.verifyFieldDate().verify(jDtPicker)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldCbo().verify(jCboRep)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldString().verify(jTxtAdrRue)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldInt().verify(jTxtAdrVille)) return false ;
+        
+        
+        return true;
     }    
      
     
@@ -692,7 +707,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
          @Override
          public boolean verify(JComponent input) {
              JTextField tf = (JTextField) input;
-             boolean bOk = (!tf.getText().isEmpty() || !tf.isEnabled());
+             boolean bOk = ((!tf.getText().isEmpty() && !tf.getText().contains(separator)) || !tf.isEnabled());
              jLblErreur.setText("Veuillez verifier votre saisie");
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
