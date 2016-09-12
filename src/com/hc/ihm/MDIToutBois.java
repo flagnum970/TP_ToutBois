@@ -26,7 +26,16 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
+ * Fenêtre MDI principale de l'application
+ * Ne contient que les menus : 
+ * Référentiel : 
+ *  - Représentants
+ *  - Clients
+ *  - Prospects
+ *  - produits
+ * Commandes :
+ *  - Gestion commandes
+ *  Lors du clic sur un menu, vérifie si la frame est déjà affichée. Si oui, on lui donne le focus, sinon, on la crée et on l'affiche
  * @author cflagollet
  */
 public class MDIToutBois extends javax.swing.JFrame {
@@ -82,14 +91,14 @@ public class MDIToutBois extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        gestionMenu = new javax.swing.JMenu();
+        referentielMenu = new javax.swing.JMenu();
         representantMenuItem = new javax.swing.JMenuItem();
         clientMenuItem = new javax.swing.JMenuItem();
         prospectMenuItem = new javax.swing.JMenuItem();
+        produitMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         commandeMenu = new javax.swing.JMenu();
-        produitMenuItem = new javax.swing.JMenuItem();
         commandeMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -98,39 +107,48 @@ public class MDIToutBois extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        gestionMenu.setMnemonic('f');
-        gestionMenu.setText("Gestion");
+        referentielMenu.setMnemonic('f');
+        referentielMenu.setText("Référentiel");
 
         representantMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         representantMenuItem.setMnemonic('o');
-        representantMenuItem.setText("Représentant");
+        representantMenuItem.setText("Représentants");
         representantMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 representantMenuItemActionPerformed(evt);
             }
         });
-        gestionMenu.add(representantMenuItem);
+        referentielMenu.add(representantMenuItem);
 
         clientMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         clientMenuItem.setMnemonic('s');
-        clientMenuItem.setText("Client");
+        clientMenuItem.setText("Clients");
         clientMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientMenuItemActionPerformed(evt);
             }
         });
-        gestionMenu.add(clientMenuItem);
+        referentielMenu.add(clientMenuItem);
 
         prospectMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         prospectMenuItem.setMnemonic('a');
-        prospectMenuItem.setText("Prospect");
+        prospectMenuItem.setText("Prospects");
         prospectMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prospectMenuItemActionPerformed(evt);
             }
         });
-        gestionMenu.add(prospectMenuItem);
-        gestionMenu.add(jSeparator1);
+        referentielMenu.add(prospectMenuItem);
+
+        produitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        produitMenuItem.setText("Produits");
+        produitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                produitMenuItemActionPerformed(evt);
+            }
+        });
+        referentielMenu.add(produitMenuItem);
+        referentielMenu.add(jSeparator1);
 
         exitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         exitMenuItem.setMnemonic('x');
@@ -140,20 +158,11 @@ public class MDIToutBois extends javax.swing.JFrame {
                 exitMenuItemActionPerformed(evt);
             }
         });
-        gestionMenu.add(exitMenuItem);
+        referentielMenu.add(exitMenuItem);
 
-        menuBar.add(gestionMenu);
+        menuBar.add(referentielMenu);
 
         commandeMenu.setText("Commandes");
-
-        produitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        produitMenuItem.setText("Gestion des produits");
-        produitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                produitMenuItemActionPerformed(evt);
-            }
-        });
-        commandeMenu.add(produitMenuItem);
 
         commandeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         commandeMenuItem.setText("Gestion des commandes");
@@ -337,13 +346,13 @@ public class MDIToutBois extends javax.swing.JFrame {
     private javax.swing.JMenuItem commandeMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu gestionMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem produitMenuItem;
     private javax.swing.JMenuItem prospectMenuItem;
+    private javax.swing.JMenu referentielMenu;
     private javax.swing.JMenuItem representantMenuItem;
     // End of variables declaration//GEN-END:variables
 
