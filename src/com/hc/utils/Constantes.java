@@ -17,4 +17,5 @@ public class Constantes {
      public static final String FICHIER_COMMANDE = "commande.txt";
      
      public enum type_acces {creation,modification,visualisation};
+     public final static String separator=";";
 }
