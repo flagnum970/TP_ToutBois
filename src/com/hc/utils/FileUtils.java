@@ -11,6 +11,7 @@ import com.hc.Entites.Commande;
 import com.hc.Entites.Produit;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
+import static com.hc.utils.Constantes.separator;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,11 +32,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
+ * classe utilitaire de gestion des fichiers
+ * 
  * @author cflagollet
  */
 public class FileUtils {
-    private final static String separator=";";
     private FileUtils() 
     {     
     }
@@ -43,10 +44,9 @@ public class FileUtils {
     /*** Lecture d'un fichier dont le chemin est passé en paramètre
      *   renvoie une list de String 
      * @param chemin
-     * @return 
+     * @return liste de String
      */
-    
-    public static List<String> litFichier(String chemin) // throws FileNotFoundException
+    public static List<String> litFichier(String chemin) 
     {
         String line;
         List<String> lst = new ArrayList<String>();
@@ -84,6 +84,11 @@ public class FileUtils {
         
     }
     
+    /** 
+     * Méthode qui prend en entrée une liste de String et qui crée une hashMap de représentants <no représentant, Représentant>
+     * @param lst
+     * @return hasMap des représentants
+     */
     public static HashMap<Integer,Representant> decodeRep(List<String> lst) 
     {        
         HashMap<Integer,Representant> hashRep = new HashMap<Integer,Representant>();
@@ -109,6 +114,11 @@ public class FileUtils {
         return hashRep;
     }
     
+    /** 
+     * Méthode qui prend en entrée une liste de String et qui crée une hashMap de clients <no client, Client>
+     * @param lst
+     * @return hasMap des Clients
+     */
     public static HashMap<Integer,Client> decodeClient(List<String> lst) 
     {        
         HashMap<Integer,Client> hashClient = new HashMap<Integer,Client>();
@@ -137,6 +147,11 @@ public class FileUtils {
         return hashClient;
     }
     
+    /** 
+     * Méthode qui prend en entrée une liste de String et qui crée une hashMap de Prospects <no Prospect, Prospect>
+     * @param lst
+     * @return hasMap des Prospects
+     */
     public static HashMap<Integer,Prospect> decodeProspect(List<String> lst) 
     {        
         HashMap<Integer,Prospect> hashProspect = new HashMap<Integer,Prospect>();
@@ -164,6 +179,12 @@ public class FileUtils {
         return hashProspect;
     }
    
+    
+    /** 
+     * Méthode qui prend en entrée une liste de String et qui crée une hashMap de produits <code Produits, Produits>
+     * @param lst
+     * @return hasMap des Produits
+     */
     public static HashMap<String,Produit> decodeProduit(List<String> lst) 
     {        
         HashMap<String,Produit> hashProduit = new HashMap<String,Produit>();
@@ -187,7 +208,12 @@ public class FileUtils {
         return hashProduit;
     }
     
-        public static HashMap<Integer,Commande> decodeCommande(List<String> lst) 
+    /** 
+     * Méthode qui prend en entrée une liste de String et qui crée une hashMap de Commandes <no Commandes, Commandes>
+     * @param lst
+     * @return hasMap des commandes
+     */
+    public static HashMap<Integer,Commande> decodeCommande(List<String> lst) 
     {        
         HashMap<Integer,Commande> hashCommande = new HashMap<Integer,Commande>();
       
@@ -211,6 +237,12 @@ public class FileUtils {
     }
     
     
+    /** 
+     * Méthode qui prend une hashMap des produits et revoie une ligne de String
+     * Utilisée pour la sauvegarde dans le fichier produits
+     * @param hashProduit
+     * @return list de String
+     */
     public static List<String> codeFichierProduit(HashMap<String,Produit> hashProduit)
     {
         Set<String> setProduit = hashProduit.keySet();
@@ -229,6 +261,12 @@ public class FileUtils {
     }
     
     
+    /** 
+     * Méthode qui prend une hashMap des produits et revoie une ligne de String
+     * Utilisée pour la sauvegarde dans le fichier produits
+     * @param hashProduit
+     * @return list de String
+     */
     public static List<String> codeFichierRep(HashMap<Integer,Representant> hashRep)
     {
         Set<Integer> setRep = hashRep.keySet();
