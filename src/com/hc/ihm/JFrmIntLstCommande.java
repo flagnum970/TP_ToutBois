@@ -39,7 +39,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 
 /**
- *
+ * Fenêtre de gestion des commandes (non implémentée)
  * @author cflagollet
  */
 public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
@@ -52,9 +52,8 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
     private JDatePickerImpl jDtPicker ;
    
     /**
-     * Creates new form JFrmIntRep
-     * @param hashProspect
-     * @param hashRep
+     * Fenêtre de gestion des commandes (non implémenté)
+     * @param hashCommande
      */
     public JFrmIntLstCommande(HashMap<Integer,Commande> hashCommande) {
         initComponents();
