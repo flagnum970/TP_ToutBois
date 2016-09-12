@@ -13,11 +13,14 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 /**
- *
+ * Classe utilitaire pour l'interface graphique
+ * 
  * @author cflagollet
  */
 public class GuiUtils {
-        //Methode pour enable/disable un panel (quand on disable un container, les composants contenus ne sont pas disable !
+        /** 
+         * Methode pour enable/disable un panel (quand on disable un container, les composants contenus ne sont pas disable 
+         */
     public static void setEnableRec(Component container, boolean enable){
     
         if  (( (container.getName() ==null ) ||
@@ -47,8 +50,9 @@ public class GuiUtils {
         }
     }
     
-    /* méthode de verification des champs appelée lors du clic sur OK
-       car on ne passe pas forcément par tous les champs donc les inputVerifier ne sont pas appelés systématiquement
+    /** méthode de verification des champs appelée lors du clic sur OK
+    *   car on ne passe pas forcément par tous les champs donc les inputVerifier ne sont pas appelés systématiquement
+    * Non utilisé actuellement. A revoir
     */
     public static boolean  verifyFields(Component container) 
     {
