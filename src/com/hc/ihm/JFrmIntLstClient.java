@@ -8,6 +8,7 @@ package com.hc.ihm;
 import com.hc.Entites.Adresse;
 import com.hc.Entites.Client;
 import com.hc.Entites.Representant;
+import static com.hc.utils.Constantes.separator;
 import com.hc.utils.Constantes.type_acces;
 import com.hc.utils.GuiUtils;
 import java.awt.Component;
@@ -28,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
- *
+ * Fenêtre de gestion des clients 
  * @author cflagollet
  */
 public class JFrmIntLstClient extends javax.swing.JInternalFrame {
@@ -671,8 +672,9 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
          @Override
          public boolean verify(JComponent input) {
              JTextField tf = (JTextField) input;
-             boolean bOk = !tf.getText().isEmpty();
+             boolean bOk = ((!tf.getText().isEmpty() && !tf.getText().contains(separator)) || !tf.isEnabled());
              if (!bOk) tf.requestFocusInWindow();
+             jLblErreur.setText("Veuillez vérifier votre saisie");
              jLblErreur.setVisible(!bOk);
              return (bOk);
          }
