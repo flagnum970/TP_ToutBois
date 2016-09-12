@@ -664,7 +664,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
         if (!new JFrmIntLstProspect.verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
         if (!new JFrmIntLstProspect.verifyTxtFieldString().verify(jTxtAdrRue)) return false ;
         if (!new JFrmIntLstProspect.verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
-        if (!new JFrmIntLstProspect.verifyTxtFieldInt().verify(jTxtAdrVille)) return false ;
+        if (!new JFrmIntLstProspect.verifyTxtFieldString().verify(jTxtAdrVille)) return false ;
         
         
         return true;
@@ -696,7 +696,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
          public boolean verify(JComponent input) {
              JComboBox<String> tf = (JComboBox<String>) input;
              boolean bOk = (!tf.getSelectedItem().toString().isEmpty() || !tf.isEnabled());
-             jLblErreur.setText("Veuillez verifier votre saisie");
+             jLblErreur.setText("Veuillez vérifier votre saisie");
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return (bOk);
@@ -708,7 +708,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
          public boolean verify(JComponent input) {
              JTextField tf = (JTextField) input;
              boolean bOk = ((!tf.getText().isEmpty() && !tf.getText().contains(separator)) || !tf.isEnabled());
-             jLblErreur.setText("Veuillez verifier votre saisie");
+             jLblErreur.setText("Veuillez vérifier votre saisie");
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return (bOk);
@@ -729,7 +729,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                     bOk = false;
                 }
              }
-             jLblErreur.setText("Veuillez verifier votre saisie (Entier incorrect)");
+             jLblErreur.setText("Veuillez vérifier votre saisie (Entier incorrect)");
              if (!bOk) tf.requestFocusInWindow();
              jLblErreur.setVisible(!bOk);
              return bOk;
@@ -750,7 +750,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                     bOk = false;
                 }
             }
-            jLblErreur.setText("Veuillez verifier votre saisie (Nombre incorrect)");
+            jLblErreur.setText("Veuillez vérifier votre saisie (Nombre incorrect)");
             if (!bOk) tf.requestFocusInWindow();
             jLblErreur.setVisible(!bOk);
             return bOk;
@@ -774,7 +774,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                     bOk = false;
                 }
             }
-            jLblErreur.setText("Veuillez verifier votre saisie (date incorrecte)");
+            jLblErreur.setText("Veuillez vérifier votre saisie (date incorrecte)");
             jLblErreur.setVisible(!bOk);
             if (!bOk) jDate.requestFocusInWindow();
             return bOk;
@@ -792,7 +792,7 @@ public class JFrmIntLstProspect extends javax.swing.JInternalFrame   {
                 Matcher matcher = pattern.matcher(tf.getText());
                 bOk = matcher.matches();
             }
-            jLblErreur.setText("Veuillez verifier votre saisie (mail incorrect)");
+            jLblErreur.setText("Veuillez vérifier votre saisie (mail incorrect)");
             jLblErreur.setVisible(!bOk);
             if (!bOk) input.requestFocusInWindow();
             return bOk;
