@@ -19,15 +19,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe principale de l'application
+ * Cette classe charge les  fichiers et instancie une Hashmap pour chaque Entité :
+ * Représentant, client, prospect, produit, commande
+ * Ensuite, elle crée et affiche la fenêtre MDI principale
  * @author cflagollet
  */
 public class Principale {
-        /**
-     * @param args the command line arguments
-     */
-   
-    
+         
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -61,7 +60,6 @@ public class Principale {
                 
                 //On crée la map des représentants, à partir du fichier
                 HashMap<Integer,Representant> hashRep;
-         
                 lstLignes=  FileUtils.litFichier(Constantes.FICHIER_REP);
                 hashRep=FileUtils.decodeRep(lstLignes) ;
         
@@ -80,7 +78,7 @@ public class Principale {
                 lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PRODUIT);
                 hashProduit=FileUtils.decodeProduit(lstLignes) ;
                 
-                                //On crée la map des produits, à partir du fichier
+                //On crée la map des produits, à partir du fichier
                 HashMap<Integer,Commande> hashCommande;
                 lstLignes=  FileUtils.litFichier(Constantes.FICHIER_COMMANDE);
                 hashCommande=FileUtils.decodeCommande(lstLignes) ;
