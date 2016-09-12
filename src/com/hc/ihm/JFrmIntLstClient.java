@@ -631,7 +631,7 @@ public class JFrmIntLstClient extends javax.swing.JInternalFrame {
         if (!new verifyTxtFieldString().verify(jTxtAdrRue)) return false ;
         if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
         if (!new verifyTxtFieldString().verify(jTxtAdrVille)) return false ;
-        if (!new verifyTxtFieldCbo().verify(jCboAdrPays)) return false ;
+  //      if (!new verifyTxtFieldCbo().verify(jCboAdrPays)) return false ;
         
         return true;        
         
