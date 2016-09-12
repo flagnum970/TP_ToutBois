@@ -23,7 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Fenêtre de gestion des produits (non implémenté)
  * @author cflagollet
  */
 public class JFrmIntLstProduit extends javax.swing.JInternalFrame {
