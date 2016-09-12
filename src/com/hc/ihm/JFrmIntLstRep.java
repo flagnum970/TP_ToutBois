@@ -659,10 +659,10 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
            }
          }
    
-                 if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
+        if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
         if (!new verifyTxtFieldString().verify(jTxtAdrRue)) return false ;
         if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
-        if (!new verifyTxtFieldInt().verify(jTxtAdrVille)) return false ;
+        if (!new verifyTxtFieldString().verify(jTxtAdrVille)) return false ;
          
         return true;               
     }
