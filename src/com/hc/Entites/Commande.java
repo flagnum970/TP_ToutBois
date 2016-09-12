@@ -35,7 +35,7 @@ public class Commande {
      * @param dtCommande
      * @param dtLivraison
      * @param lgComm
-     * @param etat : initialisée à 'en cours'
+     *  etat : initialisée à 'en cours'
      */
     public Commande(Date dtCommande, Date dtLivraison,List<LigneCommande>lgComm) {
         no = ++dernierNo;
