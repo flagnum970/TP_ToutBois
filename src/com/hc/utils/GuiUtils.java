@@ -5,12 +5,20 @@
  */
 package com.hc.utils;
 
+import static com.hc.utils.Constantes.separator;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.InputVerifier;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 
 /**
  * Classe utilitaire pour l'interface graphique
@@ -70,6 +78,120 @@ public class GuiUtils {
         }
         return true;              
     }  
+    
+    public static boolean verifyTxtFieldCbo(Component input,JLabel jLabel)  {        
+        
+        JComboBox<String> tf = (JComboBox<String>) input;
+        boolean bOk = (!tf.getSelectedItem().toString().isEmpty() || !tf.isEnabled());
+        jLabel.setText("Veuillez vérifier votre saisie");
+        if (!bOk) tf.requestFocusInWindow();
+        jLabel.setVisible(!bOk);
+        return (bOk);
+    }
+    
+    
+    public static boolean verifyTxtFieldString(Component input,JLabel jLabel) {
+        JTextField tf = (JTextField) input;
+        boolean bOk = ((!tf.getText().isEmpty() && !tf.getText().contains(separator)) || !tf.isEnabled());
+        jLabel.setText("Veuillez vérifier votre saisie ");
+        jLabel.setVisible(!bOk);
+        if (!bOk) tf.requestFocusInWindow();
+        return (bOk);
+    }
+    
+    
+    public static boolean verifyTxtFieldInt(Component input,JLabel jLabel) {
+        boolean bOk = true;
+        JTextField tf = (JTextField) input;
+        if (tf.isEnabled()) {
+            try {
+                int i = Integer.parseInt(tf.getText());                 
+                if (i<0) bOk=false;
+            }
+            catch (Exception e) {
+                bOk = false;
+            }
+        }
+        jLabel.setText("Veuillez vérifier votre saisie (Entier positif)");
+        jLabel.setVisible(!bOk); 
+        if (!bOk) tf.requestFocusInWindow(); 
+        return bOk;
+    }
+
+    public static boolean verifyTxtFieldTaux(Component input,JLabel jLabel) {
+        boolean bOk = true;
+        JTextField tf = (JTextField) input;
+        if (tf.isEnabled()) {
+            try {
+                Double d = Double.parseDouble(tf.getText());                 
+                if ((d<0) || d>100) bOk=false;
+            }
+            catch (Exception e) {
+                bOk = false;
+            }
+        }
+        jLabel.setText("Veuillez vérifier votre saisie (0<taux<100)");
+        jLabel.setVisible(!bOk);
+        if (!bOk) tf.requestFocusInWindow();
+        return bOk;
+    }
+    
+    
+    public static boolean verifyTxtFieldNumber(Component input,JLabel jLabel)  {
+        boolean bOk = true;
+        JTextField tf = (JTextField) input;
+        if (tf.isEnabled()) {
+            try {
+                double d = Double.parseDouble(tf.getText());                 
+                if (d<0) bOk=false;
+            }
+            catch (Exception e) {
+                bOk = false;
+            }
+        }
+        jLabel.setText("Veuillez vérifier votre saisie (nombre positif)");
+        jLabel.setVisible(!bOk);
+        if (!bOk) tf.requestFocusInWindow();
+        return bOk;
+    }
+    
+    public static boolean verifyFieldDate(Component input,JLabel jLabel){
+        Date d; 
+        boolean bOk = true;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
+        sdf.setLenient(false);
+        JDatePickerImpl jDate = (JDatePickerImpl) input;
+        if (jDate.isEnabled()) {
+            try {
+                d = (Date) jDate.getModel().getValue();
+                if (d==null) bOk=false;
+            } catch (Exception e) {
+                bOk = false;
+            }
+        }
+        jLabel.setText("Veuillez vérifier votre saisie (date incorrecte)");
+        jLabel.setVisible(!bOk);
+        if (!bOk) jDate.requestFocusInWindow();
+        return bOk;
+        
+    }
+
+   public static boolean verifyTxtFieldMail(Component input,JLabel jLabel){
+
+        boolean bOk = true;
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        JTextField tf = (JTextField) input;
+        if (tf.isEnabled()) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(tf.getText());
+            bOk = matcher.matches();
+        }
+        jLabel.setText("Veuillez vérifier votre saisie (mail incorrect)");
+        jLabel.setVisible(!bOk);
+        if (!bOk) input.requestFocusInWindow();
+        return bOk;
+    }
     
 }
 

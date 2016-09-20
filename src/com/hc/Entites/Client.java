@@ -16,8 +16,8 @@ public class Client extends Entreprise {
     private static int dernierNo=0;
 
     //Constructeur sans le n° 
-    public Client( String enseigne, Adresse adresse, String mail, String telephone, String siret,int noRepresentant, int nbCommandes) {
-        super(enseigne, adresse, mail, telephone, siret);
+    public Client( String enseigne, String siret,String mail, String telephone, int nbCommandes,int noRepresentant, Adresse adresse) {
+        super(enseigne, siret, mail, telephone, adresse);
         this.noRepresentant = noRepresentant;
         this.nbCommandes = nbCommandes;
         dernierNo++;
@@ -25,8 +25,8 @@ public class Client extends Entreprise {
     }
 
     //Constructeur avec le n° passé en paramètre
-    public Client(int no, String enseigne, Adresse adresse, String mail, String telephone, String siret,int noRepresentant, int nbCommandes) {
-        super(enseigne, adresse, mail, telephone, siret);
+    public Client(int no, String enseigne, String siret, String mail, String telephone, int nbCommandes, int noRepresentant,Adresse adresse) {
+        super(enseigne, siret, mail, telephone, adresse);
         this.noRepresentant = noRepresentant;
         this.nbCommandes = nbCommandes;
         this.no= no;

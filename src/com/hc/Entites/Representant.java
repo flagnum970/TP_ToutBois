@@ -15,7 +15,7 @@ public class Representant extends Personne {
     private double txComm;
     private double salaire;
 
-    public Representant(double txComm, double salaire, String nom, String prenom, Adresse adresse) {
+    public Representant(String nom, String prenom, double txComm, double salaire, Adresse adresse) {
         super(nom, prenom, adresse);
         this.txComm = txComm;
         this.salaire = salaire;
@@ -23,7 +23,7 @@ public class Representant extends Personne {
         no= dernierNo;
     }
 
-    public Representant(int no, double txComm, double salaire, String nom, String prenom, Adresse adresse) {
+    public Representant(int no,  String nom, String prenom, double txComm, double salaire, Adresse adresse) {
         super(nom, prenom, adresse);
         this.no = no;
         this.txComm = txComm;

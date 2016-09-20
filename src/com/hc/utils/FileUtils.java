@@ -11,6 +11,7 @@ import com.hc.Entites.Commande;
 import com.hc.Entites.Produit;
 import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
+import com.hc.application.Principale;
 import static com.hc.utils.Constantes.separator;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,6 +23,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import static java.util.Collections.list;
@@ -30,6 +33,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * classe utilitaire de gestion des fichiers
@@ -37,8 +42,12 @@ import java.util.Set;
  * @author cflagollet
  */
 public class FileUtils {
-    private FileUtils() 
+    
+    private static MySQLCli mysqlCli;
+    
+    public FileUtils(MySQLCli mysqlCli) 
     {     
+        FileUtils.mysqlCli = mysqlCli;
     }
     
     /*** Lecture d'un fichier dont le chemin est passé en paramètre
@@ -99,10 +108,11 @@ public class FileUtils {
             Adresse n = new Adresse(Integer.parseInt(ts[5]),ts[6], ts[7], Integer.parseInt(ts[8]),ts[9],ts[10]);
             try {
                 Representant r = new Representant(  Integer.parseInt(ts[0]),
-                                                    Double.parseDouble(ts[1]),
-                                                    Double.parseDouble(ts[2]),
-                                                    ts[3],
-                                                    ts[4],
+                                                    ts[1],
+                                                    ts[2],
+                                                    Double.parseDouble(ts[3]),
+                                                    Double.parseDouble(ts[4]),
+ 
                                                     n);
                 hashRep.put(Integer.parseInt(ts[0]), r);
             } catch (Exception e) {
@@ -113,33 +123,128 @@ public class FileUtils {
         
         return hashRep;
     }
+ 
     
+    /** 
+     * Méthodequi crée une hashMap de représentants <no client, Client>
+     * @param mysqlCli
+     * @return hasMap des représentants
+     */
+   public static HashMap<Integer,Representant> decodeRepSQL()
+   {
+       
+        HashMap<Integer,Representant> hashRep = new HashMap<Integer,Representant>();
+ 
+        //On crée la hashmap des représentants, à partir de la table
+        ResultSet repSet = mysqlCli.exec("SELECT `noRep`, `nomRep`, `prenomRep`, `tauxRep`, `salaireRep`, `adrNoRep`, "
+                                       + "`adrRueRep`, `adrComplRep`, `adrCPRep`, `adrVilleRep`, `adrPaysRep` from representant");
+
+        try {
+            while (repSet.next()) {
+                Adresse a = new Adresse(repSet.getInt(6),repSet.getString(7),repSet.getString(8),repSet.getInt(9),repSet.getString(10),repSet.getString(11));
+                Representant r = new Representant(  repSet.getInt(1),
+                                                    repSet.getString(2),                                            
+                                                    repSet.getString(3),
+                                                    repSet.getDouble(4), 
+                                                    repSet.getDouble(5),
+                                                    a);
+               hashRep.put( repSet.getInt(1),r);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashRep;
+    }                
+    
+      /** 
+     * Méthode qui prend en entrée une connexion mySQL et qui crée une hashMap de clients <no client, Client>
+     * @param mysqlCli
+     * @return hasMap des Clients
+     */
+   public static HashMap<Integer,Client> decodeClientSQL()
+   {
+       
+        HashMap<Integer,Client> hashClient = new HashMap<Integer,Client>();
+ 
+        //On crée la hashmap des clients, à partir de la table
+        ResultSet clientSet = mysqlCli.exec("SELECT `noClient`, `enseigne`, `siret`, `mail`, `tel`, `nbComm`, `noRep`,"+ 
+        "`adrNoClient`, `adrRueClient`, `adrComplClient`, `adrCPClient`, `adrVilleClient` , `adrPaysClient` FROM `client`;");
+
+        try {
+            while (clientSet.next()) {
+                Adresse a = new Adresse(clientSet.getInt(8),clientSet.getString(9),clientSet.getString(10),clientSet.getInt(11),clientSet.getString(12),clientSet.getString(13));
+                Client c = new Client(      clientSet.getInt(1),
+                                            clientSet.getString(2),                                            
+                                            clientSet.getString(3),
+                                            clientSet.getString(4), 
+                                            clientSet.getString(5),
+                                            clientSet.getInt(6),
+                                            clientSet.getInt(7),
+                                            a);
+               hashClient.put( clientSet.getInt(1),c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashClient;
+    }                
+    
+    public static HashMap<Integer,Prospect> decodeProspectSQL()
+   {    
+        HashMap<Integer,Prospect> hashProspect = new HashMap<Integer,Prospect>();
+ 
+        //On crée la hashmap des Prospects, à partir de la table
+        //ResultSet prospectSet = mysqlCli.exec("SELECT `noProspect`, `enseigne`, `siret`, `mail`, `tel`,  DATE_FORMAT(dateDerVisite, '%d-%m-%Y') as dateDerVisite, "
+        ResultSet prospectSet = mysqlCli.exec("SELECT `noProspect`, `enseigne`, `siret`, `mail`, `tel`,  dateDerVisite, "                
+                                            + "`noRep`, `adrNoProspect`, `adrRueProspect`, `adrComplProspect`, `adrCPProspect`,"
+                                            + " `adrVilleProspect`, `AdrPaysProspect` FROM `prospect`");
+
+        try {
+            while (prospectSet.next()) {
+                Adresse a = new Adresse(prospectSet.getInt(8),prospectSet.getString(9),prospectSet.getString(10),prospectSet.getInt(11),prospectSet.getString(12),prospectSet.getString(13));                
+                Prospect p = new Prospect ( prospectSet.getInt(1),
+                                            prospectSet.getString(2),                                            
+                                            prospectSet.getString(3),
+                                            prospectSet.getString(4), 
+                                            prospectSet.getString(5),
+                                            prospectSet.getDate(6),
+                                            prospectSet.getInt(7),
+                                            a);
+               hashProspect.put( prospectSet.getInt(1),p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Principale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashProspect;
+    } 
+   
     /** 
      * Méthode qui prend en entrée une liste de String et qui crée une hashMap de clients <no client, Client>
      * @param lst
      * @return hasMap des Clients
      */
-    public static HashMap<Integer,Client> decodeClient(List<String> lst) 
+    public static HashMap<Integer,Client> decodeCliente(List<String> lst) 
     {        
         HashMap<Integer,Client> hashClient = new HashMap<Integer,Client>();
       
         for (String s : lst) {
             String[] ts = s.split(separator);
                                                     
-            Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3], ts[4], Integer.parseInt(ts[5]),ts[6],ts[7]);
+            Adresse a = new Adresse(Integer.parseInt(ts[2]),ts[3], ts[4], Integer.parseInt(ts[5]),ts[6],ts[7]);
             try {
-                Client c = new Client(  Integer.parseInt(ts[0]), // n, s, s, s, 0, 0);
+                Client c = new Client(  Integer.parseInt(ts[0]), 
                                                     ts[1],
-                                                    n,
-                                                    ts[8],
-                                                    ts[9],                                                    
-                                                    ts[10],               
+                                                    ts[2],
+                                                    ts[3],                                                    
+                                                    ts[4],               
                                                     Integer.parseInt(ts[11]),
-                                                    Integer.parseInt(ts[12]));
+                                                    Integer.parseInt(ts[12]),
+                                                    a
+                            );
                 
                 hashClient.put(Integer.parseInt(ts[0]), c);
             } catch (Exception e) {
-                System.out.println("com.hc.utils.FileUtils.decodeRep()");
+                System.out.println("com.hc.utils.FileUtils.decodeClient()");
             }
             
         }
@@ -159,16 +264,17 @@ public class FileUtils {
         for (String s : lst) {
             String[] ts = s.split(separator);
                                                     
-            Adresse n = new Adresse(Integer.parseInt(ts[2]),ts[3], ts[4],Integer.parseInt(ts[5]),ts[6],ts[7]);
+            Adresse a = new Adresse(Integer.parseInt(ts[7]),ts[8], ts[9],Integer.parseInt(ts[10]),ts[11],ts[12]);
             try {
                 Prospect p = new Prospect(Integer.parseInt(ts[0]), // n, s, s, s, 0, 0);
                                                     ts[1],
-                                                    n,
-                                                    ts[8],
-                                                    ts[9],                                                    
-                                                    ts[10],               
-                                                    Integer.parseInt(ts[11]),
-                                                    new SimpleDateFormat("dd/MM/YYYY").parse(ts[12]));
+                                                   
+                                                    ts[2],
+                                                    ts[3],                                                    
+                                                    ts[4],               
+                                                    new SimpleDateFormat("YYYY-MM-dd").parse(ts[5]),
+                                                    Integer.parseInt(ts[6]),
+                                                    a);
                 hashProspect.put(Integer.parseInt(ts[0]), p);
             } catch (Exception e) {
                 System.out.println("com.hc.utils.FileUtils.decodeRep()");
@@ -275,10 +381,10 @@ public class FileUtils {
         for (Integer no : setRep) {
             Representant r = hashRep.get(no);
             String s =  no+separator+
-                        r.getTxComm()+separator+
-                        r.getSalaire()+separator+
                         r.getNom()+separator+
                         r.getPrenom()+separator+
+                        r.getTxComm()+separator+
+                        r.getSalaire()+separator+
                         r.getAdresse().getNo()+separator+
                         r.getAdresse().getRue()+separator+
                         r.getAdresse().getCompl()+separator+
@@ -299,17 +405,19 @@ public class FileUtils {
             Prospect p = hashProspect.get(no);
             String s =  no+separator+
                         p.getEnseigne()+separator+                        
+                        p.getSiret()+separator+
+                        p.getMail()+separator+
+                        p.getTelephone()+separator+
+                        p.getNoRepresentant()+separator+
+                        new SimpleDateFormat("dd/MM/YYYY").format(p.getDateVisite()+separator+
                         p.getAdresse().getNo()+separator+
                         p.getAdresse().getRue()+separator+
                         p.getAdresse().getCompl()+separator+
                         p.getAdresse().getCp()+separator+
                         p.getAdresse().getVille()+separator+
-                        p.getAdresse().getPays()+separator+
-                        p.getMail()+separator+
-                        p.getTelephone()+separator+
-                        p.getSiret()+separator+
-                        p.getNoRepresentant()+separator+
-                        new SimpleDateFormat("dd/MM/YYYY").format(p.getDateVisite())+"\n";
+                        p.getAdresse().getPays())+"\n";
+                       
+
             lstRep.add(s);
         }
         return lstRep;
@@ -324,17 +432,17 @@ public class FileUtils {
             Client c = hashClient.get(no);
             String s =  no+separator+
                         c.getEnseigne()+separator+                        
+                        c.getMail()+separator+
+                        c.getTelephone()+separator+
+                        c.getSiret()+separator+
+                        c.getNoRepresentant()+separator+
+                        c.getNbCommandes()+separator+
                         c.getAdresse().getNo()+separator+
                         c.getAdresse().getRue()+separator+
                         c.getAdresse().getCompl()+separator+
                         c.getAdresse().getCp()+separator+
                         c.getAdresse().getVille()+separator+
-                        c.getAdresse().getPays()+separator+
-                        c.getMail()+separator+
-                        c.getTelephone()+separator+
-                        c.getSiret()+separator+
-                        c.getNoRepresentant()+separator+
-                        c.getNbCommandes()+"\n";
+                        c.getAdresse().getPays()+separator+"\n";
                     
             lstClient.add(s);
         }
@@ -370,6 +478,65 @@ public class FileUtils {
         }
         
     }
+    
+    public static void close()
+    {
+        mysqlCli.close();
+    }
+    
+    
+    public static void sauveTableRep(HashMap<Integer,Representant> hashRep) 
+    {
+        
+        mysqlCli.update("delete from `representant`;");
+        for (Representant r : hashRep.values()) {
+            String reqInsert = "INSERT INTO `representant`(`noRep`, `nomRep`, `prenomRep`, `tauxRep`, `salaireRep`, "
+                        + "`adrNoRep`, `adrRueRep`, `adrComplRep`, `adrCPRep`, `adrVilleRep`, `adrPaysRep`) VALUES (";
+            
+            reqInsert += r.getNo()+ ",'"+r.getNom()+"','"+r.getPrenom()+"',"+r.getTxComm()+","+r.getSalaire()+","+
+                         r.getAdresse().getNo()+",'"+r.getAdresse().getRue()+"','"+r.getAdresse().getCompl()+"',"+r.getAdresse().getCp()+ ",'"+
+                         r.getAdresse().getVille()+"','"+r.getAdresse().getPays()+"');";
+            mysqlCli.update(reqInsert);
+            
+        }   
+    }
+
+
+    public static void sauveTableClient(HashMap<Integer,Client> hashClient) 
+    {
+        
+        mysqlCli.update("delete from `client`;");
+        for (Client c : hashClient.values()) {
+            String reqInsert ="INSERT INTO `client`(`noClient`, `enseigne`, `siret`, `mail`, `tel`, `nbComm`, `noRep`, "
+                                + "`adrNoClient`, `adrRueClient`, `adrComplClient`, `adrCPClient`, `adrVilleClient`,`adrPaysClient`) VALUES (";
+            
+            reqInsert += c.getNo()+ ",'"+c.getEnseigne()+"','"+c.getSiret()+"','"+c.getMail()+"','"+c.getTelephone()+"',"+c.getNbCommandes()+","+
+                         c.getNoRepresentant()+","+c.getAdresse().getNo()+",'"+c.getAdresse().getRue()+"','"+c.getAdresse().getCompl()+"',"+c.getAdresse().getCp()+ ",'"+
+                         c.getAdresse().getVille()+"','"+c.getAdresse().getPays()+"');";
+            mysqlCli.update(reqInsert);
+            
+        }   
+    }
+    
+    public static void sauveTableProspect(HashMap<Integer,Prospect> hashProspect) 
+    {
+        
+        mysqlCli.update("delete from `prospect`;");
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        
+        for (Prospect p : hashProspect.values()) {
+            String reqInsert = "INSERT INTO `prospect`(`noProspect`, `enseigne`, `siret`, `mail`, `tel`, `dateDerVisite`, `noRep`, "
+                                + "`adrNoProspect`, `adrRueProspect`, `adrComplProspect`, `adrCPProspect`, `adrVilleProspect`, `AdrPaysProspect`) VALUES (";
+            
+            reqInsert += p.getNo()+ ",'"+p.getEnseigne()+"','"+p.getSiret()+"','"+p.getMail()+"','"+p.getTelephone()+"','"+
+                         sdf.format(p.getDateVisite())+"',"+p.getNoRepresentant()+","+
+                         p.getAdresse().getNo()+",'"+p.getAdresse().getRue()+"','"+p.getAdresse().getCompl()+"',"+p.getAdresse().getCp()+ ",'"+
+                         p.getAdresse().getVille()+"','"+p.getAdresse().getPays()+"');";
+            mysqlCli.update(reqInsert);
+            
+        }   
+    }
+    
 }
 
 

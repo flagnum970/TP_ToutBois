@@ -462,7 +462,8 @@ public class JFrmIntLstCommande extends javax.swing.JInternalFrame   {
     }//GEN-LAST:event_jBtnNouveauModifierActionPerformed
 
     private void refreshComboRep(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_refreshComboRep
-        // TODO add your handling code here:
+        // TODO à supprimer
+        // 
         if (jPanel1.isEnabled())
             remplitComboRep(jCboEtat.getSelectedIndex()) ;
     }//GEN-LAST:event_refreshComboRep

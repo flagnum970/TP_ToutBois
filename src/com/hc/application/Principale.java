@@ -5,6 +5,7 @@
  */
 package com.hc.application;
 
+import com.hc.Entites.Adresse;
 import com.hc.Entites.Client;
 import com.hc.Entites.Commande;
 import com.hc.Entites.Produit;
@@ -12,7 +13,8 @@ import com.hc.Entites.Prospect;
 import com.hc.Entites.Representant;
 import com.hc.ihm.MDIToutBois;
 import com.hc.utils.*;
-import java.io.FileNotFoundException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,32 +58,47 @@ public class Principale {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                
                 List<String> lstLignes=null;
                 
+                //Avant tout, on se connecte à la BDD
+                MySQLCli mysqlCli = new MySQLCli("//localhost/toutbois", "root", "Paulilou_20");
+                if (mysqlCli.connect()) {
+                    System.err.println("Connexion OK");
+                } else System.err.println("erreur connexion");
+        
+                FileUtils fu = new FileUtils(mysqlCli);
+                    
+                //Création de la hashMap des clients à partir de la base mySql
+                HashMap<Integer,Representant> hashRep=FileUtils.decodeRepSQL();
+                HashMap<Integer,Client> hashClient =FileUtils.decodeClientSQL();
+                HashMap<Integer,Prospect> hashProspect=FileUtils.decodeProspectSQL();
+                HashMap<Integer,Commande> hashCommande=null;
+                HashMap<String,Produit> hashProduit=null;
+                
                 //On crée la map des représentants, à partir du fichier
-                HashMap<Integer,Representant> hashRep;
-                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_REP);
-                hashRep=FileUtils.decodeRep(lstLignes) ;
+                //lstLignes=  FileUtils.litFichier(Constantes.FICHIER_REP);
+                //hashRep=FileUtils.decodeRep(lstLignes) ;
         
                 //On crée la map des clients, à partir du fichier
-                HashMap<Integer,Client> hashClient;
-                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_CLIENT);
-                hashClient=FileUtils.decodeClient(lstLignes) ;
+                //HashMap<Integer,Client> hashClient;
+                //lstLignes=  FileUtils.litFichier(Constantes.FICHIER_CLIENT);
+                //hashClient=FileUtils.decodeClient(lstLignes) ;
              
                 //On crée la map des prospects, à partir du fichier
-                HashMap<Integer,Prospect> hashProspect;
-                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PROSPECT);
-                hashProspect=FileUtils.decodeProspect(lstLignes) ;
+                //HashMap<Integer,Prospect> hashProspect;
+                //lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PROSPECT);
+                //hashProspect=FileUtils.decodeProspect(lstLignes) ;
                 
                 //On crée la map des produits, à partir du fichier
-                HashMap<String,Produit> hashProduit;
-                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PRODUIT);
-                hashProduit=FileUtils.decodeProduit(lstLignes) ;
+                //HashMap<String,Produit> hashProduit;
+                //lstLignes=  FileUtils.litFichier(Constantes.FICHIER_PRODUIT);
+                //hashProduit=FileUtils.decodeProduit(lstLignes) ;
                 
                 //On crée la map des produits, à partir du fichier
-                HashMap<Integer,Commande> hashCommande;
-                lstLignes=  FileUtils.litFichier(Constantes.FICHIER_COMMANDE);
-                hashCommande=FileUtils.decodeCommande(lstLignes) ;
+                //HashMap<Integer,Commande> hashCommande;
+                //lstLignes=  FileUtils.litFichier(Constantes.FICHIER_COMMANDE);
+                //hashCommande=FileUtils.decodeCommande(lstLignes) ;
                 
                 //On appelle la fenêtre MDI avec nos hashmaps
                 new MDIToutBois(hashRep,hashClient,hashProspect,hashProduit,hashCommande).setVisible(true);

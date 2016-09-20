@@ -8,6 +8,7 @@ import com.hc.Entites.*;
 import com.hc.application.Principale;
 import com.hc.utils.Constantes;
 import com.hc.utils.FileUtils;
+import com.hc.utils.MySQLCli;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -327,15 +328,22 @@ public class MDIToutBois extends javax.swing.JFrame {
     }//GEN-LAST:event_commandeMenuItemActionPerformed
 
     private void quitteSauve() {
-        List<String> lstRepString = FileUtils.codeFichierRep(hashRep);
-        FileUtils.sauveFichier(lstRepString,Constantes.FICHIER_REP);
+        // on sauve avec les fichiers 
+        // NON UTILISE
+        //List<String> lstRepString = FileUtils.codeFichierRep(hashRep);
+        //FileUtils.sauveFichier(lstRepString,Constantes.FICHIER_REP);
         
-        List<String> lstClientString = FileUtils.codeFichierClient(hashClient);
-        FileUtils.sauveFichier(lstClientString,Constantes.FICHIER_CLIENT);
+        //List<String> lstClientString = FileUtils.codeFichierClient(hashClient);
+        //FileUtils.sauveFichier(lstClientString,Constantes.FICHIER_CLIENT);
         
-        List<String> lstProspectString = FileUtils.codeFichierProspect(hashProspect);
-        FileUtils.sauveFichier(lstProspectString,Constantes.FICHIER_PROSPECT);
-              
+        //List<String> lstProspectString = FileUtils.codeFichierProspect(hashProspect);
+        //FileUtils.sauveFichier(lstProspectString,Constantes.FICHIER_PROSPECT);
+        
+        //on sauve la table
+        FileUtils.sauveTableRep(hashRep);
+        FileUtils.sauveTableClient(hashClient);
+        FileUtils.sauveTableProspect(hashProspect);
+        FileUtils.close();
         System.exit(0);
     }
 

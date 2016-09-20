@@ -16,7 +16,7 @@ public class Entreprise {
     protected  String telephone;
     protected String siret;
 
-    public Entreprise(String enseigne, Adresse adresse, String mail, String telephone, String siret) {
+    public Entreprise(String enseigne,String siret, String mail, String telephone,  Adresse adresse) {
         this.enseigne = enseigne;
         this.adresse = adresse;
         this.mail = mail;

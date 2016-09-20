@@ -62,6 +62,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jTblRep.getSelectionModel().addListSelectionListener(new SharedListSelectionHandler()); 
         jTblRep.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);    
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,12 +224,12 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTxtNom.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtNom.setInputVerifier(new verifyTxtFieldString());
+        jTxtNom.setInputVerifier(new verify());
         jTxtNom.setNextFocusableComponent(jTxtPrenom);
         jPanel1.add(jTxtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 170, -1));
 
         jTxtPrenom.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtPrenom.setInputVerifier(new verifyTxtFieldString());
+        jTxtPrenom.setInputVerifier(new verify());
         jTxtPrenom.setNextFocusableComponent(jTxtTxComm);
         jPanel1.add(jTxtPrenom, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 170, -1));
 
@@ -248,7 +249,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jPanel1.add(jLblTxComm, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 183, -1, 0));
 
         jTxtTxComm.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtTxComm.setInputVerifier(new verifyTxtFieldTaux());
+        jTxtTxComm.setInputVerifier(new verify());
         jTxtTxComm.setNextFocusableComponent(jTxtSalaire);
         jPanel1.add(jTxtTxComm, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 40, -1));
 
@@ -271,7 +272,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jTxtSalaire.setToolTipText("");
         jTxtSalaire.setAutoscrolls(false);
         jTxtSalaire.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtSalaire.setInputVerifier(new verifyTxtFieldNumber());
+        jTxtSalaire.setInputVerifier(new verify());
         jTxtSalaire.setNextFocusableComponent(jTxtAdrNo);
         jPanel1.add(jTxtSalaire, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 70, -1));
 
@@ -321,7 +322,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 57, 20));
 
         jTxtAdrNo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrNo.setInputVerifier(new verifyTxtFieldInt());
+        jTxtAdrNo.setInputVerifier(new verify());
         jTxtAdrNo.setNextFocusableComponent(jTxtAdrRue);
         jPanel5.add(jTxtAdrNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 40, -1));
 
@@ -332,17 +333,17 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 57, 20));
 
         jTxtAdrRue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrRue.setInputVerifier(new verifyTxtFieldString());
+        jTxtAdrRue.setInputVerifier(new verify());
         jTxtAdrRue.setNextFocusableComponent(jTxtAdrCompl);
         jPanel5.add(jTxtAdrRue, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 210, -1));
 
         jTxtAdrCP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrCP.setInputVerifier(new verifyTxtFieldInt());
+        jTxtAdrCP.setInputVerifier(new verify());
         jTxtAdrCP.setNextFocusableComponent(jTxtAdrVille);
         jPanel5.add(jTxtAdrCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 60, -1));
 
         jTxtAdrVille.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTxtAdrVille.setInputVerifier(new verifyTxtFieldString());
+        jTxtAdrVille.setInputVerifier(new verify());
         jTxtAdrVille.setNextFocusableComponent(jCboAdrPays);
         jPanel5.add(jTxtAdrVille, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 160, -1));
 
@@ -375,7 +376,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         jPanel5.add(jTxtAdrCompl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 210, -1));
 
         jCboAdrPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afghanistan", "Afrique du Sud", "Albanie", "Algérie", "Allemagne", "Andorre", "Angola", "Antigua et Barbuda", "Arabie saoudite", "Argentine", "Arménie", "Australie", "Autriche", "Azerbaïdjan", "Bahamas", "Bahrein", "Bangladesh", "Barbade", "Belgique", "Bélize", "Benin", "Bhoutan", "Biélorussie", "Bolivie", "Bosnie-Herzégovine", "Botswana", "Brésil", "Brunei", "Bulgarie", "Burkina Faso", "Burundi", "Cambodge", "Cameroun", "Canada", "Cap Vert", "Centrafrique", "Chili", "Chine", "Chypre", "Colombie", "Comores", "Congo démocratique", "Congo", "Corée du Nord", "Corée du Sud", "Costa Rica", "Côte d'Ivoire", "Croatie", "Cuba", "Danemark", "Djibouti", "Dominique", "RépubliqueDominicaine", "Egypte", "Emirats Arabes Unis", "Equateur", "Erythrée", "Espagne", "Estonie", "Etats-Unis", "Ethiopie", "Fidji", "Finlande", "France", "Gabon", "Gambie", "Géorgie", "Ghana", "Grèce", "Grenade", "Groenland", "Guatémala", "Guinée", "Guinée Bissau", "Guinée équatoriale", "Guyana", "Haïti", "Honduras", "Hong Kong", "Hongrie", "Inde", "Indonésie", "Irak", "Iran", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Jordanie", "Kazakhstan", "Kenya", "Kirghizstan", "Kiribati", "Koweït", "Laos", "Lesotho", "Lettonie", "Liban", "Liberia", "Libye", "Liechtenstein", "Lituanie", "Luxembourg", "Macédoine", "Madagascar", "Malaisie", "Malawi", "Maldives", "Mali", "Malte", "Maroc", "Marshall", "Maurice", "Mauritanie", "Mexique", "Micronésie", "Moldavie", "Monaco", "Mongolie", "Mozambique", "Myanmar", "Namibie", "Népal", "Nicaragua", "Niger", "Nigeria", "Norvège", "Nouvelle Zélande", "Oman", "Ouganda", "Ouzbekistan", "Pakistan", "Palau", "Palestine", "Panama", "Papouasie - Nouvelle Guinée", "Paraguay", "Pays-Bas", "Pérou", "Philippines", "Pologne", "Porto Rico", "Portugal", "Qatar", "Roumanie", "Royaume-Uni", "Russie", "Rwanda", "Saint Christophe et Nevis", "Saint Vincent et les Grenadines", "Sainte Lucie", "Salomon", "Salvador", "Samoa", "São Tomé et Príncipe", "Sénégal", "Seychelles", "Sierra Leone", "Singapour", "Slovaquie", "Slovénie", "Somalie", "Somaliland", "Soudan", "Sri Lanka", "Suède", "Suisse", "Surinam", "Syrie", "Swaziland", "Tadjikistan", "Taïwan", "Tanzanie", "Tchad", "Tchéquie", "Thaïlande", "Tibet", "Timor Oriental", "Togo", "Tonga", "Trinité et Tobago", "Tunisie", "Turkmenistan", "Turquie", "Tuvalu", "Ukraine", "Uruguay", "Vanuatu", "Vatican", "Vénézuéla", "Vietnam", "Yémen", "Yougoslavie", "Zambie", "Zimbabwe" }));
-        jCboAdrPays.setInputVerifier(new verifyTxtFieldCbo());
         jCboAdrPays.setNextFocusableComponent(jBtnOK);
         jPanel5.add(jCboAdrPays, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
 
@@ -435,19 +435,11 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
        
     /** 
      * Appelé lors clic Suppression d'un représentant
+     * Verification de l'intégrité des données 
+     * (on ne peut pas supprimer un représentant s'il est utilisé ailleurs (client ou prospect)
      * @param evt 
      */
     private void jBtnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSupprimerActionPerformed
-
-           // TODO : si jFrmClient ou jFrmProspect ouverts en modif ou création, rafraichir la combox des représentants.
-            Component[] c=this.getParent().getParent().getComponents();
-            
-           //Si   on trouve la fenêtre des représentants, on lui donne le focus
-           //if (c instanceof com.hc.ihm.JFrmIntLstRep) {
-           // }
-        
-        
-        //Verification de l'intégrité des données (on ne peut pas supprimer un représentant s'il est utilisé ailleurs (client ou prospect)
         if (verifIntegriteRep(Integer.parseInt(jTxtNo.getText()))) {
             //Affichage boite de dialogue pour confirmation
             if (JOptionPane.showConfirmDialog(null,"Etes-vous sûr de vouloir supprimer ce représentant ?","Attention",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -458,11 +450,11 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
                 remplitFiche(-1);                   //On vide la fiche
                 remplitTable();                     //Affichage nouvelle liste
                 typAcc = type_acces.visualisation;  //En visu
-                
-            } else { // Sinon, on affiche un message d'alerte
+            }         
+        } else { // Sinon, on affiche un message d'alerte
             JOptionPane.showMessageDialog(null,"Impossible de supprimer ce représentant : utilisé","ERREUR",JOptionPane.WARNING_MESSAGE);
-            }
-        }         
+        }
+                
     }//GEN-LAST:event_jBtnSupprimerActionPerformed
 
 
@@ -542,7 +534,6 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
      * mise à jour des zones : utilisé en création (zones à vide) et en modification (zones remplies à partir de la hasMap)
      * @param : noRep : numéro du représentant (-1 si création)
      */
-    
     private void remplitFiche(int noRep) 
     {
 
@@ -573,8 +564,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             jTxtAdrCP.setText("");
             jCboAdrPays.setSelectedItem("France");
             jTxtNo.setText("");
-        }
-        
+        } 
         jLblErreur.setVisible(false);
     }
     
@@ -585,10 +575,10 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         //MODIFICATION
         if (typAcc == type_acces.modification) {
             Representant r = new Representant(  Integer.parseInt(jTxtNo.getText()),
-                                                Double.parseDouble(jTxtTxComm.getText()),
-                                                Double.parseDouble(jTxtSalaire.getText()),
                                                 jTxtNom.getText(),
                                                 jTxtPrenom.getText(),
+                                                Double.parseDouble(jTxtTxComm.getText()),
+                                                Double.parseDouble(jTxtSalaire.getText()),
                                                 new Adresse(Integer.parseInt(jTxtAdrNo.getText()), 
                                                             jTxtAdrRue.getText(),
                                                             jTxtAdrCompl.getText(),
@@ -599,10 +589,10 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
             // En modif on utilise le n° de la textbox pour stocker dans la hashMap
             hashRep.put(Integer.parseInt(jTxtNo.getText()),r);
         } else { //CREATION : Utilisation du constructeur sans le n°
-            Representant r = new Representant(  Double.parseDouble(jTxtTxComm.getText()),
-                                                Double.parseDouble(jTxtSalaire.getText()),
-                                                jTxtNom.getText(),
+            Representant r = new Representant(  jTxtNom.getText(),
                                                 jTxtPrenom.getText(),
+                                                Double.parseDouble(jTxtTxComm.getText()),
+                                                Double.parseDouble(jTxtSalaire.getText()),
                                                 new Adresse(Integer.parseInt(jTxtAdrNo.getText()), 
                                                             jTxtAdrRue.getText(),
                                                             jTxtAdrCompl.getText(),
@@ -614,11 +604,7 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         }
         
 
-    }
-        
-    private void supprimeFiche() {
-
-    }
+    }       
     
     /** Verification de l'intégrité des données 
     * on vérifie que le représentant passé en param, n'existe pas dans les prospects et clients    
@@ -629,13 +615,8 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
         for (Prospect p : hashProspect.values())
             if (p.getNoRepresentant() == noRep)
                 return false;
-        
-        //parcourt des clients
-        if (!hashClient.values().stream().noneMatch((c) -> (c.getNoRepresentant() == noRep))) {
-            return false;
-        }
-         
-        return true;
+        //parcourt des clients     
+        return hashClient.values().stream().noneMatch((c) -> (c.getNoRepresentant() == noRep));
     }
     
     /** méthode de verification des champs appelée lors du clic sur OK
@@ -649,25 +630,24 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
                  JComponent jc = (JComponent)c;
 
                  if (jc.getInputVerifier()!=null) {
-                     if (!jc.getInputVerifier().verify(jc)) {
-                         System.out.println("ça chie dans la colle pour : " );
+                     if (!jc.getInputVerifier().verify(jc))    
                          return false ;
-                     }
+                     
                  }
            } catch (ClassCastException e) {
              //TODO : gestion exception
            }
          }
    
-        if (!new verifyTxtFieldInt().verify(jTxtAdrNo)) return false ;
-        if (!new verifyTxtFieldString().verify(jTxtAdrRue)) return false ;
-        if (!new verifyTxtFieldInt().verify(jTxtAdrCP)) return false ;
-        if (!new verifyTxtFieldString().verify(jTxtAdrVille)) return false ;
+        if (!GuiUtils.verifyTxtFieldInt(jTxtAdrNo,jLblErreur)) return false ;
+        if (!GuiUtils.verifyTxtFieldString(jTxtAdrRue,jLblErreur)) return false ;
+        if (!GuiUtils.verifyTxtFieldInt(jTxtAdrCP,jLblErreur)) return false ;
+        if (!GuiUtils.verifyTxtFieldString(jTxtAdrVille,jLblErreur)) return false ;
          
         return true;               
     }
     
-    /** Pour un select (déselect) sur la jTable
+    /** gestion select (déselect) sur la jTable
      * 
      */
     class SharedListSelectionHandler implements ListSelectionListener {
@@ -688,95 +668,26 @@ public class JFrmIntLstRep extends javax.swing.JInternalFrame {
                 jBtnSupprimer.setEnabled(true);                
             }
         }            
-    }
+    } 
+
     /** Contrôle des champs
      * 
      */
-    class verifyTxtFieldCbo extends InputVerifier {
+    class verify extends InputVerifier {
         @Override
         public boolean verify(JComponent input) {
-            JComboBox<String> tf = (JComboBox<String>) input;
-            boolean bOk = (!tf.getSelectedItem().toString().isEmpty() || !tf.isEnabled());
-            jLblErreur.setText("Veuillez vérifier votre saisie");
-            if (!bOk) tf.requestFocusInWindow();
-            jLblErreur.setVisible(!bOk);
-            return (bOk);
+            String sLabel="";
+            boolean bOk = false;
+            if (input == jTxtNom) bOk = GuiUtils.verifyTxtFieldString(input,jLblErreur);
+            if (input == jTxtPrenom) bOk = GuiUtils.verifyTxtFieldString(input,jLblErreur);
+            if (input == jTxtTxComm) bOk=GuiUtils.verifyTxtFieldTaux(input,jLblErreur);
+            if (input == jTxtSalaire) bOk=GuiUtils.verifyTxtFieldNumber(input,jLblErreur);
+            if (input ==jTxtAdrNo) bOk=GuiUtils.verifyTxtFieldInt(input,jLblErreur);
+            if (input ==jTxtAdrRue) bOk=GuiUtils.verifyTxtFieldString(input,jLblErreur);
+            if (input ==jTxtAdrCP) bOk=GuiUtils.verifyTxtFieldInt(input,jLblErreur);
+            if (input ==jTxtAdrVille) bOk=GuiUtils.verifyTxtFieldString(input,jLblErreur);
+            return bOk;
          }
-    }
-    
-    class verifyTxtFieldString extends InputVerifier {
-         @Override
-        public boolean verify(JComponent input) {
-           JTextField tf = (JTextField) input;
-           boolean bOk = ((!tf.getText().isEmpty() && !tf.getText().contains(separator)) || !tf.isEnabled());
-           jLblErreur.setText("Veuillez vérifier votre saisie ");
-           jLblErreur.setVisible(!bOk);
-           if (!bOk) tf.requestFocusInWindow();
-           return (bOk);
-        }
-    }
-    
-    class verifyTxtFieldInt extends InputVerifier {
-        @Override
-        public boolean verify(JComponent input) {
-            boolean bOk = true;
-            JTextField tf = (JTextField) input;
-            if (tf.isEnabled()) {
-                try {
-                    int i = Integer.parseInt(tf.getText());                 
-                    if (i<0) bOk=false;
-                }
-                catch (Exception e) {
-                    bOk = false;
-                }
-            }
-            jLblErreur.setText("Veuillez vérifier votre saisie (Entier positif)");
-            jLblErreur.setVisible(!bOk); 
-            if (!bOk) tf.requestFocusInWindow(); 
-            return bOk;
-        }
-    }
-
-    class verifyTxtFieldTaux extends InputVerifier {
-        @Override
-        public boolean verify(JComponent input) {
-            boolean bOk = true;
-            JTextField tf = (JTextField) input;
-            if (tf.isEnabled()) {
-                try {
-                    Double d = Double.parseDouble(tf.getText());                 
-                    if ((d<0) || d>100) bOk=false;
-                }
-                catch (Exception e) {
-                    bOk = false;
-                }
-            }
-            jLblErreur.setText("Veuillez vérifier votre saisie (0<taux<100)");
-            jLblErreur.setVisible(!bOk);
-            if (!bOk) tf.requestFocusInWindow();
-            return bOk;
-        }
-    }
-    
-    class verifyTxtFieldNumber extends InputVerifier {
-        @Override
-        public boolean verify(JComponent input) {
-            boolean bOk = true;
-            JTextField tf = (JTextField) input;
-            if (tf.isEnabled()) {
-                try {
-                    double d = Double.parseDouble(tf.getText());                 
-                    if (d<0) bOk=false;
-                }
-                catch (Exception e) {
-                    bOk = false;
-                }
-            }
-            jLblErreur.setText("Veuillez vérifier votre saisie (nombre positif)");
-            jLblErreur.setVisible(!bOk);
-            if (!bOk) tf.requestFocusInWindow();
-            return bOk;
-        }
     }
     
 }

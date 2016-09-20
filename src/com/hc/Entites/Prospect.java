@@ -22,16 +22,16 @@ public class Prospect extends Entreprise {
     private int no;
     private static int dernierNo=0;
     
-    public Prospect( String enseigne, Adresse adresse, String mail, String telephone, String siret,int noRepresentant, Date dateVisite) {
-        super(enseigne, adresse, mail, telephone, siret);
+    public Prospect( String enseigne,String siret,String mail, String telephone, Date dateVisite, int noRepresentant,  Adresse adresse) {
+        super(enseigne,siret, mail, telephone, adresse );
         this.noRepresentant = noRepresentant;
         this.dateVisite = dateVisite;
         dernierNo++;
         this.no= dernierNo;
     }
 
-    public Prospect(int no, String enseigne, Adresse adresse, String mail, String telephone, String siret,int noRepresentant, Date dateVisite) {
-        super(enseigne, adresse, mail, telephone, siret);
+    public Prospect(int no, String enseigne,String siret,String mail, String telephone, Date dateVisite, int noRepresentant,  Adresse adresse) {
+        super(enseigne,siret, mail, telephone, adresse );
         this.noRepresentant = noRepresentant;
         this.dateVisite = dateVisite;
         this.no= no;
